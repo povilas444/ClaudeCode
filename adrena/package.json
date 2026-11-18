@@ -1,0 +1,15 @@
+{
+  "name": "adrena",
+  "version": "2.0.0",
+  "description": "Adrena – ekstremalaus sporto pamokų platforma",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "engines": {
+    "node": ">=18"
+  },
+  "devDependencies": {
+    "playwright": "^1.65.1"
+  }
+}

@@ -1,0 +1,104 @@
+<!doctype html>
+<html lang="lt">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Vėjo prognozė | Adrena</title>
+<meta name="description" content="Gyva vėjo prognozė kaitavimo ir kitų ekstremalių sporto šakų vietoms Lietuvoje: Svencelė, Pervalka, Nida, Melnragė, Kauno marios.">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Adrena">
+<meta property="og:title" content="Vėjo prognozė: Adrena">
+<meta property="og:image" content="media/adrena-produkto-foto-1920x1080.png">
+<meta property="og:description" content="Gyva vėjo prognozė kaitavimo ir kitų ekstremalių sporto šakų vietoms Lietuvoje.">
+<script>try{var t=localStorage.getItem('adrena-theme');if(t)document.documentElement.setAttribute('data-theme',t)}catch(e){}</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:ital,wdth,wght@0,62..125,400..900;1,62..125,700..900&family=Archivo+Narrow:wght@500;600&display=swap">
+<link rel="stylesheet" href="assets/css/style.css?v=3">
+</head>
+<body data-page="wind">
+<header id="site-header"></header>
+
+<main>
+
+<section class="page-hero" style="padding-block:40px 48px">
+  <div class="wrap">
+    <div class="eyebrow">Vėjo prognozė</div>
+    <h1>Vėjo prognozė</h1>
+    <p>Gyva prognozė iš LHMT kaitavimo ir kitų sporto šakų vietoms Lietuvoje.</p>
+  </div>
+</section>
+
+<section style="padding-block:0;border-top:0">
+  <div class="wrap" style="padding-block:28px 0">
+
+    <!-- Spot tabs -->
+    <div id="spot-tabs" class="spot-tabs" role="tablist" aria-label="Vieta"></div>
+
+    <!-- Controls bar -->
+    <div class="wx-controls">
+      <div class="wx-sport-wrap">
+        <label for="sport-select" class="wx-ctrl-label">Sportas</label>
+        <select id="sport-select" class="wx-sport-select"></select>
+      </div>
+      <div class="wx-unit-wrap">
+        <span class="wx-ctrl-label">Vienetai</span>
+        <div class="wx-unit-toggle">
+          <button data-unit="ms" class="on">m/s</button>
+          <button data-unit="kn">kn</button>
+          <button data-unit="kmh">km/h</button>
+        </div>
+      </div>
+      <div class="wx-refresh-wrap">
+        <span id="wx-updated" class="wx-updated"></span>
+        <button id="wx-refresh" class="wx-refresh-btn" aria-label="Atnaujinti">↻</button>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- Summary + best windows -->
+<section style="padding-block:24px;border-top:1px solid var(--line)">
+  <div class="wrap wx-summary-wrap">
+    <div id="wx-now"></div>
+    <div id="wx-best"></div>
+  </div>
+</section>
+
+<!-- Forecast table -->
+<section style="padding-block:0 32px;border-top:1px solid var(--line)">
+  <div class="wrap">
+    <h2 style="font-size:20px;margin-bottom:16px">Prognozė</h2>
+  </div>
+  <div class="fc-section-clip"><div id="wx-table"></div></div>
+  <div class="wrap" style="margin-top:8px">
+    <p class="wx-credit">Duomenų šaltinis: Lietuvos hidrometeorologijos tarnyba · <a href="https://api.meteo.lt" target="_blank" rel="noopener">api.meteo.lt</a> · CC BY-SA 4.0</p>
+  </div>
+</section>
+
+<!-- Wind chart -->
+<section style="padding-block:0 32px;border-top:1px solid var(--line)">
+  <div class="wrap">
+    <h2 style="font-size:20px;margin-bottom:16px">Vėjo diagrama</h2>
+    <div id="wx-chart"></div>
+  </div>
+</section>
+
+<!-- Legend + safety -->
+<section style="padding-block:24px 48px;border-top:1px solid var(--line)">
+  <div class="wrap">
+    <div id="wx-legend"></div>
+  </div>
+</section>
+
+</main>
+
+<footer id="site-footer"></footer>
+<script src="assets/js/config.js?v=4"></script>
+<script src="assets/js/spots.js?v=3"></script>
+<script src="assets/js/site.js?v=4"></script>
+<script src="assets/js/forecast.js?v=3"></script>
+</body>
+</html>

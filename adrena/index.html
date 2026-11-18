@@ -1,0 +1,1336 @@
+<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
+<title>Adrena</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<meta name="description" content="Adrena – visos ekstremalaus sporto pamokos vienoje vietoje: patikrinti instruktoriai, aiškios kainos, užsakymas per kelias minutes.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:ital,wdth,wght@0,62..125,400..900;1,62..125,700..900&family=Archivo+Narrow:wght@500;600&display=swap">
+<style>
+/* Layout: dark "sea at dusk" hero band, then calm light sections on a 1120px column; the live phone demo is the page's centrepiece. */
+:root{
+  --bg:#F3F6F6; --surface:#FFFFFF; --fg:#0E1B2C; --muted:#52616C; --line:#D8E1E3;
+  --coral:#FF5A36; --orange:#FF8A3D; --teal:#0FA3A0;
+  --coral-text:#C93A18; --teal-text:#0A7573; --soft:#E6F1F0;
+  --band:#0E1B2C; --band-fg:#EEF4F5; --band-muted:#9FB1BC; --band-line:#22374A;
+  --f-display:"Archivo","Helvetica Neue","Arial Black",system-ui,sans-serif;
+  --f-body:"Archivo","Helvetica Neue","Segoe UI",system-ui,sans-serif;
+  --f-mono:"Archivo Narrow","Arial Narrow","Helvetica Neue",sans-serif;
+  --r:14px;
+  /* phone app keeps its own light look in both themes */
+  --a-bg:#F2F5F6; --a-card:#FFFFFF; --a-fg:#0E1B2C; --a-muted:#5B6975; --a-line:#E2E8EA;
+  --a-good:#178A55; --a-good-bg:#E3F4EB; --a-warn:#B86E00; --a-warn-bg:#FBF0DC; --a-bad:#6F7D88; --a-bad-bg:#ECEFF1;
+  --frame:#0B141E;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --bg:#0A141E; --surface:#112131; --fg:#E8EFF2; --muted:#9AACB7; --line:#22384B;
+  --coral:#FF6A47; --orange:#FF9550; --teal:#2BC1BD;
+  --coral-text:#FF8A6B; --teal-text:#4FD3CF; --soft:#12303A;
+  --band:#060D15; --band-line:#1C3042; --frame:#000000; color-scheme:dark;
+}}
+:root[data-theme="dark"]{
+  --bg:#0A141E; --surface:#112131; --fg:#E8EFF2; --muted:#9AACB7; --line:#22384B;
+  --coral:#FF6A47; --orange:#FF9550; --teal:#2BC1BD;
+  --coral-text:#FF8A6B; --teal-text:#4FD3CF; --soft:#12303A;
+  --band:#060D15; --band-line:#1C3042; --frame:#000000; color-scheme:dark;
+}
+*{box-sizing:border-box}
+[hidden]{display:none!important}
+html{scroll-behavior:smooth}
+@media (prefers-reduced-motion: reduce){html{scroll-behavior:auto}*{animation:none!important;transition:none!important}}
+body{background:var(--bg);color:var(--fg);font-family:var(--f-body);font-size:17px;line-height:1.6}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:10;background:var(--band)}
+a{color:inherit}
+:focus-visible{outline:3px solid var(--teal);outline-offset:2px;border-radius:6px}
+h1,h2,h3{font-family:var(--f-display);line-height:1.04;margin:0;text-wrap:balance;letter-spacing:-.015em}
+h1,h2,.a-h1,.cond-big b,.gift b,.soon{font-stretch:118%}
+h1,h2{text-transform:none;font-weight:800}
+.hero h1{font-style:italic;font-weight:900}
+.eyebrow,.cond-tag,.member-role,.cmp-head > div,.vs thead th,.c-item b,.g-item small,.hero-note{font-weight:600}
+h2{font-size:clamp(30px,4.2vw,46px);font-weight:800}
+h3{font-size:21px;font-weight:600}
+p{margin:0}
+.wrap{max-width:1120px;margin:0 auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+.eyebrow{font-family:var(--f-mono);font-size:14px;letter-spacing:.1em;text-transform:uppercase;color:var(--coral-text)}
+.lead{font-size:19px;color:var(--muted);max-width:62ch}
+section{padding-block:88px}
+section + section{border-top:1px solid var(--line)}
+.sec-head{display:grid;gap:14px;margin-bottom:44px;max-width:720px}
+
+/* header */
+.top{position:sticky;top:env(safe-area-inset-top,0px);z-index:20;background:var(--band);color:var(--band-fg);border-bottom:1px solid var(--band-line)}
+.top .wrap{display:flex;align-items:center;justify-content:space-between;gap:16px;height:64px}
+.brand{display:flex;align-items:center;text-decoration:none}
+.brand svg{height:30px;width:auto;display:block}
+.nav{display:flex;gap:0;align-items:center}
+.nav a{text-decoration:none;font-size:14.5px;font-weight:500;color:var(--band-muted);padding:8px 9px;border-radius:8px;white-space:nowrap}
+.nav a:hover{color:var(--band-fg);background:var(--band-line)}
+.nav .cta-s{background:var(--coral);color:#fff;font-weight:600}
+.nav .cta-s:hover{background:var(--orange);color:#fff}
+.menu-btn{display:none;background:none;border:1px solid var(--band-line);color:var(--band-fg);font:600 15px var(--f-body);padding:8px 14px;border-radius:10px;cursor:pointer}
+@media (max-width:1180px){
+  .menu-btn{display:block}
+  .nav{display:none;position:absolute;left:0;right:0;top:64px;background:var(--band);flex-direction:column;align-items:stretch;padding:8px max(16px,env(safe-area-inset-right,0px)) 16px max(16px,env(safe-area-inset-left,0px));border-bottom:1px solid var(--band-line)}
+  .nav.open{display:flex}
+  .nav a{padding:12px}
+}
+
+/* hero */
+.hero{background:var(--band);color:var(--band-fg);position:relative;overflow:hidden;padding-block:72px 96px;border-top:0}
+.hero .wrap{display:grid;grid-template-columns:1.25fr .9fr;gap:56px;align-items:center;position:relative;z-index:1}
+.hero h1{font-size:clamp(40px,6.6vw,84px);letter-spacing:-.025em;line-height:.98}
+.hero h1 em{font-style:normal;background:linear-gradient(90deg,var(--coral),var(--orange));-webkit-background-clip:text;background-clip:text;color:transparent}
+.hero .lead{color:var(--band-muted);margin-top:24px}
+.hero-ctas{display:flex;flex-wrap:wrap;gap:12px;margin-top:34px}
+.btn{display:inline-flex;align-items:center;gap:8px;font:600 16px var(--f-body);text-decoration:none;padding:14px 22px;border-radius:12px;border:0;cursor:pointer}
+.btn-primary{background:var(--coral);color:#fff}
+.btn-primary:hover{background:var(--orange)}
+.btn-ghost{background:transparent;color:var(--band-fg);box-shadow:inset 0 0 0 1.5px var(--band-line)}
+.btn-ghost:hover{box-shadow:inset 0 0 0 1.5px var(--band-muted)}
+.hero-note{margin-top:28px;font-family:var(--f-mono);font-size:12.5px;color:var(--band-muted);letter-spacing:.06em}
+.waves{position:absolute;inset:auto -10% -40px -10%;height:260px;z-index:0;opacity:.55;pointer-events:none}
+.waves path{fill:none;stroke-linecap:round}
+@keyframes drift{from{transform:translateX(0)}to{transform:translateX(-120px)}}
+.waves g{animation:drift 14s linear infinite alternate}
+
+/* conditions card (hero) */
+.cond{background:#132638;border:1px solid var(--band-line);border-radius:20px;padding:24px;color:var(--band-fg);max-width:400px;justify-self:end;width:100%}
+.cond-top{display:flex;justify-content:space-between;gap:12px;font-size:14px;color:var(--band-muted)}
+.cond-tag{font-family:var(--f-mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;border:1px solid var(--band-line);padding:3px 8px;border-radius:99px;white-space:nowrap;align-self:flex-start}
+.cond-place{font-weight:600;color:var(--band-fg);font-size:16px}
+.cond-big{display:flex;align-items:baseline;gap:10px;margin-top:18px}
+.cond-big b{font-family:var(--f-display);font-size:64px;font-weight:800;line-height:1;font-variant-numeric:tabular-nums}
+.cond-big span{font-family:var(--f-mono);color:var(--band-muted);font-size:15px}
+.meter{margin-top:18px}
+.meter-bar{position:relative;height:10px;border-radius:99px;background:#22374A}
+.meter-ok{position:absolute;top:0;bottom:0;left:40%;width:26.67%;background:var(--teal);border-radius:99px;opacity:.9}
+.meter-dot{position:absolute;top:50%;width:18px;height:18px;margin:-9px 0 0 -9px;border-radius:50%;background:var(--coral);box-shadow:0 0 0 4px #132638}
+.meter-scale{display:flex;justify-content:space-between;font-family:var(--f-mono);font-size:11px;color:var(--band-muted);margin-top:8px}
+.cond-status{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-top:20px;padding-top:18px;border-top:1px solid var(--band-line);font-size:14.5px;color:var(--band-muted)}
+.pill-ok{background:rgba(15,163,160,.18);color:#58D9D4;font-weight:600;padding:5px 11px;border-radius:99px;font-size:13.5px;white-space:nowrap}
+@media (max-width:860px){.hero .wrap{grid-template-columns:1fr;gap:40px}.cond{justify-self:start}}
+
+/* problem / compare */
+.compare{display:grid;border:1px solid var(--line);border-radius:var(--r);overflow:hidden;background:var(--surface)}
+.cmp-row{display:grid;grid-template-columns:1fr 1fr;border-top:1px solid var(--line)}
+.cmp-row:first-child{border-top:0}
+.cmp-row > div{padding:18px 22px;min-width:0}
+.cmp-row > div:last-child{border-left:1px solid var(--line)}
+.cmp-head > div{font-family:var(--f-mono);font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);padding-block:12px}
+.cmp-head > div:last-child{color:var(--teal-text)}
+.cmp-row:not(.cmp-head) > div:first-child{color:var(--muted)}
+.cmp-row:not(.cmp-head) > div:last-child{font-weight:600}
+@media (max-width:640px){.cmp-row{grid-template-columns:1fr}.cmp-row > div:last-child{border-left:0;padding-top:0}.cmp-head{display:none}.cmp-row:not(.cmp-head) > div:first-child{padding-bottom:6px;font-size:15px}.cmp-row:not(.cmp-head) > div:first-child::before{content:"Šiandien: "}}
+
+
+/* edge + comparison */
+.edge{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-bottom:28px}
+.edge > div{background:var(--surface);border:1px solid var(--line);border-radius:var(--r);padding:22px;display:grid;gap:6px;align-content:start}
+.edge b{font-family:var(--f-display);font-size:19px;font-weight:600;line-height:1.2}
+.edge p{color:var(--muted);font-size:16px}
+@media (max-width:760px){.edge{grid-template-columns:1fr}}
+.vs-wrap{overflow-x:auto;border:1px solid var(--line);border-radius:var(--r);background:var(--surface)}
+.vs{width:100%;min-width:760px;border-collapse:collapse;font-size:15.5px}
+.vs th,.vs td{padding:14px 12px;border-top:1px solid var(--line);text-align:center;vertical-align:middle}
+.vs thead th{border-top:0;font-family:var(--f-mono);font-size:11.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);font-weight:500;line-height:1.35}
+.vs tbody th{text-align:left;font-weight:600;padding-left:20px;width:32%}
+.vs .me{color:var(--coral-text);font-weight:600}
+.vs td:nth-child(2),.vs th.me{background:var(--soft)}
+.vs svg,.vs-legend svg{width:22px;height:22px;fill:none;stroke-width:2.2;stroke-linecap:round;vertical-align:middle}
+.y svg{stroke:var(--teal-text)}.y svg circle{fill:var(--teal-text);fill-opacity:.14}
+.h svg{stroke:var(--orange)}.h svg path{fill:var(--orange);stroke:none}
+.n svg{stroke:var(--muted)}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}
+.vs-legend{display:flex;flex-wrap:wrap;gap:8px 20px;margin-top:14px;font-size:14px;color:var(--muted);align-items:center}
+.vs-legend span{display:inline-flex;align-items:center;gap:6px}
+.vs-legend svg{width:18px;height:18px}
+
+/* values */
+.values{display:grid;grid-template-columns:repeat(2,1fr);gap:1px;background:var(--line);border:1px solid var(--line);border-radius:var(--r);overflow:hidden}
+.value{background:var(--surface);padding:30px 28px;display:grid;gap:10px;align-content:start}
+.value p{color:var(--muted)}
+.value .mark{width:38px;height:38px}
+@media (max-width:700px){.values{grid-template-columns:1fr}}
+.instr{margin-top:28px;display:grid;grid-template-columns:.9fr 1.1fr;gap:32px;align-items:center;background:var(--soft);border-radius:var(--r);padding:32px}
+.instr ul{margin:0;padding:0;list-style:none;display:grid;gap:12px}
+.instr li{display:flex;gap:12px;align-items:flex-start}
+.instr li::before{content:"";flex:none;width:10px;height:10px;margin-top:9px;border-radius:3px;background:var(--teal)}
+@media (max-width:760px){.instr{grid-template-columns:1fr;padding:24px}}
+
+/* demo section */
+.demo{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:56px;align-items:start}
+.demo-side{display:grid;gap:22px;min-width:0}
+.scn{display:grid;gap:8px;counter-reset:s}
+.scn button{counter-increment:s;display:grid;grid-template-columns:30px 1fr;gap:12px;align-items:center;text-align:left;background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:12px 14px;font:500 16px var(--f-body);color:var(--fg);cursor:pointer}
+.scn button::before{content:counter(s);display:grid;place-items:center;width:30px;height:30px;border-radius:50%;background:var(--soft);color:var(--teal-text);font:500 13px var(--f-mono)}
+.scn button:hover{border-color:var(--teal)}
+.scn button small{display:block;color:var(--muted);font-size:14px;font-weight:400}
+.demo-note{font-size:14.5px;color:var(--muted);border-left:3px solid var(--orange);padding-left:14px}
+.reset{justify-self:start;background:none;border:0;color:var(--teal-text);font:600 15px var(--f-body);cursor:pointer;padding:4px 0;text-decoration:underline;text-underline-offset:3px}
+@media (max-width:900px){.demo{grid-template-columns:1fr}.phone-wrap{order:-1;justify-self:center}}
+
+
+/* tech / impact / business */
+.flow{list-style:none;margin:0 0 20px;padding:0;display:grid;grid-template-columns:repeat(4,1fr);gap:12px;counter-reset:none}
+.flow li{position:relative;background:var(--surface);border:1px solid var(--line);border-radius:var(--r);padding:22px 20px;display:grid;gap:8px;align-content:start;min-width:0}
+.flow li:not(:last-child)::after{content:"";position:absolute;right:-13px;top:34px;width:14px;height:2px;background:var(--coral);z-index:1}
+.flow-n{width:34px;height:34px;border-radius:50%;background:var(--coral);color:#fff;display:grid;place-items:center;font:700 16px var(--f-display)}
+.flow b{font-family:var(--f-display);font-size:18px;font-weight:700;line-height:1.2}
+.flow p,.tech p,.impact p,.rev span{color:var(--muted);font-size:16px}
+.tech{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--line);border:1px solid var(--line);border-radius:var(--r);overflow:hidden}
+.tech > div{background:var(--soft);padding:20px;display:grid;gap:6px;align-content:start}
+.tech b{font-size:16.5px}
+@media (max-width:900px){.flow,.tech{grid-template-columns:1fr 1fr}.flow li::after{display:none}}
+@media (max-width:560px){.flow,.tech{grid-template-columns:1fr}}
+.impact{display:grid;grid-template-columns:repeat(3,1fr);gap:28px}
+.impact > div{display:grid;gap:10px;align-content:start;border-top:3px solid var(--teal);padding-top:18px}
+.impact > div:nth-child(2){border-color:var(--orange)}
+.impact > div:nth-child(3){border-color:var(--coral)}
+@media (max-width:800px){.impact{grid-template-columns:1fr}}
+.measure{margin-top:32px;background:var(--soft);border-radius:var(--r);padding:24px 28px;display:grid;gap:14px}
+.measure ul{margin:0;padding:0;list-style:none;display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
+.measure li{font-weight:600;font-size:16px;border-left:3px solid var(--teal);padding-left:12px}
+@media (max-width:800px){.measure ul{grid-template-columns:1fr 1fr}}
+@media (max-width:480px){.measure ul{grid-template-columns:1fr}}
+.biz{display:grid;grid-template-columns:1.1fr .9fr;gap:24px;align-items:start}
+.split{background:var(--surface);border:1px solid var(--line);border-radius:var(--r);padding:26px;display:grid;gap:18px}
+.split-title{font-family:var(--f-display);font-weight:700;font-size:20px}
+.split-row{display:grid;gap:8px;font-size:15px;color:var(--muted)}
+.bar{display:flex;height:40px;border-radius:10px;overflow:hidden;font-weight:700;font-size:14px}
+.bar i{font-style:normal;display:flex;align-items:center;padding:0 12px;white-space:nowrap;overflow:hidden}
+.b-ins{background:var(--teal);color:#fff}
+.b-adr{background:var(--coral);color:#fff;justify-content:center;padding:0!important}
+.split-note{font-size:15px;color:var(--muted)}
+.rev{list-style:none;margin:0;padding:0;display:grid;gap:10px}
+.rev li{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:16px 18px;display:grid;gap:4px}
+.rev b{font-size:16.5px}
+@media (max-width:800px){.biz{grid-template-columns:1fr}}
+
+/* team */
+.team{display:grid;grid-template-columns:repeat(2,1fr);gap:24px}
+.member{background:var(--surface);border:1px solid var(--line);border-radius:var(--r);overflow:hidden;display:grid}
+.member-photo{aspect-ratio:1/1;max-width:100%;background:linear-gradient(160deg,#173149,#0E1B2C);display:grid;place-items:center;color:#9FB1BC;font-family:var(--f-mono);font-size:13px;letter-spacing:.08em;text-transform:uppercase;position:relative;overflow:hidden}
+.member-photo img{width:100%;height:100%;object-fit:cover}
+.member-body{padding:24px;display:grid;gap:8px}
+.member-role{font-family:var(--f-mono);font-size:12.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--teal-text)}
+.member-body p{color:var(--muted)}
+.tags{display:flex;flex-wrap:wrap;gap:6px;margin-top:6px}
+.tags span{font-size:13.5px;background:var(--soft);color:var(--teal-text);padding:4px 10px;border-radius:99px;font-weight:600}
+@media (max-width:700px){.team{grid-template-columns:1fr}}
+
+/* gallery */
+.gallery{display:grid;grid-template-columns:repeat(4,1fr);grid-auto-rows:200px;grid-auto-flow:dense;gap:12px}
+.g-item{border-radius:12px;overflow:hidden;position:relative;display:flex;align-items:flex-end;padding:14px;color:#fff;font-weight:600;font-size:15px;min-width:0}
+.g-item.big{grid-column:span 2;grid-row:span 2}
+.g-item.wide{grid-column:span 2}
+.g-item svg{position:absolute;inset:0;width:100%;height:100%;opacity:.35}
+.g-item span{position:relative;z-index:1;text-shadow:0 1px 8px rgba(0,0,0,.35)}
+.g-item small{display:block;font-family:var(--f-mono);font-size:11px;font-weight:500;letter-spacing:.1em;text-transform:uppercase;opacity:.85}
+.g-item img,.g-item video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.g-item:has(img)::after,.g-item:has(video)::after{content:"";position:absolute;inset:auto 0 0;height:45%;background:linear-gradient(to top,rgba(0,0,0,.55),transparent)}
+@media (max-width:760px){.gallery{grid-template-columns:repeat(2,1fr);grid-auto-rows:150px}.g-item.big{grid-column:span 2}}
+
+/* partners */
+.partners{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
+.p-card{grid-column:span 2;display:grid;gap:10px;align-content:start;background:var(--surface);border:1px solid var(--line);border-radius:var(--r);padding:24px 26px;text-decoration:none;color:var(--fg);transition:border-color .2s}
+.p-card:hover{border-color:var(--teal)}
+.p-tag{justify-self:start;font:600 12px var(--f-mono);letter-spacing:.1em;text-transform:uppercase;background:var(--soft);color:var(--teal-text);padding:4px 10px;border-radius:99px}
+.p-name{font-family:var(--f-display);font-weight:900;font-style:italic;font-stretch:118%;font-size:34px;letter-spacing:-.01em;line-height:1}
+.p-desc{color:var(--muted);font-size:16px}
+.p-link{font-weight:700;color:var(--coral-text)}
+.p-slot{border:1.5px dashed var(--line);border-radius:12px;min-height:110px;display:grid;place-items:center;color:var(--muted);font-family:var(--f-mono);font-size:12px;letter-spacing:.1em;text-transform:uppercase}
+.soon{display:inline-block;background:var(--orange);color:#1B0E05;font:600 13px var(--f-mono);letter-spacing:.08em;text-transform:uppercase;padding:4px 10px;border-radius:6px;vertical-align:middle;margin-left:10px}
+@media (max-width:700px){.partners{grid-template-columns:repeat(2,1fr)}}
+@media (max-width:480px){.partners{grid-template-columns:1fr}.p-card{grid-column:auto}}
+
+/* faq */
+.faq{display:grid;gap:10px;max-width:820px}
+.faq details{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:0 22px}
+.faq summary{cursor:pointer;font-weight:600;padding:18px 0;list-style:none;display:flex;justify-content:space-between;gap:16px}
+.faq summary::-webkit-details-marker{display:none}
+.faq summary::after{content:"+";font:500 22px/1 var(--f-mono);color:var(--teal-text)}
+.faq details[open] summary::after{content:"–"}
+.faq details p{padding-bottom:20px;color:var(--muted)}
+
+/* contact + footer */
+.contact{display:grid;grid-template-columns:1.1fr .9fr;gap:40px;align-items:start}
+.c-list{display:grid;gap:12px}
+.c-item{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:18px 20px;display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap}
+.c-item b{display:block;font-family:var(--f-mono);font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);font-weight:500}
+.c-item span{font-size:18px;font-weight:600;user-select:all;word-break:break-word}
+.copy{background:var(--soft);color:var(--teal-text);border:0;border-radius:8px;padding:8px 12px;font:600 14px var(--f-body);cursor:pointer}
+@media (max-width:760px){.contact{grid-template-columns:1fr}}
+footer{background:var(--band);color:var(--band-muted);padding-block:40px;font-size:15px}
+footer .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:20px;align-items:center}
+footer a{color:var(--band-fg)}
+footer svg{height:24px;width:auto;display:block}
+
+/* privacy */
+.legal{padding-block:64px 96px}
+.legal .wrap{max-width:780px}
+.legal h1{font-size:clamp(34px,5vw,52px);font-weight:800;margin:12px 0 10px}
+.legal h2{font-size:23px;font-weight:600;margin:40px 0 10px}
+.legal p,.legal li{color:var(--muted)}
+.legal p + p{margin-top:12px}
+.legal ul{padding-left:22px;margin:10px 0 0;display:grid;gap:6px}
+.legal .updated{font-family:var(--f-mono);font-size:13px;color:var(--muted)}
+.back-link{font-weight:600;color:var(--teal-text);text-decoration:none}
+
+/* ---------- PHONE ---------- */
+.phone-wrap{position:relative}
+.phone{width:min(352px,calc(100vw - 40px));aspect-ratio:352/724;max-width:100%;background:var(--frame);border-radius:52px;padding:11px;box-shadow:0 30px 60px -20px rgba(14,27,44,.45),0 0 0 1.5px #2A3A4A inset}
+.screen{position:relative;width:100%;height:100%;border-radius:42px;overflow:hidden;background:var(--a-bg);color:var(--a-fg);display:flex;flex-direction:column;font-family:var(--f-body);font-size:15px;line-height:1.45}
+.notch{position:absolute;top:9px;left:50%;width:96px;height:28px;margin-left:-48px;background:#000;border-radius:20px;z-index:6}
+.sbar{flex:none;height:46px;display:flex;justify-content:space-between;align-items:flex-end;padding:0 26px 6px;font:600 13.5px var(--f-body);color:var(--a-fg)}
+.sbar i{font-style:normal;letter-spacing:1px}
+.app{flex:1;overflow-y:auto;overflow-x:hidden;scrollbar-width:none;position:relative}
+.app::-webkit-scrollbar{display:none}
+.tabbar{flex:none;display:grid;grid-template-columns:repeat(4,1fr);background:var(--a-card);border-top:1px solid var(--a-line);padding:6px 6px 16px}
+.tabbar button{background:none;border:0;display:grid;justify-items:center;gap:2px;font:600 10.5px var(--f-body);color:var(--a-muted);cursor:pointer;padding:6px 0}
+.tabbar button svg{width:22px;height:22px}
+.tabbar button.on{color:var(--coral-text-app,#D9431F)}
+.demo-flag{position:absolute;top:50px;right:12px;z-index:5;font:500 9.5px var(--f-mono);letter-spacing:.08em;text-transform:uppercase;background:rgba(14,27,44,.72);color:#fff;padding:3px 7px;border-radius:6px;pointer-events:none}
+.pad{padding:8px 18px 22px}
+.a-h1{font-family:var(--f-display);font-weight:800;font-size:26px;line-height:1.1;letter-spacing:-.01em}
+.a-h2{font-family:var(--f-display);font-weight:600;font-size:17px;margin:20px 0 10px}
+.a-muted{color:var(--a-muted);font-size:13.5px}
+.a-card{background:var(--a-card);border-radius:16px;border:1px solid var(--a-line)}
+.a-btn{display:flex;align-items:center;justify-content:center;width:100%;background:#FF5A36;color:#fff;border:0;border-radius:14px;padding:14px;font:700 15.5px var(--f-body);cursor:pointer}
+.a-btn:disabled{background:#C9D1D6;cursor:not-allowed}
+.a-btn.sec{background:var(--a-card);color:var(--a-fg);border:1.5px solid var(--a-line)}
+.a-btn.teal{background:#0FA3A0}
+.a-back{display:flex;align-items:center;gap:10px;padding:4px 14px 8px}
+.a-back button{width:36px;height:36px;border-radius:50%;border:1px solid var(--a-line);background:var(--a-card);display:grid;place-items:center;cursor:pointer;color:var(--a-fg)}
+.a-back b{font-size:16px}
+.search{display:flex;align-items:center;gap:8px;background:var(--a-card);border:1px solid var(--a-line);border-radius:14px;padding:0 12px;margin-top:14px}
+.search input{border:0;outline:0;background:transparent;font:500 15px var(--f-body);color:var(--a-fg);padding:12px 0;width:100%;min-width:0}
+.sport-grid{display:grid;grid-template-columns:1fr 1fr;gap:9px}
+.sport{height:84px;border-radius:14px;border:0;color:#fff;text-align:left;padding:10px 12px;display:flex;align-items:flex-end;font:700 14.5px var(--f-body);cursor:pointer;position:relative;overflow:hidden}
+.sport svg{position:absolute;right:-8px;top:-6px;width:70px;height:70px;opacity:.32}
+.quiz-cta{display:flex;gap:12px;align-items:center;width:100%;text-align:left;margin-top:14px;padding:14px;background:#0E1B2C;color:#fff;border:0;border-radius:16px;cursor:pointer;font:inherit}
+.quiz-cta b{display:block;font-size:15.5px}
+.quiz-cta span{font-size:13px;color:#A9BAC5}
+.quiz-cta .q{flex:none;width:40px;height:40px;border-radius:12px;background:#FF5A36;display:grid;place-items:center;font:800 20px var(--f-display)}
+.hscroll{display:flex;gap:10px;overflow-x:auto;scrollbar-width:none;margin:0 -18px;padding:0 18px 4px}
+.hscroll::-webkit-scrollbar{display:none}
+.mini{flex:none;width:200px;padding:0;overflow:hidden;text-align:left;cursor:pointer;font:inherit;color:inherit}
+.mini .cov{height:78px}
+.mini .in{padding:10px 12px}
+.prov{display:grid;grid-template-columns:64px 1fr;gap:12px;padding:12px;text-align:left;width:100%;cursor:pointer;font:inherit;color:inherit;margin-bottom:10px}
+.prov .cov{width:64px;height:64px;border-radius:12px}
+.prov b{font-size:15px}
+.row{display:flex;align-items:center;justify-content:space-between;gap:8px}
+.ver{display:inline-flex;align-items:center;gap:4px;background:#E3F4EB;color:#178A55;font-size:11.5px;font-weight:700;padding:2px 7px;border-radius:99px}
+.star{color:#E08A00;font-weight:700}
+.chips{display:flex;gap:7px;flex-wrap:wrap}
+.chip{border:1.5px solid var(--a-line);background:var(--a-card);color:var(--a-fg);border-radius:99px;padding:7px 12px;font:600 13px var(--f-body);cursor:pointer}
+.chip.on{background:#0E1B2C;border-color:#0E1B2C;color:#fff}
+.cover{height:150px;position:relative;margin:-8px -18px 0;display:flex;align-items:flex-end;padding:14px 18px}
+.offer{display:grid;grid-template-columns:22px 1fr auto;gap:10px;padding:12px;margin-bottom:8px;cursor:pointer;text-align:left;width:100%;font:inherit;color:inherit}
+.offer.on{border-color:#FF5A36;box-shadow:0 0 0 1.5px #FF5A36 inset}
+.radio{width:20px;height:20px;border-radius:50%;border:2px solid #C3CDD3;margin-top:2px}
+.offer.on .radio{border:6px solid #FF5A36}
+.inc{display:flex;flex-wrap:wrap;gap:5px;margin-top:6px}
+.inc span{font-size:11.5px;background:var(--a-bg);border-radius:6px;padding:2px 7px;color:var(--a-muted);font-weight:600}
+.review{padding:12px;margin-bottom:8px;font-size:14px}
+.days{display:grid;grid-template-columns:repeat(7,1fr);gap:5px}
+.day{border:1.5px solid var(--a-line);background:var(--a-card);border-radius:12px;padding:7px 0 6px;display:grid;justify-items:center;gap:1px;cursor:pointer;font:inherit;color:inherit}
+.day b{font-size:15px}
+.day small{font-size:10.5px;color:var(--a-muted);font-weight:600}
+.day .wx{font:500 10.5px var(--f-mono);padding:1px 4px;border-radius:5px;margin-top:2px}
+.day.on{border-color:#0E1B2C;box-shadow:0 0 0 1.5px #0E1B2C inset}
+.wx.good{background:var(--a-good-bg);color:var(--a-good)}
+.wx.warn{background:var(--a-warn-bg);color:var(--a-warn)}
+.wx.bad{background:var(--a-bad-bg);color:var(--a-bad)}
+.legend{display:flex;gap:10px;flex-wrap:wrap;margin-top:8px;font-size:11.5px;color:var(--a-muted)}
+.legend i{display:inline-block;width:8px;height:8px;border-radius:2px;margin-right:4px}
+.times{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
+.time{border:1.5px solid var(--a-line);background:var(--a-card);border-radius:12px;padding:10px 0;font:700 14.5px var(--f-body);cursor:pointer;color:var(--a-fg)}
+.time.on{background:#0E1B2C;color:#fff;border-color:#0E1B2C}
+.time:disabled{opacity:.4;text-decoration:line-through;cursor:not-allowed}
+.stepper{display:flex;align-items:center;gap:14px}
+.stepper button{width:34px;height:34px;border-radius:50%;border:1.5px solid var(--a-line);background:var(--a-card);font:700 18px var(--f-body);cursor:pointer;color:var(--a-fg)}
+.sum{padding:4px 14px}
+.sum .row{padding:10px 0;border-top:1px solid var(--a-line);font-size:14px}
+.sum .row:first-child{border-top:0}
+.sum .row span:first-child{color:var(--a-muted)}
+.sum .row span:last-child{text-align:right;font-weight:600}
+.total{font-size:17px!important}
+.pay{display:grid;grid-template-columns:22px 1fr;gap:10px;padding:12px;margin-bottom:8px;align-items:center;cursor:pointer;width:100%;font:600 14.5px var(--f-body);color:inherit;text-align:left}
+.pay.on{border-color:#FF5A36;box-shadow:0 0 0 1.5px #FF5A36 inset}
+.pay .radio{margin:0}
+.pay.on .radio{border:6px solid #FF5A36}
+.guard{background:#E6F4F3;border-radius:14px;padding:12px 14px;font-size:13.5px;color:#0A5D5B;display:flex;gap:10px}
+.guard b{display:block;color:#0A4F4D}
+.okmark{width:76px;height:76px;border-radius:50%;background:#E3F4EB;display:grid;place-items:center;margin:18px auto 12px}
+.map{height:110px;border-radius:14px;background:linear-gradient(160deg,#CFE8EE,#E8F2E4);position:relative;overflow:hidden}
+.map svg{position:absolute;inset:0;width:100%;height:100%}
+.list{margin:0;padding:0;list-style:none;display:grid;gap:7px}
+.list li{display:flex;gap:9px;font-size:14px}
+.list li::before{content:"";flex:none;width:7px;height:7px;border-radius:2px;background:#0FA3A0;margin-top:7px}
+.push{position:absolute;left:10px;right:10px;top:-120px;z-index:7;background:rgba(255,255,255,.97);border-radius:20px;padding:12px 14px;box-shadow:0 10px 30px rgba(14,27,44,.25);display:grid;grid-template-columns:36px 1fr;gap:10px;cursor:pointer;transition:top .45s cubic-bezier(.2,.9,.3,1.2);text-align:left;border:0;font:inherit;color:var(--a-fg)}
+.push.show{top:48px}
+.push .ic{width:36px;height:36px;border-radius:9px;background:#0E1B2C;display:grid;place-items:center}
+.push b{font-size:13.5px}
+.push p{font-size:13px;line-height:1.35}
+.toast{position:absolute;left:50%;bottom:90px;transform:translate(-50%,20px);opacity:0;background:#0E1B2C;color:#fff;font-size:13px;font-weight:600;padding:9px 14px;border-radius:12px;z-index:8;transition:.25s;pointer-events:none;width:max-content;max-width:86%;text-align:center}
+.toast.show{opacity:1;transform:translate(-50%,0)}
+.wxchart{display:flex;align-items:flex-end;gap:6px;height:90px;padding:10px 12px 0}
+.wxchart div{flex:1;display:grid;justify-items:center;gap:3px;font:500 10px var(--f-mono);color:var(--a-muted)}
+.wxchart i{display:block;width:100%;border-radius:5px 5px 2px 2px}
+.lvl{display:flex;gap:5px;margin:10px 0 4px}
+.lvl i{flex:1;height:8px;border-radius:99px;background:#E2E8EA}
+.lvl i.on{background:linear-gradient(90deg,#FF5A36,#FF8A3D)}
+.feed{display:grid;gap:12px}
+.post{overflow:hidden}
+.post .media{aspect-ratio:4/5;max-width:100%;position:relative;display:grid;place-items:center;color:#fff;overflow:hidden;background:#0E1B2C}
+.post .media video{width:100%;height:100%;object-fit:cover;display:block}
+.post .media .ph{display:grid;justify-items:center;gap:8px;text-align:center;padding:20px;position:relative;font-size:13px}
+.post .media .play{width:54px;height:54px;border-radius:50%;background:rgba(255,255,255,.22);display:grid;place-items:center;backdrop-filter:blur(4px)}
+.post .meta{padding:10px 12px;display:grid;gap:4px}
+.post .who{display:flex;align-items:center;gap:8px;font-size:13.5px}
+.avatar{width:30px;height:30px;border-radius:50%;display:grid;place-items:center;font:700 13px var(--f-body);color:#fff;flex:none}
+.like{background:none;border:0;display:flex;align-items:center;gap:5px;font:700 13.5px var(--f-body);color:var(--a-fg);cursor:pointer;padding:4px 0}
+.like.on{color:#E2342A}
+.upload{display:flex;align-items:center;justify-content:center;gap:8px;border:1.5px dashed #AFC0C8;border-radius:14px;padding:13px;font:700 14.5px var(--f-body);color:var(--a-fg);cursor:pointer;background:var(--a-card)}
+.field{display:grid;gap:6px;margin-bottom:14px}
+.field label{font-size:13px;font-weight:700}
+.field input,.field select,.field textarea{border:1.5px solid var(--a-line);background:var(--a-card);border-radius:12px;padding:12px;font:500 15px var(--f-body);color:var(--a-fg);width:100%}
+.field textarea{resize:none;height:76px}
+.check{display:flex;gap:10px;align-items:flex-start;font-size:13px;color:var(--a-muted);margin:6px 0 16px}
+.check input{width:18px;height:18px;margin-top:1px;accent-color:#FF5A36;flex:none}
+.welcome{height:100%;display:flex;flex-direction:column;justify-content:space-between;padding:30px 22px 28px;background:linear-gradient(170deg,#0E1B2C 0%,#12324A 62%,#0F6F78 100%);color:#fff}
+.welcome .a-h1{font-size:34px;margin-top:22px}
+.welcome p{color:#B9C8D1;margin-top:10px;font-size:15px}
+.gift{border-radius:16px;padding:16px;background:linear-gradient(135deg,#FF5A36,#FF8A3D);color:#fff;border:0;width:100%;text-align:left;cursor:pointer;font:inherit;margin-top:18px}
+.gift b{font-family:var(--f-display);font-size:18px;display:block}
+.empty{text-align:center;padding:36px 12px;color:var(--a-muted)}
+.bk{padding:12px 14px;margin-bottom:10px}
+.status{font-size:11.5px;font-weight:700;padding:2px 8px;border-radius:99px}
+.status.ok{background:var(--a-good-bg);color:var(--a-good)}
+.status.moved{background:var(--a-warn-bg);color:var(--a-warn)}
+.status.ref{background:var(--a-bad-bg);color:var(--a-bad)}
+.qopt{display:block;width:100%;text-align:left;padding:15px 16px;margin-bottom:9px;font:600 15px var(--f-body);color:var(--a-fg);cursor:pointer}
+.qopt span{display:block;font-weight:500;font-size:13px;color:var(--a-muted)}
+.qdots{display:flex;gap:5px;margin:6px 0 18px}
+.qdots i{height:5px;flex:1;border-radius:99px;background:#E2E8EA}
+.qdots i.on{background:#FF5A36}
+.sticky-b{position:sticky;bottom:0;padding:12px 18px 14px;background:linear-gradient(to top,var(--a-bg) 70%,rgba(242,245,246,0));margin-top:8px}
+</style>
+
+<header class="top">
+  <div class="wrap">
+    <a class="brand" href="#pradzia" aria-label="Adrena – į pradžią">
+      <svg viewBox="0 20 404 92" role="img" aria-hidden="true"><g transform="translate(-6 16.5) scale(0.93)"><defs><linearGradient id="hg" x1="0" y1="1" x2="1" y2="0"><stop offset="0" stop-color="#FF5A36"/><stop offset="1" stop-color="#FF8A3D"/></linearGradient><mask id="hm" maskUnits="userSpaceOnUse" x="0" y="0" width="100" height="100"><rect width="100" height="100" fill="#fff"/><path d="M16 64 C27 52 39 52 50 62 S73 72 84 58" fill="none" stroke="#000" stroke-width="20" stroke-linecap="round"/></mask></defs><path d="M18 84 L50 16 L82 84" fill="none" stroke="url(#hg)" stroke-width="13" stroke-linecap="round" stroke-linejoin="round" mask="url(#hm)"/><path d="M16 64 C27 52 39 52 50 62 S73 72 84 58" fill="none" stroke="#0FA3A0" stroke-width="9" stroke-linecap="round"/></g><g transform="translate(100 0)"><g fill="none" stroke="#FFFFFF" stroke-width="9" stroke-linecap="round" stroke-linejoin="round"><circle cx="21.5" cy="80" r="17"/><path d="M38.5 63 V97"/><circle cx="76.5" cy="80" r="17"/><path d="M93.5 36 V97"/><path d="M114.5 97 V63 M114.5 80 A17 17 0 0 1 131.5 63"/><path d="M148.5 80 H182.5 A17 17 0 1 0 177.5 92"/><path d="M203.5 63 V97 M203.5 80 A17 17 0 0 1 237.5 80 V97"/><circle cx="275.5" cy="80" r="17"/><path d="M292.5 63 V97"/></g></g></svg>
+    </a>
+    <button class="menu-btn" id="menuBtn" aria-expanded="false" aria-controls="nav">Meniu</button>
+    <nav class="nav" id="nav" aria-label="Pagrindinis meniu">
+      <a href="#ideja">Idėja</a>
+      <a href="#isskirtinumas">Kodėl Adrena</a>
+      <a href="#technologijos">Technologijos</a>
+      <a href="#poveikis">Poveikis</a>
+      <a href="#verslo-modelis">Verslo modelis</a>
+      <a href="#komanda">Komanda</a>
+      <a href="#galerija">Galerija</a>
+      <a href="#partneriai">Partneriai</a>
+      <a href="#kontaktai">Kontaktai</a>
+      <a href="#prototipas" class="cta-s">Išbandyk</a>
+    </nav>
+  </div>
+</header>
+
+<main id="homeView">
+
+<!-- TITULINIS -->
+<section class="hero" id="pradzia">
+  <div class="wrap">
+    <div>
+      <div class="eyebrow" style="color:var(--orange)">Ekstremalaus sporto pamokos vienoje vietoje</div>
+      <h1 style="margin-top:18px">Adrenalinas, kurį gali <em>išmokti</em></h1>
+      <p class="lead">Adrena sujungia visas ekstremalaus sporto šakas vienoje programėlėje. Rasi patikrintą instruktorių, matysi aiškią kainą ir laisvus laikus, o pamoką užsisakysi per kelias minutes. Jei oras netinkamas, programėlė pati pasiūlys kitą laiką.</p>
+      <div class="hero-ctas">
+        <a class="btn btn-primary" href="#prototipas">Išbandyk programėlę</a>
+        <a class="btn btn-ghost" href="#komanda">Kas mes esame</a>
+      </div>
+      <p class="hero-note">KURIAMA LIETUVOJE · MOKINIŲ BENDROVĖ · 2026</p>
+    </div>
+    <aside class="cond" aria-label="Pavyzdinė orų kortelė">
+      <div class="cond-top">
+        <div><div class="cond-place">Kuršių marios</div>Šeštadienis, 10:00 · kaitavimas</div>
+        <span class="cond-tag">Pavyzdys</span>
+      </div>
+      <div class="cond-big"><b>8</b><span>m/s · ŠV<br>gūsiai iki 11</span></div>
+      <div class="meter" aria-hidden="true">
+        <div class="meter-bar"><div class="meter-ok"></div><div class="meter-dot" style="left:53.3%"></div></div>
+        <div class="meter-scale"><span>0</span><span>6–10 m/s tinka pradedantiesiems</span><span>15</span></div>
+      </div>
+      <div class="cond-status"><span>IKO 2 lygio instruktorius · patikrintas</span><span class="pill-ok">Tinka pamokai</span></div>
+    </aside>
+  </div>
+  <svg class="waves" viewBox="0 0 1600 260" preserveAspectRatio="none" aria-hidden="true">
+    <g>
+      <path d="M0 150 C130 100 260 100 400 140 S660 190 800 130 S1060 90 1200 140 S1460 180 1720 120" stroke="#0FA3A0" stroke-width="3"/>
+      <path d="M0 190 C140 150 280 150 420 180 S680 220 820 170 S1080 140 1220 180 S1480 210 1720 160" stroke="#0FA3A0" stroke-width="2" opacity=".6"/>
+      <path d="M0 225 C150 195 290 195 430 215 S690 250 830 210 S1090 185 1230 215 S1490 240 1720 200" stroke="#FF5A36" stroke-width="2" opacity=".55"/>
+    </g>
+  </svg>
+</section>
+
+<!-- APIE KĄ MES -->
+<section id="ideja">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="eyebrow">Apie ką mes</div>
+      <h2>Pradėti ekstremalų sportą turėtų būti paprasta</h2>
+      <p class="lead">Šiandien instruktorių tenka ieškoti socialiniuose tinkluose, rašyti keliems ir laukti atsakymo, spėlioti, kas įeina į kainą. Kartais pamoka atšaukiama dėl oro, ir planai atidedami dar metams. Adrena šį kelią sutrumpina iki kelių minučių.</p>
+    </div>
+    <div class="compare" role="table" aria-label="Kaip yra šiandien ir kaip bus su Adrena">
+      <div class="cmp-row cmp-head" role="row"><div role="columnheader">Šiandien</div><div role="columnheader">Su Adrena</div></div>
+      <div class="cmp-row" role="row"><div role="cell">Instruktoriaus ieškai Instagram ir Facebook grupėse</div><div role="cell">Visi patikrinti instruktoriai ir mokyklos vienoje vietoje</div></div>
+      <div class="cmp-row" role="row"><div role="cell">Rašai keliems ir lauki, kol atsakys</div><div role="cell">Matai laisvus laikus ir užsisakai iš karto</div></div>
+      <div class="cmp-row" role="row"><div role="cell">Spėlioji, kas įeina į kainą</div><div role="cell">Aiški kaina: įranga, trukmė, grupės dydis</div></div>
+      <div class="cmp-row" role="row"><div role="cell">Pamoka atšaukiama dėl oro, planai atidedami</div><div role="cell">Orų apsauga pasiūlo kitą laiką arba grąžina pinigus</div></div>
+      <div class="cmp-row" role="row"><div role="cell">Po pirmos pamokos nežinai, ką daryti toliau</div><div role="cell">Progreso kelias parodo tavo kitą žingsnį</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- KUO IŠSKIRTINIAI -->
+<section id="isskirtinumas">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="eyebrow">Kuo esame išskirtiniai</div>
+      <h2>Ko neturi kitos programos</h2>
+      <p class="lead">Pamokų dabar ieškoma socialiniuose tinkluose, dovanų kuponų ir turistinėse platformose, o instruktoriai užsakymus tvarko atskiromis rezervacijų programomis. Nė viena iš jų nėra sukurta ekstremalaus sporto mokymuisi.</p>
+    </div>
+    <div class="edge">
+      <div><b>Mokymasis, o ne vienkartinė pramoga</b><p>Po pamokos matai pasiektą lygį ir kitą žingsnį iki savarankiško sportininko.</p></div>
+      <div><b>Orų apsauga</b><p>Kai sąlygos netinka, pamoka perkeliama arba pinigai grąžinami automatiškai.</p></div>
+      <div><b>Sąžiningas modelis instruktoriams</b><p>Didesnį komisinį jie moka tik už naujus klientus, kuriuos atvedame mes.</p></div>
+    </div>
+    <div class="vs-wrap">
+      <table class="vs">
+        <thead><tr><th scope="col"><span class="sr">Galimybė</span></th><th scope="col" class="me">Adrena</th><th scope="col">Socialiniai tinklai</th><th scope="col">Dovanų kuponų svetainės</th><th scope="col">Turistinės platformos</th><th scope="col">Rezervacijų programos</th></tr></thead>
+        <tbody><tr><th scope="row">Visos ekstremalaus sporto šakos vienoje vietoje</th><td class="y"><svg viewBox="0 0 24 24" aria-label="Taip"><circle cx="12" cy="12" r="10"/><path d="M7 12.5l3.2 3.2L17 9"/></svg></td><td class="h"><svg viewBox="0 0 24 24" aria-label="Iš dalies"><circle cx="12" cy="12" r="10"/><path d="M12 2a10 10 0 0 1 0 20z"/></svg></td><td class="h"><svg viewBox="0 0 24 24" aria-label="Iš dalies"><circle cx="12" cy="12" r="10"/><path d="M12 2a10 10 0 0 1 0 20z"/></svg></td><td class="h"><svg viewBox="0 0 24 24" aria-label="Iš dalies"><circle cx="12" cy="12" r="10"/><path d="M12 2a10 10 0 0 1 0 20z"/></svg></td><td class="n"><svg viewBox="0 0 24 24" aria-label="Ne"><path d="M7 12h10"/></svg></td></tr><tr><th scope="row">Patikrinti, sertifikuoti instruktoriai</th><td class="y"><svg viewBox="0 0 24 24" aria-label="Taip"><circle cx="12" cy="12" r="10"/><path d="M7 12.5l3.2 3.2L17 9"/></svg></td><td class="n"><svg viewBox="0 0 24 24" aria-label="Ne"><path d="M7 12h10"/></svg></td><td class="n"><svg viewBox="0 0 24 24" aria-label="Ne"><path d="M7 12h10"/></svg></td><td class="h"><svg viewBox="0 0 24 24" aria-label="Iš dalies"><circle cx="12" cy="12" r="10"/><path d="M12 2a10 10 0 0 1 0 20z"/></svg></td><td class="n"><svg viewBox="0 0 24 24" aria-label="Ne"><path d="M7 12h10"/></svg></td></tr><tr><th scope="row">Laisvi laikai ir užsakymas iš karto</th><td class="y"><svg viewBox="0 0 24 24" aria-label="Taip"><circle cx="12" cy="12" r="10"/><path d="M7 12.5l3.2 3.2L17 9"/></svg></td><td class="n"><svg viewBox="0 0 24 24" aria-label="Ne"><path d="M7 12h10"/></svg></td><td class="n"><svg viewBox="0 0 24 24" aria-label="Ne"><path d="M7 12h10"/></svg></td><td class="y"><svg viewBox="0 0 24 24" aria-label="Taip"><circle cx="12" cy="12" r="10"/><path d="M7 12.5l3.2 3.2L17 9"/></svg></td><td class="y"><svg viewBox="0 0 24 24" aria-label="Taip"><circle cx="12" cy="12" r="10"/><path d="M7 12.5l3.2 3.2L17 9"/></svg></td></tr><tr><th scope="row">Orų apsauga: automatinis perkėlimas arba pinigų grąžinimas</th><td class="y"><svg viewBox="0 0 24 24" aria-label="Taip"><circle cx="12" cy="12" r="10"/><path d="M7 12.5l3.2 3.2L17 9"/></svg></td><td class="n"><svg viewBox="0 0 24 24" aria-label="Ne"><path d="M7 12h10"/></svg></td><td class="n"><svg viewBox="0 0 24 24" aria-label="Ne"><path d="M7 12h10"/></svg></td><td class="h"><svg viewBox="0 0 24 24" aria-label="Iš dalies"><circle cx="12" cy="12" r="10"/><path d="M12 2a10 10 0 0 1 0 20z"/></svg></td><td class="h"><svg viewBox="0 0 24 24" aria-label="Iš dalies"><circle cx="12" cy="12" r="10"/><path d="M12 2a10 10 0 0 1 0 20z"/></svg></td></tr><tr><th scope="row">Progreso kelias po kiekvienos pamokos</th><td class="y"><svg viewBox="0 0 24 24" aria-label="Taip"><circle cx="12" cy="12" r="10"/><path d="M7 12.5l3.2 3.2L17 9"/></svg></td><td class="n"><svg viewBox="0 0 24 24" aria-label="Ne"><path d="M7 12h10"/></svg></td><td class="n"><svg viewBox="0 0 24 24" aria-label="Ne"><path d="M7 12h10"/></svg></td><td class="n"><svg viewBox="0 0 24 24" aria-label="Ne"><path d="M7 12h10"/></svg></td><td class="n"><svg viewBox="0 0 24 24" aria-label="Ne"><path d="M7 12h10"/></svg></td></tr><tr><th scope="row">Bendruomenė ir sportininkų vaizdo įrašai</th><td class="y"><svg viewBox="0 0 24 24" aria-label="Taip"><circle cx="12" cy="12" r="10"/><path d="M7 12.5l3.2 3.2L17 9"/></svg></td><td class="y"><svg viewBox="0 0 24 24" aria-label="Taip"><circle cx="12" cy="12" r="10"/><path d="M7 12.5l3.2 3.2L17 9"/></svg></td><td class="n"><svg viewBox="0 0 24 24" aria-label="Ne"><path d="M7 12h10"/></svg></td><td class="n"><svg viewBox="0 0 24 24" aria-label="Ne"><path d="M7 12h10"/></svg></td><td class="n"><svg viewBox="0 0 24 24" aria-label="Ne"><path d="M7 12h10"/></svg></td></tr><tr><th scope="row">Nauji klientai instruktoriams</th><td class="y"><svg viewBox="0 0 24 24" aria-label="Taip"><circle cx="12" cy="12" r="10"/><path d="M7 12.5l3.2 3.2L17 9"/></svg></td><td class="h"><svg viewBox="0 0 24 24" aria-label="Iš dalies"><circle cx="12" cy="12" r="10"/><path d="M12 2a10 10 0 0 1 0 20z"/></svg></td><td class="y"><svg viewBox="0 0 24 24" aria-label="Taip"><circle cx="12" cy="12" r="10"/><path d="M7 12.5l3.2 3.2L17 9"/></svg></td><td class="y"><svg viewBox="0 0 24 24" aria-label="Taip"><circle cx="12" cy="12" r="10"/><path d="M7 12.5l3.2 3.2L17 9"/></svg></td><td class="n"><svg viewBox="0 0 24 24" aria-label="Ne"><path d="M7 12h10"/></svg></td></tr></tbody>
+      </table>
+    </div>
+    <p class="vs-legend"><span class="y"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M7 12.5l3.2 3.2L17 9"/></svg>Yra</span><span class="h"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 2a10 10 0 0 1 0 20z"/></svg>Iš dalies</span><span class="n"><svg viewBox="0 0 24 24"><path d="M7 12h10"/></svg>Nėra</span><span>Palyginimas pagal mūsų pačių apžvalgą, 2026 m.</span></p>
+  </div>
+</section>
+
+<!-- UŽ KĄ MES -->
+<section id="vertybes">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="eyebrow">Už ką mes</div>
+      <h2>Daugiau nei programėlė – bendruomenė</h2>
+      <p class="lead">Mūsų tikslas yra supaprastinti kelią mokiniams, instruktoriams ir sporto mokykloms. Ne mažiau svarbu mums burti ekstremalaus sporto bendruomenę ir lydėti lietuvius ten, kur juos veda aistra: nuo Kuršių marių iki kalnų ir vandenyno bangų.</p>
+    </div>
+    <div class="values">
+      <div class="value">
+        <svg class="mark" viewBox="0 0 40 40" aria-hidden="true"><path d="M20 4 L34 10 V20 C34 28 28 34 20 37 C12 34 6 28 6 20 V10 Z" fill="none" stroke="var(--teal)" stroke-width="3" stroke-linejoin="round"/><path d="M13 20 L18 25 L27 15" fill="none" stroke="var(--coral)" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        <h3>Saugumas pirmiausia</h3>
+        <p>Tikriname instruktorių sertifikatus ir draudimą. Ženklas „Patikrintas“ reiškia, kad gali pasitikėti, kas tave moko.</p>
+      </div>
+      <div class="value">
+        <svg class="mark" viewBox="0 0 40 40" aria-hidden="true"><path d="M6 32 L16 22 L22 27 L34 10" fill="none" stroke="var(--coral)" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/><path d="M26 10 H34 V18" fill="none" stroke="var(--teal)" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        <h3>Mokytis, o ne tik pabandyti</h3>
+        <p>Po kiekvienos pamokos matai pasiektą lygį ir kitą žingsnį. Lygiai susieti su tarptautinėmis sistemomis, pavyzdžiui, IKO kaitavimui.</p>
+      </div>
+      <div class="value">
+        <svg class="mark" viewBox="0 0 40 40" aria-hidden="true"><circle cx="14" cy="15" r="6" fill="none" stroke="var(--teal)" stroke-width="3"/><circle cx="27" cy="15" r="6" fill="none" stroke="var(--coral)" stroke-width="3"/><path d="M4 34 C5 26 23 26 24 34 M17 34 C18 26 36 26 37 34" fill="none" stroke="var(--teal)" stroke-width="3" stroke-linecap="round"/></svg>
+        <h3>Bendruomenė</h3>
+        <p>Dalinkis savo vaizdo įrašais, kaip kaituoji, slidinėji ar čiuoži banglente, sek kitų pasiekimus ir rask bendraminčių.</p>
+      </div>
+      <div class="value">
+        <svg class="mark" viewBox="0 0 40 40" aria-hidden="true"><path d="M4 26 C10 19 16 19 20 24 S30 29 36 22" fill="none" stroke="var(--teal)" stroke-width="3" stroke-linecap="round"/><path d="M20 6 V14 M12 9 L15 15 M28 9 L25 15" fill="none" stroke="var(--orange)" stroke-width="3" stroke-linecap="round"/></svg>
+        <h3>Sportas visiems ir gamtai</h3>
+        <p>Bandomosios pamokos, grupių kainos ir bendros kelionės į pamokas. Daugelis šakų naudoja vėjo, bangų ir žmogaus jėgą, o ne variklius.</p>
+      </div>
+    </div>
+    <div class="instr">
+      <div>
+        <div class="eyebrow" style="color:var(--teal-text)">Instruktoriams ir mokykloms</div>
+        <h3 style="font-size:26px;margin-top:10px">Mažiau susirašinėjimo, daugiau laiko ant vandens</h3>
+      </div>
+      <ul>
+        <li>Užsakymai patenka tiesiai į kalendorių jau apmokėti.</li>
+        <li>Pamokas dėl oro perkeli vienu mygtuku visiems tos dienos klientams.</li>
+        <li>Didesnį komisinį moki tik už naujus klientus, kuriuos atvedame mes.</li>
+        <li>Klientams naudotis Adrena nemokama.</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- PROTOTIPAS -->
+<section id="prototipas">
+  <div class="wrap demo">
+    <div class="demo-side">
+      <div class="sec-head" style="margin-bottom:6px">
+        <div class="eyebrow">Prototipas</div>
+        <h2>Išbandyk Adreną</h2>
+        <p class="lead">Tai veikianti programėlės demonstracija. Spausk telefone kaip tikroje programėlėje arba pasirink scenarijų.</p>
+      </div>
+      <div class="scn" id="scn">
+        <button data-scn="signup"><span>Susikurk paskyrą<small>Vardas, miestas ir mėgstamos veiklos</small></span></button>
+        <button data-scn="quiz"><span>Nežinai, ką išbandyti?<small>Trys klausimai ir tau tinkamos veiklos</small></span></button>
+        <button data-scn="book"><span>Užsisakyk kaitavimo pamoką<small>Instruktorius, laikas pagal vėją, apmokėjimas</small></span></button>
+        <button data-scn="alert"><span>Gauk pranešimą dėl oro<small>Pamoka perkeliama į kitą dieną</small></span></button>
+        <button data-scn="progress"><span>Pažiūrėk savo progresą<small>Pasiektas lygis ir kitas žingsnis</small></span></button>
+        <button data-scn="community"><span>Bendruomenės vaizdo įrašai<small>Žiūrėk ir įkelk savo klipą</small></span></button>
+      </div>
+      <p class="demo-note">Visi instruktoriai, kainos, atsiliepimai ir orai yra pavyzdiniai, o mokėjimai netikri. Ką įvedi ar įkeli demonstracijoje, lieka tik tavo naršyklėje.</p>
+      <button class="reset" id="resetDemo">Pradėti demonstraciją iš naujo</button>
+    </div>
+    <div class="phone-wrap">
+      <div class="phone">
+        <div class="screen" id="screen">
+          <div class="notch"></div>
+          <div class="sbar"><span id="clock">9:41</span><i>●●● ▮</i></div>
+          <div class="demo-flag">Demo</div>
+          <button class="push" id="push" type="button" aria-live="polite"></button>
+          <div class="app" id="app"></div>
+          <nav class="tabbar" id="tabbar" aria-label="Programėlės meniu"></nav>
+          <div class="toast" id="toast" role="status"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TECHNOLOGIJOS -->
+<section id="technologijos">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="eyebrow">Technologijos</div>
+      <h2>Kaip veikia orų apsauga</h2>
+      <p class="lead">Didžiausia Adrenos naujovė yra orų prognozių susiejimas su užsakymais. Programėlė pati stebi sąlygas ir pasirūpina, kad pamoka vyktų tada, kai iš tikrųjų galima sportuoti.</p>
+    </div>
+    <ol class="flow">
+      <li><span class="flow-n">1</span><b>Orų duomenys</b><p>Prognozę imame iš Lietuvos hidrometeorologijos tarnybos atvirųjų duomenų (api.meteo.lt) kiekvienai pamokų vietai.</p></li>
+      <li><span class="flow-n">2</span><b>Taisyklės kiekvienai šakai</b><p>Kaitavimui svarbus vėjas (pradedantiesiems 6–10 m/s), banglentėms bangų aukštis, kitoms šakoms lietus ir perkūnija.</p></li>
+      <li><span class="flow-n">3</span><b>Spalvos ženklas</b><p>Prie kiekvienos dienos klientas mato, ar sąlygos tinka, yra ribinės ar netinka, dar prieš užsisakydamas.</p></li>
+      <li><span class="flow-n">4</span><b>Automatinis sprendimas</b><p>Jei prognozė pablogėja, klientas ir instruktorius gauna pranešimą su nauju laiku arba pinigai grąžinami.</p></li>
+    </ol>
+    <div class="tech">
+      <div><b>Instruktorių patikra</b><p>Sertifikatus (IKO, PADI ir kt.) ir draudimą tikriname prieš suteikdami ženklą „Patikrintas“.</p></div>
+      <div><b>Skaitmeninis progreso kelias</b><p>Po pamokos instruktorius pažymi išmoktus įgūdžius, o lygiai susieti su tarptautinėmis sistemomis.</p></div>
+      <div><b>Saugūs mokėjimai</b><p>Klientas sumoka iš karto, o instruktorius pinigus gauna po pamokos per patikimą mokėjimų sistemą, pavyzdžiui, Stripe.</p></div>
+      <div><b>Rekomendacijos</b><p>Klausimynas padeda išsirinkti šaką, o ilgainiui sukaupti duomenys leis tiksliau pasiūlyti kitą žingsnį.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- POVEIKIS -->
+<section id="poveikis">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="eyebrow">Poveikis</div>
+      <h2>Daugiau judėjimo, mažiau kliūčių</h2>
+      <p class="lead">Norintiems pradėti dažniausiai trukdo ne noras, o neaiškumas: nežino, kur ieškoti, kuo pasitikėti ir kas įeina į kainą. Adrena šias kliūtis pašalina ir padeda nemesti po pirmo karto.</p>
+    </div>
+    <div class="impact">
+      <div><h3>Fizinis aktyvumas</h3><p>Progreso kelias vienkartinę pramogą paverčia nuolatiniu sportu. Daug šakų vienoje vietoje leidžia judėti ištisus metus: vasarą ant vandens, žiemą ant sniego, tarp sezonų ant sienelės. Grupinės pamokos įtraukia draugus ir šeimas.</p></div>
+      <div><h3>Tvarumas</h3><p>Daugelis šakų naudoja vėjo, bangų ir žmogaus jėgą, o ne variklius. Orų tikrinimas iš anksto sumažina bereikalingų kelionių, bendros kelionės į pamokas taupo kurą, o įrangos nuoma mažina poreikį kiekvienam pirkti savo.</p></div>
+      <div><h3>Vietos bendruomenė</h3><p>Aktyvus poilsis Lietuvoje stiprina mažus instruktorių verslus pajūryje, prie ežerų ir regionuose, o sportininkų bendruomenė dalijasi patirtimi ir įkvepia kitus.</p></div>
+    </div>
+    <div class="measure">
+      <div class="eyebrow" style="color:var(--teal-text)">Ką matuosime</div>
+      <ul>
+        <li>Kiek klientų tęsia po pirmos pamokos</li>
+        <li>Aktyvaus sporto valandos per metus</li>
+        <li>Bendrų kelionių ir grupinių užsakymų dalis</li>
+        <li>Vietos instruktorių pajamų augimas</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- VERSLO MODELIS -->
+<section id="verslo-modelis">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="eyebrow">Verslo modelis</div>
+      <h2>Kaip Adrena uždirba</h2>
+      <p class="lead">Klientui naudotis Adrena nemokama: jis moka tą pačią kainą, kaip ir tiesiogiai instruktoriui. Uždirbame iš komisinio, kurį moka instruktorius ar mokykla.</p>
+    </div>
+    <div class="biz">
+      <div class="split">
+        <div class="split-title">Pavyzdys: 100 € pamoka</div>
+        <div class="split-row"><span>Naujas klientas, kurį atvedė Adrena</span>
+          <div class="bar"><i class="b-ins" style="width:85%">Instruktorius 85 €</i><i class="b-adr" style="width:15%">15 €</i></div></div>
+        <div class="split-row"><span>Grįžtantis klientas</span>
+          <div class="bar"><i class="b-ins" style="width:97%">Instruktorius 95–100 €</i><i class="b-adr" style="width:3%"></i></div></div>
+        <p class="split-note">Didesnį komisinį imame tik už naujus klientus, todėl instruktoriams apsimoka visus užsakymus tvarkyti per Adreną.</p>
+      </div>
+      <ul class="rev">
+        <li><b>Komisinis</b><span>15–20 % už naujus klientus, 0–5 % už grįžtančius</span></li>
+        <li><b>Prenumerata mokykloms</b><span>20–50 € per mėnesį už išplėstinį kalendorių, klientų bazę ir ataskaitas</span></li>
+        <li><b>Dovanų kuponai</b><span>Parduodami per Adreną, pinigai gaunami iš anksto</span></li>
+        <li><b>Partnerystės</b><span>Draudimas, įrangos nuoma ir apgyvendinimas</span></li>
+      </ul>
+    </div>
+    <p class="vs-legend" style="margin-top:18px"><span>Procentai ir sumos yra pradinės prielaidos, kurias tikslinsime pokalbiuose su instruktoriais.</span></p>
+  </div>
+</section>
+
+<!-- KOMANDA -->
+<section id="komanda">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="eyebrow">Kas mes esame</div>
+      <h2>Patys gyvename ekstremaliu sportu</h2>
+      <p class="lead">Mes – Marius ir Povilas. Patys sportuojame, todėl žinome, kaip sunku rasti, nuo ko pradėti. Būtent dėl to kuriame Adreną.</p>
+    </div>
+    <div class="team">
+      <article class="member">
+        <div class="member-photo"><img src="media/marius.jpg" alt="Marius su hidrokostiumu kaitavimo vietoje" style="object-position:50% 62%"></div>
+        <div class="member-body">
+          <div class="member-role">Adrenos komanda</div>
+          <h3>Marius</h3>
+          <p>Marius slidinėja nuo mažens: pirmuosius posūkius kalnuose darė kartu su tėvais. Kaitavimą pamilo dvylikos metų, kai pažįstamas pirmą kartą pasikvietė prie vandens. Ši aistra neblėsta iki šiandien.</p>
+          <div class="tags"><span>Kaitavimas</span><span>Slidinėjimas</span></div>
+        </div>
+      </article>
+      <article class="member">
+        <div class="member-photo"><img src="media/povilas-snieglente.jpg" alt="Povilas su snieglente sniege" style="object-position:50% 40%"></div>
+        <div class="member-body">
+          <div class="member-role">Adrenos komanda</div>
+          <h3>Povilas</h3>
+          <p>Povilas su snieglente čiuožia nuo mažens. Dabar mokosi ir kaituoti, o pirmuosius žingsnius ant vandens padeda žengti Marius.</p>
+          <div class="tags"><span>Snieglentė</span><span>Kaitavimas</span></div>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- GALERIJA -->
+<section id="galerija">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="eyebrow">Galerija</div>
+      <h2>Mūsų akimirkos</h2>
+      <p class="lead">Nuotraukos ir vaizdo įrašai iš mūsų pačių sportavimo. Netrukus jų čia bus daugiau.</p>
+    </div>
+    <div class="gallery" id="gallery"></div>
+  </div>
+</section>
+
+<!-- PARTNERIAI -->
+<section id="partneriai">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="eyebrow">Partneriai</div>
+      <h2>Kartu su mumis</h2>
+      <p class="lead">Džiaugiamės pirmuoju Adrenos partneriu. Jei norėtumėte prisidėti ir jūs, parašykite mums.</p>
+    </div>
+    <div class="partners">
+      <a class="p-card" href="https://www.pucia.lt" target="_blank" rel="noopener">
+        <span class="p-tag">Partneris</span>
+        <span class="p-name">PUČIA.LT</span>
+        <span class="p-desc">Kaitavimo centras Svencelėje prie Kuršių marių: IKO sertifikuota kaitavimo mokykla, įrangos nuoma ir parduotuvė, apgyvendinimas ant marių kranto, stovyklos ir kelionės.</span>
+        <span class="p-link">Apsilankyti pucia.lt ↗</span>
+      </a>
+      <div class="p-slot">Netrukus</div><div class="p-slot">Netrukus</div>
+    </div>
+  </div>
+</section>
+
+<!-- DUK -->
+<section id="duk">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="eyebrow">Dažni klausimai</div>
+      <h2>Ką dažniausiai klausia</h2>
+    </div>
+    <div class="faq">
+      <details><summary>Kada bus galima atsisiųsti programėlę?</summary><p>Šiuo metu kuriame ir testuojame prototipą. Apie paleidimą pranešime Instagram paskyroje.</p></details>
+      <details><summary>Ar klientui reikės mokėti už naudojimąsi Adrena?</summary><p>Ne. Moki tik už pamoką ir tą pačią kainą, kurią nustato instruktorius. Mes uždirbame iš komisinio, kurį moka instruktorius ar mokykla.</p></details>
+      <details><summary>Kaip tikrinate instruktorius?</summary><p>Prieš patekdamas į Adreną instruktorius pateikia sertifikatus ir draudimo dokumentus. Juos patikrinę suteikiame ženklą „Patikrintas“.</p></details>
+      <details><summary>Kas nutinka, jei oras netinkamas?</summary><p>Programėlė stebi orų prognozę. Jei sąlygos netinka, gausi pranešimą ir galėsi nemokamai perkelti pamoką arba atgauti pinigus.</p></details>
+      <details><summary>Kokias sporto šakas rasiu?</summary><p>Norime sujungti visas: nuo kaitavimo, banglenčių ir vandenlenčių iki slidžių, parasparnių, parašiutų, laipiojimo ir nardymo. Pradėsime nuo kelių šakų ir jų skaičių plėsime.</p></details>
+    </div>
+  </div>
+</section>
+
+<!-- KONTAKTAI -->
+<section id="kontaktai">
+  <div class="wrap contact">
+    <div class="sec-head" style="margin-bottom:0">
+      <div class="eyebrow">Kontaktai</div>
+      <h2>Parašyk mums</h2>
+      <p class="lead">Turi klausimą, idėją ar norėtum prisidėti? Mielai išklausysime, nes Adreną kuriame remdamiesi sportuojančių žmonių patirtimi.</p>
+    </div>
+    <div class="c-list">
+      <div class="c-item"><div><b>Instagram</b><span id="c-ig">@adrena_extreme</span></div><button class="copy" data-copy="c-ig">Kopijuoti</button></div>
+      <div class="c-item"><div><b>Telefonas</b><span id="c-tel">+370 653 51467</span></div><button class="copy" data-copy="c-tel">Kopijuoti</button></div>
+      <div class="c-item"><div><b>El. paštas</b><span id="c-mail">rasauadrena@gmail.com</span></div><button class="copy" data-copy="c-mail">Kopijuoti</button></div>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<!-- PRIVATUMO POLITIKA -->
+<article class="legal" id="privacyView" hidden>
+  <div class="wrap">
+    <a class="back-link" href="#pradzia">← Grįžti į pradžią</a>
+    <h1>Privatumo politika</h1>
+    <p class="updated">Atnaujinta 2026-11-14</p>
+
+    <h2>Kas mes esame</h2>
+    <p>Adrena yra mokinių bendrovė, kurianti ekstremalaus sporto pamokų paieškos ir užsakymo programėlę. Ši politika paaiškina, kaip elgiamės su informacija, kai lankotės šioje svetainėje. Klausimus apie privatumą galite siųsti el. paštu rasauadrena@gmail.com.</p>
+
+    <h2>Kokią informaciją renkame</h2>
+    <p>Ši svetainė yra informacinė. Joje nėra registracijos, prenumeratos ar kontaktų formų, todėl per ją jūsų asmens duomenų nerenkame.</p>
+    <p>Programėlės demonstracijoje galite įvesti vardą ar įkelti vaizdo įrašą. Ši informacija lieka tik jūsų naršyklėje: ji mums neperduodama, niekur nesaugoma ir išnyksta uždarius ar atnaujinus puslapį. Demonstracijoje nėra tikrų mokėjimų.</p>
+
+    <h2>Kai susisiekiate su mumis</h2>
+    <p>Jei paskambinate, parašote mums el. paštu ar per Instagram, gauname jūsų vardą, kontaktą ir žinutės ar pokalbio turinį. Šią informaciją naudojame tik tam, kad atsakytume, ir neperduodame jos kitiems. Susirašinėjimą ištriname, kai jo nebereikia, ir saugome ne ilgiau nei 12 mėnesių.</p>
+
+    <h2>Slapukai ir trečiųjų šalių paslaugos</h2>
+    <p>Patys nenaudojame slapukų, analitikos ar reklamos sekimo. Svetainės šriftai įkeliami iš „Google Fonts“, o pati svetainė talpinama pas paslaugos teikėją. Šios paslaugos, kaip ir dauguma interneto svetainių, gali tvarkyti techninius duomenis, pavyzdžiui, IP adresą ir naršyklės tipą, pagal savo privatumo taisykles.</p>
+
+    <h2>Nuotraukos ir vaizdo įrašai</h2>
+    <p>Svetainėje skelbiame tik savo nuotraukas ir vaizdo įrašus arba tokius, kuriuose esantys žmonės sutiko būti parodyti. Jei atpažinote save ir norite, kad įrašą pašalintume, parašykite mums.</p>
+
+    <h2>Jūsų teisės</h2>
+    <p>Pagal Bendrąjį duomenų apsaugos reglamentą (BDAR) turite teisę:</p>
+    <ul>
+      <li>sužinoti, kokius duomenis apie jus turime, ir gauti jų kopiją;</li>
+      <li>prašyti ištaisyti netikslius duomenis;</li>
+      <li>prašyti ištrinti duomenis arba apriboti jų naudojimą;</li>
+      <li>nesutikti, kad jūsų duomenys būtų naudojami.</li>
+    </ul>
+    <p style="margin-top:12px">Jei manote, kad jūsų duomenys tvarkomi netinkamai, galite kreiptis į Valstybinę duomenų apsaugos inspekciją (vdai.lrv.lt).</p>
+
+    <h2>Programėlė ateityje</h2>
+    <p>Kai paleisime tikrą programėlę su registracija ir mokėjimais, parengsime atskirą, išsamesnę privatumo politiką ir apie ją pranešime iš anksto.</p>
+
+    <h2>Pakeitimai</h2>
+    <p>Šią politiką galime atnaujinti. Naujausia versija visada skelbiama šiame puslapyje su atnaujinimo data.</p>
+  </div>
+</article>
+
+<footer>
+  <div class="wrap">
+    <svg viewBox="0 20 404 92" aria-label="Adrena" role="img"><g transform="translate(-6 16.5) scale(0.93)"><defs><linearGradient id="fg2" x1="0" y1="1" x2="1" y2="0"><stop offset="0" stop-color="#FF5A36"/><stop offset="1" stop-color="#FF8A3D"/></linearGradient><mask id="fm2" maskUnits="userSpaceOnUse" x="0" y="0" width="100" height="100"><rect width="100" height="100" fill="#fff"/><path d="M16 64 C27 52 39 52 50 62 S73 72 84 58" fill="none" stroke="#000" stroke-width="20" stroke-linecap="round"/></mask></defs><path d="M18 84 L50 16 L82 84" fill="none" stroke="url(#fg2)" stroke-width="13" stroke-linecap="round" stroke-linejoin="round" mask="url(#fm2)"/><path d="M16 64 C27 52 39 52 50 62 S73 72 84 58" fill="none" stroke="#0FA3A0" stroke-width="9" stroke-linecap="round"/></g><g transform="translate(100 0)"><g fill="none" stroke="#FFFFFF" stroke-width="9" stroke-linecap="round" stroke-linejoin="round"><circle cx="21.5" cy="80" r="17"/><path d="M38.5 63 V97"/><circle cx="76.5" cy="80" r="17"/><path d="M93.5 36 V97"/><path d="M114.5 97 V63 M114.5 80 A17 17 0 0 1 131.5 63"/><path d="M148.5 80 H182.5 A17 17 0 1 0 177.5 92"/><path d="M203.5 63 V97 M203.5 80 A17 17 0 0 1 237.5 80 V97"/><circle cx="275.5" cy="80" r="17"/><path d="M292.5 63 V97"/></g></g></svg>
+    <span>© 2026 Adrena · Mokinių bendrovė</span>
+    <a href="#privatumo-politika">Privatumo politika</a>
+  </div>
+</footer>
+
+<script>
+/* ============ TURINYS, KURĮ PAKEISITE SAVO FAILAIS ============
+   Video: įdėkite failą į aplanką media/ ir įrašykite src, pvz. "media/kaitavimas.mp4".
+   Kol src: null, rodomas tuščias rėmelis su užrašu. */
+const VIDEOS = [
+  {src:'media/video-kaitavimas.mp4', who:'Adrenos komanda', ini:'A', col:'#FF5A36', sport:'Kaitavimas', place:'Ant vandens', text:'Vėjas pagavo kaitą, važiuojam!', likes:48, g:'#0E1B2C'},
+  {src:'media/video-sniego-kaitavimas.mp4', who:'Adrenos komanda', ini:'A', col:'#FF5A36', sport:'Sniego kaitavimas', place:'Užšalęs ežeras', text:'Žiemą kaitavimas nesibaigia: slidės ir ledas', likes:31, g:'#0E1B2C'},
+  {src:'media/video-slidinejimas.mp4', who:'Adrenos komanda', ini:'A', col:'#FF5A36', sport:'Slidinėjimas', place:'Kalnai', text:'Rytas ant šviežio sniego', likes:22, g:'#0E1B2C'}
+];
+/* Galerija: įrašykite src (nuotrauka .jpg arba video .mp4) ir parašą. */
+const GALLERY = [
+  {src:'media/marius.jpg', cls:'big', cap:'Kaitavimas', sub:'Marius', pos:'50% 60%'},
+  {src:'media/vandenlente.jpg', cls:'wide', cap:'Vandenlentės', sub:'Šuolis vandenlenčių parke', pos:'45% 50%'},
+  {src:'media/povilas-snieglente.jpg', cls:'', cap:'Snieglentė', sub:'Povilas', pos:'50% 45%'},
+  {src:'media/foto-7530.jpg', cls:'', cap:'Vandenlentė už valties', sub:'Saulėlydis ant ežero', pos:'40% 55%'},
+  {src:'media/foto-0807.jpg', cls:'', cap:'Kaitavimas', sub:'Pasiruošimas startui', pos:'55% 55%'},
+  {src:'media/video-slidinejimas.mp4', cls:'wide', cap:'Slidinėjimas', sub:'Video', pos:'50% 85%'},
+  {src:'media/video-sniego-kaitavimas.mp4', cls:'', cap:'Sniego kaitavimas', sub:'Video', pos:'50% 35%'}
+];
+
+/* ============ SVETAINĖ ============ */
+const $ = s => document.querySelector(s);
+const esc = s => String(s).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const wavePattern = '<svg viewBox="0 0 200 120" preserveAspectRatio="none" aria-hidden="true"><path d="M-10 70 C20 50 50 50 80 66 S140 84 210 56" fill="none" stroke="#fff" stroke-width="3"/><path d="M-10 92 C25 76 55 76 85 88 S145 102 210 80" fill="none" stroke="#fff" stroke-width="2" opacity=".6"/></svg>';
+
+function renderGallery(){
+  $('#gallery').innerHTML = GALLERY.map(g => {
+    let media = '';
+    if (g.src && /\.(mp4|webm|mov)$/i.test(g.src)) media = `<video src="${esc(g.src)}" muted loop playsinline autoplay preload="metadata" aria-label="${esc(g.cap)}" style="object-position:${g.pos || '50% 50%'}"></video>`;
+    else if (g.src) media = `<img src="${esc(g.src)}" alt="${esc(g.cap + ', ' + g.sub)}" loading="lazy" style="object-position:${g.pos || '50% 50%'}">`;
+    return `<figure class="g-item ${g.cls}" style="background:${g.g};margin:0">${media || wavePattern}<span><small>${g.src ? esc(g.sub) : 'Nuotrauka netrukus'}</small>${esc(g.cap)}${g.src ? '' : ' · ' + esc(g.sub)}</span></figure>`;
+  }).join('');
+}
+renderGallery();
+
+$('#menuBtn').addEventListener('click', () => {
+  const open = $('#nav').classList.toggle('open');
+  $('#menuBtn').setAttribute('aria-expanded', open);
+});
+$('#nav').addEventListener('click', e => { if (e.target.tagName === 'A') { $('#nav').classList.remove('open'); $('#menuBtn').setAttribute('aria-expanded', false); } });
+
+document.querySelectorAll('.copy').forEach(b => b.addEventListener('click', () => {
+  const el = document.getElementById(b.dataset.copy);
+  const done = () => { b.textContent = 'Nukopijuota'; setTimeout(() => b.textContent = 'Kopijuoti', 1600); };
+  try {
+    navigator.clipboard.writeText(el.textContent).then(done, () => selectText(el));
+  } catch (e) { selectText(el); }
+}));
+function selectText(el){ const r = document.createRange(); r.selectNodeContents(el); const s = getSelection(); s.removeAllRanges(); s.addRange(r); }
+
+function route(){
+  const isPrivacy = location.hash === '#privatumo-politika';
+  $('#homeView').hidden = isPrivacy;
+  $('#privacyView').hidden = !isPrivacy;
+  if (isPrivacy) window.scrollTo(0, 0);
+  else if (location.hash) { const t = document.getElementById(location.hash.slice(1)); if (t) t.scrollIntoView(); }
+}
+addEventListener('hashchange', route);
+route();
+
+/* ============ PROGRAMĖLĖS DEMONSTRACIJA ============ */
+const ICON = {
+  wind:'<path d="M3 9h11a3 3 0 1 0-3-3M3 15h15a3 3 0 1 1-3 3M3 12h7" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>',
+  wave:'<path d="M2 15c3-4 6-4 9 0s6 4 9 0M2 9c3-4 6-4 9 0s6 4 9 0" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>',
+  mtn:'<path d="M2 20 9 7l4 7 3-4 6 10z" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/>',
+  sky:'<path d="M3 12c0-5 4-8 9-8s9 3 9 8M3 12l9 8 9-8M12 4v16" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/>',
+  rock:'<path d="M4 20 8 6l5 4 3-5 4 15z M9 14h.01M14 12h.01" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"/>',
+  dive:'<circle cx="12" cy="12" r="8" fill="none" stroke="currentColor" stroke-width="2"/><path d="M8 12h8M12 8v8" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>'
+};
+const SPORTS = [
+  {id:'kaitavimas', name:'Kaitavimas', g:'linear-gradient(135deg,#0FA3A0,#0E5E7E)', ic:'wind', wx:'wind', cert:'IKO'},
+  {id:'banglentes', name:'Banglentės', g:'linear-gradient(135deg,#1C7ED6,#0E4E6E)', ic:'wave', wx:'wave', cert:'ISA'},
+  {id:'vandenlentes', name:'Vandenlentės', g:'linear-gradient(135deg,#0E6E8C,#163E63)', ic:'wave', wx:'none'},
+  {id:'slides', name:'Slidės ir snieglentės', g:'linear-gradient(135deg,#7FA7C9,#3D5A80)', ic:'mtn', wx:'none'},
+  {id:'parasparnis', name:'Parasparnis', g:'linear-gradient(135deg,#FF8A3D,#E2542F)', ic:'sky', wx:'wind'},
+  {id:'parasiutas', name:'Parašiutas', g:'linear-gradient(135deg,#FF5A36,#A83256)', ic:'sky', wx:'none'},
+  {id:'laipiojimas', name:'Laipiojimas', g:'linear-gradient(135deg,#9A7A52,#4E3B2A)', ic:'rock', wx:'none'},
+  {id:'nardymas', name:'Nardymas', g:'linear-gradient(135deg,#1E4E7A,#0E1B2C)', ic:'dive', wx:'none'}
+];
+const P = (name, place, cert, rating, n, years, students, offers, reviews) => ({name, place, cert, rating, n, years, students, offers, reviews});
+const O = (t, dur, price, inc) => ({t, dur, price, inc});
+const PROVIDERS = {
+  kaitavimas:[
+    P('Marių vėjas', 'Kuršių marios, Pervalka', 'IKO 2 lygio instruktorius', 4.9, 38, 7, 420,
+      [O('Pirmoji pamoka', '2 val.', 85, ['Įranga','Hidrokostiumas','Radijo ryšys','Grupė iki 2']), O('Pradedančiųjų kursas', '4 val.', 155, ['Įranga','Hidrokostiumas','IKO kortelė','Grupė iki 2']), O('Individuali pamoka', '2 val.', 120, ['Įranga','Hidrokostiumas','1 mokinys'])],
+      [['Gabija', 'Pirmą kartą stovėjau ant lentos jau antroje pamokoje. Instruktorius ramus ir aiškiai paaiškina.'], ['Mantas', 'Patiko, kad pamoka buvo perkelta dėl vėjo be jokio vargo.']]),
+    P('Nerijos kaitai', 'Nida', 'IKO 1 lygio instruktorius', 4.8, 21, 4, 180,
+      [O('Pirmoji pamoka', '2 val.', 90, ['Įranga','Hidrokostiumas','Grupė iki 3']), O('Pradedančiųjų kursas', '4 val.', 165, ['Įranga','Hidrokostiumas','Grupė iki 3'])],
+      [['Ieva', 'Puiki vieta pradedantiesiems, seklus vanduo.']]),
+    P('Agnė M.', 'Klaipėda, Melnragė', 'IKO 1 lygio instruktorė', 4.7, 12, 3, 90,
+      [O('Pirmoji pamoka', '2 val.', 75, ['Įranga','Hidrokostiumas','1–2 mokiniai'])],
+      [['Rokas', 'Labai kantri ir draugiška.']])
+  ],
+  banglentes:[P('Bangų klubas', 'Klaipėda, Melnragė', 'ISA instruktorius', 4.8, 19, 5, 260, [O('Pirmoji pamoka', '1,5 val.', 45, ['Lenta','Hidrokostiumas','Grupė iki 6'])], [['Lukas', 'Smagu, net jei bangos nedidelės.']])],
+  vandenlentes:[P('Marių vandenlenčių parkas', 'Kauno marios', 'Vandenlenčių treneris', 4.7, 54, 6, 900, [O('Valanda parke', '1 val.', 30, ['Lenta','Liemenė','Šalmas'])], [['Eglė', 'Treneris padėjo atsistoti iš pirmo karto.']])],
+  slides:[P('Kalnų mokykla', 'Druskininkai', 'Slidinėjimo instruktorius', 4.8, 33, 9, 700, [O('Pirmoji pamoka', '1 val.', 40, ['Slidės ir batai','Keltuvo bilietas'])], [['Domas', 'Pirmą dieną jau leidausi nuo kalno.']])],
+  parasparnis:[P('Kopų sparnai', 'Neringa', 'Tandemo piloto licencija', 4.9, 27, 11, 1300, [O('Tandemo skrydis', '20 min.', 95, ['Įranga','Skrydžio vaizdo įrašas'])], [['Austėja', 'Nerealus vaizdas į marias.']])],
+  parasiutas:[P('Laisvo kritimo klubas', 'Pociūnų aerodromas', 'Tandemo instruktorius', 4.9, 41, 14, 2500, [O('Tandemo šuolis', '1 diena', 260, ['Instruktažas','Įranga','Pažymėjimas'])], [['Karolis', 'Geriausia gimtadienio dovana.']])],
+  laipiojimas:[P('Uolų sienelė', 'Vilnius', 'Laipiojimo instruktorius', 4.7, 60, 8, 1100, [O('Įvadinė pamoka', '1,5 val.', 25, ['Batai','Diržas','Apsauga'])], [['Ugnė', 'Labai saugu ir aišku.']])],
+  nardymas:[P('Ežerų nardymo centras', 'Prie Molėtų', 'PADI instruktorius', 4.8, 17, 10, 600, [O('Bandomasis nardymas', '3 val.', 110, ['Įranga','Hidrokostiumas','Teorija'])], [['Jonas', 'Pirmas kartas po vandeniu, nepamirštama.']])]
+};
+const WIND = [7, 9, 3, 8, 12, 5, 9];
+const WAVE = [0.6, 1.1, 0.3, 0.9, 1.4, 0.5, 1.0];
+const DN = ['Sk','Pr','An','Tr','Kt','Pn','Št'];
+const DACC = ['sekmadienį','pirmadienį','antradienį','trečiadienį','ketvirtadienį','penktadienį','šeštadienį'];
+const TIMES = ['10:00','13:00','16:00'];
+const days = Array.from({length:7}, (_, i) => { const d = new Date(); d.setDate(d.getDate() + i + 1); return d; });
+const cap = s => s.charAt(0).toUpperCase() + s.slice(1);
+const sp = id => SPORTS.find(s => s.id === id);
+
+function wxOf(sport, i){
+  const t = sp(sport).wx;
+  if (t === 'wind'){ const v = WIND[i]; const c = v < 5 ? 'bad' : v < 6 || v > 10 ? 'warn' : 'good'; return {c, label: v + ' m/s', v}; }
+  if (t === 'wave'){ const v = WAVE[i]; const c = v < 0.5 ? 'bad' : v < 0.8 ? 'warn' : 'good'; return {c, label: String(v).replace('.', ',') + ' m', v}; }
+  const bad = i === 2; return {c: bad ? 'bad' : 'good', label: bad ? 'liūtis' : (12 - i) + '°', v:0};
+}
+
+const fresh = () => ({user:null, stack:['welcome'], tab:null, sport:'kaitavimas', prov:0, offer:0, day:null, time:null, people:1, pay:'card', bookings:[], quiz:{step:0, a:[]}, liked:{}, videos:VIDEOS.map(v => ({...v})), filters:{}, interests:[], gift:{amt:100}, resched:null, pushTimer:null});
+let S = fresh();
+
+const app = $('#app');
+const cur = () => S.stack[S.stack.length - 1];
+function go(name){ S.stack.push(name); render(true); }
+function back(){ if (S.stack.length > 1) S.stack.pop(); render(true); }
+function tab(name){ S.stack = [name]; render(true); }
+function toast(msg){ const t = $('#toast'); t.textContent = msg; t.classList.add('show'); clearTimeout(t._h); t._h = setTimeout(() => t.classList.remove('show'), 2200); }
+
+const backBar = title => `<div class="a-back"><button data-a="back" aria-label="Atgal"><svg width="18" height="18" viewBox="0 0 24 24"><path d="M15 5l-7 7 7 7" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg></button><b>${title}</b></div>`;
+const ic = (k, sz = 22) => `<svg width="${sz}" height="${sz}" viewBox="0 0 24 24">${ICON[k]}</svg>`;
+const verified = '<span class="ver"><svg width="11" height="11" viewBox="0 0 24 24"><path d="M5 12l5 5 9-10" fill="none" stroke="currentColor" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"/></svg>Patikrintas</span>';
+const minPrice = p => Math.min(...p.offers.map(o => o.price));
+
+const SCREENS = {
+  welcome(){
+    return `<div class="welcome">
+      <div>
+        <svg width="64" height="64" viewBox="8 8 84 84" aria-hidden="true"><defs><linearGradient id="wg" x1="0" y1="1" x2="1" y2="0"><stop offset="0" stop-color="#FF5A36"/><stop offset="1" stop-color="#FF8A3D"/></linearGradient><mask id="wm" maskUnits="userSpaceOnUse" x="0" y="0" width="100" height="100"><rect width="100" height="100" fill="#fff"/><path d="M16 64 C27 52 39 52 50 62 S73 72 84 58" fill="none" stroke="#000" stroke-width="20" stroke-linecap="round"/></mask></defs><path d="M18 84 L50 16 L82 84" fill="none" stroke="url(#wg)" stroke-width="13" stroke-linecap="round" stroke-linejoin="round" mask="url(#wm)"/><path d="M16 64 C27 52 39 52 50 62 S73 72 84 58" fill="none" stroke="#0FA3A0" stroke-width="9" stroke-linecap="round"/></svg>
+        <div class="a-h1">Adrenalinas, kurį gali išmokti</div>
+        <p>Rask patikrintą instruktorių, užsisakyk pamoką ir sek savo progresą.</p>
+      </div>
+      <div style="display:grid;gap:10px">
+        <button class="a-btn" data-a="go" data-v="signup">Sukurti paskyrą</button>
+        <button class="a-btn sec" style="background:transparent;color:#fff;border-color:rgba(255,255,255,.3)" data-a="guest">Tęsti be paskyros</button>
+      </div>
+    </div>`;
+  },
+  signup(){
+    const ints = ['Kaitavimas','Banglentės','Slidės','Parasparnis','Laipiojimas','Nardymas'];
+    return backBar('Nauja paskyra') + `<div class="pad">
+      <div class="a-h1" style="font-size:23px">Susipažinkime</div>
+      <p class="a-muted" style="margin:6px 0 18px">Tai demonstracija: duomenys niekur nesiunčiami.</p>
+      <div class="field"><label for="su-name">Vardas</label><input id="su-name" autocomplete="off" placeholder="pvz., Gabija" maxlength="20"></div>
+      <div class="field"><label for="su-city">Miestas</label><select id="su-city"><option>Vilnius</option><option selected>Kaunas</option><option>Klaipėda</option><option>Šiauliai</option><option>Panevėžys</option><option>Kitas</option></select></div>
+      <div class="field"><label>Kas tave domina?</label><div class="chips">${ints.map(t => `<button class="chip ${S.interests.includes(t) ? 'on' : ''}" data-a="int" data-v="${t}">${t}</button>`).join('')}</div></div>
+      <label class="check"><input type="checkbox" id="su-ok">Sutinku su Adrenos naudojimo sąlygomis ir privatumo politika</label>
+      <button class="a-btn" data-a="signup">Sukurti paskyrą</button>
+    </div>`;
+  },
+  home(){
+    const q = (S.q || '').toLowerCase();
+    const list = SPORTS.filter(s => s.name.toLowerCase().includes(q));
+    const pop = PROVIDERS.kaitavimas.slice(0, 2).map((p, i) => ({p, s:'kaitavimas', i})).concat([{p:PROVIDERS.parasparnis[0], s:'parasparnis', i:0}, {p:PROVIDERS.banglentes[0], s:'banglentes', i:0}]);
+    return `<div class="pad">
+      <div class="row"><div><div class="a-muted">Labas${S.user ? ', ' + esc(S.user.name) : ''}!</div><div class="a-h1">Ką nori išbandyti?</div></div>
+      <div class="avatar" style="background:#0FA3A0;width:38px;height:38px">${esc((S.user ? S.user.name : 'S').charAt(0).toUpperCase())}</div></div>
+      <label class="search"><svg width="18" height="18" viewBox="0 0 24 24"><circle cx="11" cy="11" r="7" fill="none" stroke="#5B6975" stroke-width="2.2"/><path d="M16.5 16.5 21 21" stroke="#5B6975" stroke-width="2.2" stroke-linecap="round"/></svg><input id="q" placeholder="Kaitavimas, slidės, nardymas…" value="${esc(S.q || '')}" aria-label="Paieška"></label>
+      <button class="quiz-cta" data-a="quiz"><span class="q">?</span><span><b>Nežinau, ką išbandyti</b><span>3 klausimai ir tau tinkamos veiklos</span></span></button>
+      <div class="a-h2">Veiklos</div>
+      <div class="sport-grid">${list.map(s => `<button class="sport" style="background:${s.g}" data-a="sport" data-v="${s.id}">${ic(s.ic, 70)}${s.name}</button>`).join('') || '<p class="a-muted">Nieko nerasta. Pabandyk kitą žodį.</p>'}</div>
+      <div class="a-h2">Populiaru šią savaitę</div>
+      <div class="hscroll">${pop.map(({p, s, i}) => `<button class="a-card mini" data-a="prov" data-s="${s}" data-v="${i}"><div class="cov" style="background:${sp(s).g}"></div><div class="in"><b style="font-size:14px">${esc(p.name)}</b><div class="a-muted">${sp(s).name} · nuo ${minPrice(p)} €</div><div style="font-size:13px;margin-top:3px"><span class="star">★ ${String(p.rating).replace('.', ',')}</span> <span class="a-muted">(${p.n})</span></div></div></button>`).join('')}</div>
+      <button class="gift" data-a="go" data-v="gift"><b>Dovanok adrenaliną</b><span style="font-size:13.5px">Dovanų kuponas bet kuriai veiklai. Gavėjas pats pasirinks laiką.</span></button>
+    </div>`;
+  },
+  quiz(){
+    const Q = [
+      {t:'Kur norėtum sportuoti?', o:[['vanduo','Ant vandens','Jūra, marios, ežerai'], ['oras','Ore','Skrydžiai ir šuoliai'], ['sniegas','Ant sniego','Kalnai ir trasos'], ['zeme','Ant žemės','Uolos ir sienelės']]},
+      {t:'Kiek adrenalino nori?', o:[['1','Šiek tiek','Ramiai išbandyti'], ['2','Vidutiniškai','Noriu pajusti greitį'], ['3','Daug!','Kuo ekstremaliau, tuo geriau']]},
+      {t:'Su kuo eisi?', o:[['vienas','Vienas','Noriu išmokti pats'], ['draugai','Su draugais','Grupinė pamoka'], ['seima','Su šeima','Tinka ir vaikams']]}
+    ];
+    const st = S.quiz.step;
+    if (st >= Q.length){
+      const [kur, lvl] = S.quiz.a;
+      const map = {vanduo:['kaitavimas','banglentes','vandenlentes'], oras:['parasparnis','parasiutas'], sniegas:['slides'], zeme:['laipiojimas','slides']};
+      let res = map[kur] || ['kaitavimas'];
+      if (lvl === '1' && kur === 'vanduo') res = ['vandenlentes','banglentes','kaitavimas'];
+      if (lvl === '3' && kur === 'oras') res = ['parasiutas','parasparnis'];
+      if (res.length < 2) res = res.concat(kur === 'sniegas' ? ['kaitavimas'] : ['nardymas']);
+      return backBar('Tau tinka') + `<div class="pad">
+        <div class="a-h1" style="font-size:23px">Štai ką rekomenduojame</div>
+        <p class="a-muted" style="margin:6px 0 16px">Pagal tavo atsakymus</p>
+        <div style="display:grid;gap:10px">${res.slice(0, 3).map((id, i) => `<button class="sport" style="background:${sp(id).g};height:96px;width:100%" data-a="sport" data-v="${id}">${ic(sp(id).ic, 70)}<span>${i === 0 ? '<span style="display:block;font-size:11px;font-weight:600;opacity:.85">GERIAUSIAI TINKA</span>' : ''}${sp(id).name}</span></button>`).join('')}</div>
+        <button class="a-btn sec" style="margin-top:16px" data-a="quizAgain">Atsakyti iš naujo</button>
+      </div>`;
+    }
+    const q = Q[st];
+    return backBar('Nežinau, ką išbandyti') + `<div class="pad">
+      <div class="qdots">${Q.map((_, i) => `<i class="${i <= st ? 'on' : ''}"></i>`).join('')}</div>
+      <div class="a-h1" style="font-size:23px;margin-bottom:16px">${q.t}</div>
+      ${q.o.map(o => `<button class="a-card qopt" data-a="qa" data-v="${o[0]}">${o[1]}<span>${o[2]}</span></button>`).join('')}
+    </div>`;
+  },
+  results(){
+    const s = sp(S.sport); let list = (PROVIDERS[s.id] || []).map((p, i) => ({p, i}));
+    if (S.filters.cheap) list = list.filter(x => minPrice(x.p) <= 80);
+    const ni = days.findIndex((_, i) => wxOf(s.id, i).c === 'good');
+    const nextTxt = ni < 0 ? '' : ' · artimiausia tinkama diena: ' + DACC[days[ni].getDay()] + ' (' + wxOf(s.id, ni).label + ')';
+    return backBar(s.name) + `<div class="pad">
+      <div class="chips" style="margin-bottom:14px">
+        <button class="chip on">Pradedantiesiems</button>
+        <button class="chip ${S.filters.cheap ? 'on' : ''}" data-a="filter" data-v="cheap">Iki 80 €</button>
+        <button class="chip">Šią savaitę</button>
+      </div>
+      <p class="a-muted" style="margin-bottom:10px">Rasta: ${list.length}${s.wx !== 'none' ? nextTxt : ''}</p>
+      ${list.map(({p, i}) => `<button class="a-card prov" data-a="prov" data-s="${s.id}" data-v="${i}"><div class="cov" style="background:${s.g}"></div><div style="min-width:0">
+        <div class="row"><b>${esc(p.name)}</b>${verified}</div>
+        <div class="a-muted">${esc(p.place)}</div>
+        <div class="row" style="margin-top:4px;font-size:13.5px"><span><span class="star">★ ${String(p.rating).replace('.', ',')}</span> <span class="a-muted">(${p.n})</span></span><b>nuo ${minPrice(p)} €</b></div>
+      </div></button>`).join('') || '<div class="empty">Pagal šį filtrą nieko nėra.</div>'}
+    </div>`;
+  },
+  profile(){
+    const s = sp(S.sport), p = PROVIDERS[s.id][S.prov];
+    return `<div class="pad"><div class="cover" style="background:${s.g}">
+        <button data-a="back" aria-label="Atgal" style="position:absolute;top:10px;left:14px;width:36px;height:36px;border-radius:50%;border:0;background:rgba(255,255,255,.9);display:grid;place-items:center;cursor:pointer"><svg width="18" height="18" viewBox="0 0 24 24"><path d="M15 5l-7 7 7 7" fill="none" stroke="#0E1B2C" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+        <span style="color:#fff;opacity:.4;position:absolute;right:10px;bottom:-6px">${ic(s.ic, 110)}</span>
+      </div>
+      <div style="margin-top:14px" class="row"><div class="a-h1" style="font-size:22px">${esc(p.name)}</div>${verified}</div>
+      <div class="a-muted">${esc(p.place)} · ${s.name}</div>
+      <div class="a-card" style="display:grid;grid-template-columns:repeat(3,1fr);text-align:center;padding:12px 6px;margin-top:14px">
+        <div><b class="star">★ ${String(p.rating).replace('.', ',')}</b><div class="a-muted" style="font-size:11.5px">${p.n} atsiliepimai</div></div>
+        <div><b>${p.years} m.</b><div class="a-muted" style="font-size:11.5px">patirtis</div></div>
+        <div><b>${p.students}+</b><div class="a-muted" style="font-size:11.5px">mokinių</div></div>
+      </div>
+      <div class="a-card" style="padding:10px 12px;margin-top:10px;font-size:13.5px;display:flex;gap:8px;align-items:center"><svg width="18" height="18" viewBox="0 0 24 24"><path d="M12 2 20 6v6c0 5-3.5 8.5-8 10-4.5-1.5-8-5-8-10V6z" fill="#E3F4EB" stroke="#178A55" stroke-width="2"/></svg><span><b>${esc(p.cert)}</b> · sertifikatas ir draudimas patikrinti</span></div>
+      <div class="a-h2">Ką siūlo</div>
+      ${p.offers.map((o, i) => `<button class="a-card offer ${S.offer === i ? 'on' : ''}" data-a="offer" data-v="${i}"><span class="radio"></span><span><b>${o.t}</b><div class="a-muted">${o.dur}</div><div class="inc">${o.inc.map(x => `<span>${x}</span>`).join('')}</div></span><b>${o.price} €</b></button>`).join('')}
+      <div class="a-h2">Atsiliepimai</div>
+      ${p.reviews.map(r => `<div class="a-card review"><div class="row"><b>${r[0]}</b><span class="star">★★★★★</span></div><p style="margin-top:4px;color:#3D4A55">${r[1]}</p></div>`).join('')}
+    </div>
+    <div class="sticky-b"><button class="a-btn" data-a="go" data-v="booking">Pasirinkti laiką</button></div>`;
+  },
+  booking(){
+    const s = sp(S.sport), p = PROVIDERS[s.id][S.prov];
+    const taken = {1:['13:00'], 3:['10:00'], 6:['16:00']};
+    const wxName = s.wx === 'wind' ? 'Vėjas' : s.wx === 'wave' ? 'Bangos' : 'Orai';
+    return backBar(S.resched != null ? 'Perkelti pamoką' : 'Pasirink laiką') + `<div class="pad">
+      <div class="a-muted">${esc(p.name)} · ${p.offers[S.offer].t}</div>
+      <div class="a-h2" style="margin-top:12px">Diena <span class="a-muted" style="font-weight:500;font-family:var(--f-body)">· ${wxName.toLowerCase()} prognozė</span></div>
+      <div class="days">${days.map((d, i) => { const w = wxOf(s.id, i); return `<button class="day ${S.day === i ? 'on' : ''}" data-a="day" data-v="${i}"><small>${DN[d.getDay()]}</small><b>${d.getDate()}</b><span class="wx ${w.c}">${w.label}</span></button>`; }).join('')}</div>
+      <div class="legend"><span><i style="background:#178A55"></i>Tinka</span><span><i style="background:#B86E00"></i>Ribinės sąlygos</span><span><i style="background:#9AA6AE"></i>Netinka</span></div>
+      ${S.day != null && wxOf(s.id, S.day).c === 'bad' ? '<div class="guard" style="margin-top:12px;background:#FBF0DC;color:#7A4A00">Šią dieną sąlygos netinka. Rinkis dieną su žaliu ženklu.</div>' : ''}
+      <div class="a-h2">Laikas</div>
+      <div class="times">${TIMES.map(t => { const dis = S.day == null || wxOf(s.id, S.day).c === 'bad' || (taken[S.day] || []).includes(t); return `<button class="time ${S.time === t && !dis ? 'on' : ''}" data-a="time" data-v="${t}" ${dis ? 'disabled' : ''}>${t}</button>`; }).join('')}</div>
+      ${S.resched != null ? '' : `<div class="a-h2">Dalyviai</div>
+      <div class="a-card row" style="padding:10px 14px"><span>Žmonių skaičius</span><div class="stepper"><button data-a="ppl" data-v="-1" aria-label="Mažiau">–</button><b>${S.people}</b><button data-a="ppl" data-v="1" aria-label="Daugiau">+</button></div></div>
+      <p class="a-muted" style="margin-top:8px">Eini su draugais? Kiekvienas gaus kvietimą ir susimokės pats.</p>`}
+    </div>
+    <div class="sticky-b"><button class="a-btn" data-a="${S.resched != null ? 'reschedDo' : 'toPay'}" ${S.day == null || !S.time || wxOf(s.id, S.day).c === 'bad' ? 'disabled' : ''}>${S.resched != null ? 'Patvirtinti naują laiką' : 'Tęsti'}</button></div>`;
+  },
+  payment(){
+    const s = sp(S.sport), p = PROVIDERS[s.id][S.prov], o = p.offers[S.offer], d = days[S.day];
+    const total = o.price * S.people;
+    const methods = [['card','Banko kortelė'], ['wallet','Apple Pay / Google Pay'], ['bank','Bankinė nuoroda']];
+    return backBar('Apmokėjimas') + `<div class="pad">
+      <div class="a-card sum">
+        <div class="row"><span>Veikla</span><span>${s.name}, ${o.t.toLowerCase()}</span></div>
+        <div class="row"><span>Instruktorius</span><span>${esc(p.name)}</span></div>
+        <div class="row"><span>Data</span><span>${cap(DACC[d.getDay()])}, ${d.getMonth() + 1}-${String(d.getDate()).padStart(2, '0')} ${S.time}</span></div>
+        <div class="row"><span>Vieta</span><span>${esc(p.place)}</span></div>
+        <div class="row"><span>Dalyviai</span><span>${S.people} × ${o.price} €</span></div>
+        <div class="row total"><span>Iš viso</span><span>${total} €</span></div>
+      </div>
+      <div class="a-h2">Mokėjimo būdas</div>
+      ${methods.map(m => `<button class="a-card pay ${S.pay === m[0] ? 'on' : ''}" data-a="pay" data-v="${m[0]}"><span class="radio"></span>${m[1]}</button>`).join('')}
+      <div class="guard" style="margin-top:10px"><svg width="22" height="22" viewBox="0 0 24 24" style="flex:none">${ICON.wind}</svg><span><b>Orų apsauga</b>Jei oras bus netinkamas, nemokamai perkelsime pamoką arba grąžinsime pinigus.</span></div>
+    </div>
+    <div class="sticky-b"><button class="a-btn" data-a="pay-now">Apmokėti ${total} €</button></div>`;
+  },
+  confirm(){
+    const b = S.bookings[S.bookings.length - 1]; if (!b) return SCREENS.home();
+    const s = sp(b.sport), p = PROVIDERS[s.id][b.prov];
+    return `<div class="pad" style="text-align:center">
+      <div class="okmark"><svg width="38" height="38" viewBox="0 0 24 24"><path d="M5 12.5l4.5 4.5L19 7" fill="none" stroke="#178A55" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+      <div class="a-h1" style="font-size:24px">Užsakymas patvirtintas!</div>
+      <p class="a-muted" style="margin-top:4px">${s.name} su „${esc(p.name)}“ · ${b.dayTxt}, ${b.time}</p>
+    </div>
+    <div class="pad" style="padding-top:0">
+      <div class="map"><svg viewBox="0 0 300 110" preserveAspectRatio="none"><path d="M0 70 C60 40 120 90 180 60 S260 30 300 50 V110 H0Z" fill="#9FD3DE"/><path d="M0 70 C60 40 120 90 180 60 S260 30 300 50" fill="none" stroke="#fff" stroke-width="2"/></svg><div style="position:absolute;left:58%;top:28%;transform:translate(-50%,-100%)"><svg width="26" height="32" viewBox="0 0 24 30"><path d="M12 29s10-10 10-17A10 10 0 0 0 2 12c0 7 10 17 10 17z" fill="#FF5A36"/><circle cx="12" cy="12" r="4" fill="#fff"/></svg></div><span style="position:absolute;left:10px;bottom:8px;font-size:12px;font-weight:700;background:#fff;padding:3px 8px;border-radius:6px">${esc(p.place)}</span></div>
+      <div class="a-h2">Ką pasiimti</div>
+      <ul class="list"><li>Rankšluostį ir maudymosi kostiumėlį</li><li>Kremą nuo saulės ir akinius</li><li>Vandens butelį</li></ul>
+      <div style="display:grid;gap:9px;margin-top:18px">
+        <button class="a-btn sec" data-a="cal">Pridėti į kalendorių</button>
+        <button class="a-btn" data-a="tab" data-v="bookings">Mano užsakymai</button>
+      </div>
+      <p class="a-muted" style="text-align:center;margin-top:12px">Artėjant pamokai stebėsime orų prognozę.</p>
+    </div>`;
+  },
+  alert(){
+    const b = activeBooking(); if (!b) return SCREENS.bookings();
+    const s = sp(b.sport); const nd = b.newDay;
+    const metric = s.wx === 'wind' ? 'm/s' : s.wx === 'wave' ? 'm' : '';
+    const vals = days.map((_, i) => wxOf(s.id, i));
+    const vmax = Math.max(...vals.map(v => v.v || 1));
+    return backBar('Pranešimas dėl oro') + `<div class="pad">
+      <div class="a-h1" style="font-size:22px">${cap(b.dayTxt)} ${s.wx === 'wind' ? 'vėjas bus per silpnas' : s.wx === 'wave' ? 'bangos bus per mažos' : 'prognozuojama liūtis'}</div>
+      <p class="a-muted" style="margin-top:6px">${s.wx === 'none' ? 'Saugumui pamokos tą dieną nevyks.' : 'Prognozė atnaujinta: ' + b.badLabel + '. Pamokai reikia bent ' + (s.wx === 'wind' ? '6 m/s' : '0,8 m') + '.'}</p>
+      ${s.wx !== 'none' ? `<div class="a-card" style="margin-top:14px;padding-bottom:8px"><div class="wxchart">${vals.map((v, i) => `<div><span>${String(v.v).replace('.', ',')}</span><i style="height:${Math.max(6, v.v / vmax * 52)}px;background:${i === b.day ? '#9AA6AE' : i === nd ? '#FF5A36' : '#BFE3E1'}"></i>${DN[days[i].getDay()]}</div>`).join('')}</div><p class="a-muted" style="padding:6px 12px 0;font-size:12px">${s.wx === 'wind' ? 'Vėjas' : 'Bangos'}, ${metric}. Pilka – tavo diena, oranžinė – siūloma.</p></div>` : ''}
+      <div class="a-card" style="padding:14px;margin-top:12px;border-color:#FF5A36;box-shadow:0 0 0 1.5px #FF5A36 inset"><div class="a-muted" style="font-size:12px;font-weight:700">SIŪLOMAS LAIKAS</div><b style="font-size:17px">${cap(DACC[days[nd].getDay()])}, ${b.time}</b><div class="a-muted">${wxOf(s.id, nd).label} · ${s.wx === 'none' ? 'giedra' : 'tinka pamokai'}</div></div>
+      <div style="display:grid;gap:9px;margin-top:14px">
+        <button class="a-btn" data-a="accept">Priimti siūlomą laiką</button>
+        <button class="a-btn sec" data-a="otherTime">Pasirinkti kitą laiką</button>
+        <button class="a-btn sec" data-a="refund">Atgauti pinigus</button>
+      </div>
+    </div>`;
+  },
+  bookings(){
+    return `<div class="pad"><div class="a-h1">Mano užsakymai</div>
+      ${S.bookings.length ? '<div style="margin-top:16px">' + S.bookings.slice().reverse().map(b => { const s = sp(b.sport), p = PROVIDERS[s.id][b.prov]; const st = b.status === 'ok' ? ['ok', 'Patvirtinta'] : b.status === 'moved' ? ['moved', 'Perkelta'] : b.status === 'ref' ? ['ref', 'Pinigai grąžinti'] : ['moved', 'Laukia sprendimo']; return `<div class="a-card bk"><div class="row"><b>${s.name}</b><span class="status ${st[0]}">${st[1]}</span></div><div class="a-muted">${esc(p.name)} · ${esc(p.place)}</div><div style="font-size:14px;margin-top:4px"><b>${cap(b.dayTxt)}, ${b.time}</b> · ${b.total} €</div>${b.status === 'pending' ? '<button class="a-btn" style="margin-top:10px;padding:10px" data-a="go" data-v="alert">Peržiūrėti pranešimą</button>' : ''}</div>`; }).join('') + '</div>'
+      : `<div class="empty"><p>Dar neturi užsakymų.</p><button class="a-btn" style="margin-top:14px" data-a="sport" data-v="kaitavimas">Rasti pamoką</button></div>`}
+      ${S.bookings.some(b => b.status === 'ok' || b.status === 'moved') && !S.bookings.some(b => b.status === 'pending') && !S.alerted ? '<button class="a-btn sec" style="margin-top:6px" data-a="simAlert">Imituoti orų pranešimą</button>' : ''}
+    </div>`;
+  },
+  progress(){
+    const learned = ['Saugumo taisyklės ir vėjo langas', 'Kaito valdymas sausumoje', 'Kūno tempimas vandenyje (body drag)'];
+    return `<div class="pad"><div class="a-h1">Mano progresas</div>
+      <p class="a-muted" style="margin-top:4px">Pavyzdys: taip atrodys po pirmos pamokos</p>
+      <div class="a-card" style="padding:16px;margin-top:14px">
+        <div class="row"><b style="font-size:16px">Kaitavimas</b><span class="a-muted" style="font-family:var(--f-mono);font-size:12px">IKO</span></div>
+        <div class="lvl">${[1, 2, 3, 4, 5].map(i => `<i class="${i <= 1 ? 'on' : ''}"></i>`).join('')}</div>
+        <div class="a-muted">1 lygis iš 5 · Pradedantysis</div>
+        <div class="a-h2" style="margin-top:14px;font-size:15px">Jau išmokai</div>
+        <ul class="list">${learned.map(l => `<li>${l}</li>`).join('')}</ul>
+        <div style="background:#F2F5F6;border-radius:12px;padding:10px 12px;margin-top:12px;font-size:13.5px"><b>Instruktoriaus komentaras</b><p style="color:#3D4A55;margin-top:2px">Puikiai jauti kaitą. Kitą kartą bandysime vandens startą.</p></div>
+      </div>
+      <div class="a-card" style="padding:16px;margin-top:10px;border-color:#FF5A36;box-shadow:0 0 0 1.5px #FF5A36 inset">
+        <div class="a-muted" style="font-size:12px;font-weight:700">TAVO KITAS ŽINGSNIS</div>
+        <b style="font-size:16px">2 lygis: vandens startas ir plaukimas lenta</b>
+        <p class="a-muted">Rekomenduojamos 2 pamokos</p>
+        <button class="a-btn" style="margin-top:10px" data-a="prov" data-s="kaitavimas" data-v="0">2 pamokų paketas – 160 €</button>
+      </div>
+      <div class="a-h2">Išbandyk ir kitas veiklas</div>
+      <div class="sport-grid">${['banglentes', 'vandenlentes'].map(id => `<button class="sport" style="background:${sp(id).g}" data-a="sport" data-v="${id}">${ic(sp(id).ic, 70)}${sp(id).name}</button>`).join('')}</div>
+    </div>`;
+  },
+  community(){
+    return `<div class="pad"><div class="a-h1">Bendruomenė</div>
+      <p class="a-muted" style="margin:4px 0 14px">Dalinkis savo akimirkomis ir įkvėpk kitus</p>
+      <label class="upload" for="vidUp"><svg width="20" height="20" viewBox="0 0 24 24"><path d="M12 16V4M6 10l6-6 6 6M4 20h16" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>Įkelti savo video</label>
+      <input type="file" id="vidUp" accept="video/*" hidden>
+      <div class="feed" style="margin-top:14px">${S.videos.map((v, i) => `<article class="a-card post">
+        <div class="media" style="background:${v.g || '#0E1B2C'}">${v.src ? `<video src="${esc(v.src)}" muted loop playsinline autoplay controls preload="metadata"></video>` : `<div class="ph"><span class="play"><svg width="22" height="22" viewBox="0 0 24 24"><path d="M8 5v14l11-7z" fill="#fff"/></svg></span><b style="font-size:15px">${esc(v.sport)} · ${esc(v.place)}</b><span style="opacity:.8">Vaizdo įrašas netrukus</span></div>`}</div>
+        <div class="meta"><div class="row"><div class="who"><span class="avatar" style="background:${v.col}">${esc(v.ini)}</span><span><b>${esc(v.who)}</b><br><span class="a-muted" style="font-size:12px">${esc(v.sport)} · ${esc(v.place)}</span></span></div>
+        <button class="like ${S.liked[i] ? 'on' : ''}" data-a="like" data-v="${i}" aria-label="Patinka"><svg width="20" height="20" viewBox="0 0 24 24"><path d="M12 20s-7-4.5-7-10a4 4 0 0 1 7-2.6A4 4 0 0 1 19 10c0 5.5-7 10-7 10z" fill="${S.liked[i] ? 'currentColor' : 'none'}" stroke="currentColor" stroke-width="2"/></svg>${v.likes + (S.liked[i] ? 1 : 0)}</button></div>
+        <p style="font-size:14px">${esc(v.text)}</p></div></article>`).join('')}</div>
+    </div>`;
+  },
+  gift(){
+    const amts = [50, 100, 150, 250];
+    return backBar('Dovanų kuponas') + `<div class="pad">
+      <div class="gift" style="margin-top:0;cursor:default"><span style="font-size:12px;font-weight:700;opacity:.85">ADRENA DOVANŲ KUPONAS</span><b style="font-size:30px;margin-top:6px">${S.gift.amt} €</b><span style="font-size:13px">Galioja 12 mėnesių visoms veikloms</span></div>
+      <div class="a-h2">Suma</div>
+      <div class="chips">${amts.map(a => `<button class="chip ${S.gift.amt === a ? 'on' : ''}" data-a="amt" data-v="${a}">${a} €</button>`).join('')}</div>
+      <div class="field" style="margin-top:16px"><label for="g-to">Kam dovanoji?</label><input id="g-to" placeholder="Gavėjo vardas" maxlength="24" autocomplete="off"></div>
+      <div class="field"><label for="g-msg">Sveikinimas</label><textarea id="g-msg" placeholder="Su gimtadieniu! Laikas išmokti kaituoti."></textarea></div>
+    </div>
+    <div class="sticky-b"><button class="a-btn" data-a="giftDo">Pirkti kuponą (demo)</button></div>`;
+  },
+  giftOk(){
+    return `<div class="pad" style="text-align:center;padding-top:40px">
+      <div class="okmark"><svg width="38" height="38" viewBox="0 0 24 24"><path d="M5 12.5l4.5 4.5L19 7" fill="none" stroke="#178A55" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+      <div class="a-h1" style="font-size:24px">Kuponas paruoštas!</div>
+      <p class="a-muted" style="margin:8px 0 22px">${S.gift.to ? esc(S.gift.to) + ' gaus' : 'Gavėjas gaus'} ${S.gift.amt} € kuponą el. paštu ir galės išsirinkti veiklą, instruktorių bei laiką.</p>
+      <button class="a-btn" data-a="tab" data-v="home">Į pradžią</button>
+    </div>`;
+  }
+};
+
+const TABS = [
+  ['home', 'Atrask', '<circle cx="11" cy="11" r="7" fill="none" stroke="currentColor" stroke-width="2"/><path d="M16.5 16.5 21 21" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>'],
+  ['bookings', 'Užsakymai', '<rect x="3" y="5" width="18" height="16" rx="3" fill="none" stroke="currentColor" stroke-width="2"/><path d="M3 10h18M8 3v4M16 3v4" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>'],
+  ['community', 'Bendruomenė', '<rect x="3" y="4" width="18" height="16" rx="3" fill="none" stroke="currentColor" stroke-width="2"/><path d="M10 9v6l5-3z" fill="currentColor"/>'],
+  ['progress', 'Progresas', '<path d="M4 19 10 12l4 4 6-9" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>']
+];
+const ROOT_TAB = {home:'home', quiz:'home', results:'home', profile:'home', booking:'home', payment:'home', confirm:'bookings', gift:'home', giftOk:'home', bookings:'bookings', alert:'bookings', community:'community', progress:'progress'};
+
+function render(resetScroll){
+  const name = cur();
+  app.innerHTML = SCREENS[name]();
+  const noTabs = name === 'welcome' || name === 'signup';
+  const tb = $('#tabbar');
+  tb.hidden = noTabs;
+  if (!noTabs){
+    const pending = S.bookings.some(b => b.status === 'pending');
+    tb.innerHTML = TABS.map(t => `<button data-a="tab" data-v="${t[0]}" class="${ROOT_TAB[name] === t[0] ? 'on' : ''}" style="${ROOT_TAB[name] === t[0] ? 'color:#D9431F' : ''}"><span style="position:relative"><svg viewBox="0 0 24 24">${t[2]}</svg>${t[0] === 'bookings' && pending ? '<i style="position:absolute;top:-2px;right:-4px;width:8px;height:8px;border-radius:50%;background:#FF5A36"></i>' : ''}</span>${t[1]}</button>`).join('');
+  }
+  if (resetScroll) app.scrollTop = 0;
+  const q = $('#q');
+  if (q) q.addEventListener('input', () => { S.q = q.value; const pos = q.selectionStart; render(false); const nq = $('#q'); nq.focus(); nq.setSelectionRange(pos, pos); });
+  const up = $('#vidUp');
+  if (up) up.addEventListener('change', () => {
+    const f = up.files && up.files[0]; if (!f) return;
+    const url = URL.createObjectURL(f);
+    S.videos.unshift({src:url, who:S.user ? S.user.name : 'Tu', ini:(S.user ? S.user.name : 'T').charAt(0).toUpperCase(), col:'#0FA3A0', sport:'Mano klipas', place:'Ką tik', text:'Mano naujausias klipas', likes:0, g:'#0E1B2C'});
+    S.liked = Object.fromEntries(Object.entries(S.liked).map(([k, v]) => [+k + 1, v]));
+    render(true); toast('Įkelta! Matoma tik tavo naršyklėje');
+  });
+}
+
+function activeBooking(){ return S.bookings.find(b => b.status === 'pending'); }
+function nextGood(sport, from){ for (let i = 1; i < 7; i++){ const j = (from + i) % 7; if (wxOf(sport, j).c === 'good') return j; } return (from + 1) % 7; }
+
+function makeBooking(){
+  const s = sp(S.sport), o = PROVIDERS[s.id][S.prov].offers[S.offer], d = days[S.day];
+  S.bookings.push({sport:s.id, prov:S.prov, offer:S.offer, day:S.day, time:S.time, people:S.people, total:o.price * S.people, dayTxt:DACC[d.getDay()], status:'ok'});
+}
+function triggerAlert(){
+  const b = S.bookings.slice().reverse().find(x => x.status === 'ok' || x.status === 'moved'); if (!b) return;
+  const s = sp(b.sport);
+  b.status = 'pending'; b.newDay = nextGood(b.sport, b.day);
+  b.badLabel = s.wx === 'wind' ? 'tik 3 m/s' : s.wx === 'wave' ? 'tik 0,3 m' : 'liūtis';
+  S.alerted = true;
+  const push = $('#push');
+  push.innerHTML = `<span class="ic"><svg width="24" height="24" viewBox="8 8 84 84"><path d="M18 84 L50 16 L82 84" fill="none" stroke="#FF8A3D" stroke-width="13" stroke-linecap="round" stroke-linejoin="round"/><path d="M16 64 C27 52 39 52 50 62 S73 72 84 58" fill="none" stroke="#0FA3A0" stroke-width="9" stroke-linecap="round"/></svg></span><span><b>Adrena · dabar</b><p>${cap(b.dayTxt)} ${s.wx === 'wind' ? 'nepakankamas vėjas' : s.wx === 'wave' ? 'per mažos bangos' : 'prognozuojama liūtis'}. Siūlome ${DACC[days[b.newDay].getDay()]} ${b.time}.</p></span>`;
+  push.classList.add('show');
+  clearTimeout(push._h); push._h = setTimeout(() => push.classList.remove('show'), 7000);
+  render(false);
+}
+$('#push').addEventListener('click', () => { $('#push').classList.remove('show'); S.stack = ['bookings', 'alert']; render(true); });
+
+app.addEventListener('click', handle);
+$('#tabbar').addEventListener('click', handle);
+function handle(e){
+  const el = e.target.closest('[data-a]'); if (!el) return;
+  const a = el.dataset.a, v = el.dataset.v;
+  switch (a){
+    case 'back': back(); break;
+    case 'go': go(v); break;
+    case 'tab': tab(v); break;
+    case 'guest': S.user = null; tab('home'); break;
+    case 'int': { const i = S.interests.indexOf(v); i < 0 ? S.interests.push(v) : S.interests.splice(i, 1); el.classList.toggle('on'); break; }
+    case 'signup': {
+      const name = $('#su-name').value.trim();
+      if (!name){ toast('Įrašyk vardą'); $('#su-name').focus(); return; }
+      if (!$('#su-ok').checked){ toast('Pažymėk sutikimą su sąlygomis'); return; }
+      S.user = {name, city:$('#su-city').value}; tab('home'); toast('Sveiki atvykę, ' + name + '!'); break;
+    }
+    case 'quiz': S.quiz = {step:0, a:[]}; go('quiz'); break;
+    case 'qa': S.quiz.a.push(v); S.quiz.step++; render(true); break;
+    case 'quizAgain': S.quiz = {step:0, a:[]}; render(true); break;
+    case 'sport': S.sport = v; S.filters = {}; go('results'); break;
+    case 'filter': S.filters[v] = !S.filters[v]; render(false); break;
+    case 'prov': S.sport = el.dataset.s; S.prov = +v; S.offer = 0; S.day = null; S.time = null; S.people = 1; S.resched = null; go('profile'); break;
+    case 'offer': S.offer = +v; render(false); break;
+    case 'day': S.day = +v; S.time = null; render(false); break;
+    case 'time': S.time = v; render(false); break;
+    case 'ppl': S.people = Math.min(6, Math.max(1, S.people + +v)); render(false); break;
+    case 'toPay': go('payment'); break;
+    case 'pay': S.pay = v; render(false); break;
+    case 'pay-now': {
+      el.disabled = true; el.textContent = 'Apdorojama…';
+      setTimeout(() => {
+        makeBooking(); S.stack = ['bookings', 'confirm']; render(true);
+        clearTimeout(S.pushTimer); S.pushTimer = setTimeout(() => { if (!S.alerted) triggerAlert(); }, 6000);
+      }, 900);
+      break;
+    }
+    case 'cal': toast('Demo: pamoka pridėta į kalendorių'); break;
+    case 'simAlert': triggerAlert(); break;
+    case 'accept': { const b = activeBooking(); b.day = b.newDay; b.dayTxt = DACC[days[b.day].getDay()]; b.status = 'moved'; tab('bookings'); toast('Pamoka perkelta į ' + b.dayTxt); break; }
+    case 'otherTime': { const b = activeBooking(); S.resched = S.bookings.indexOf(b); S.sport = b.sport; S.prov = b.prov; S.offer = b.offer; S.day = null; S.time = null; go('booking'); break; }
+    case 'reschedDo': { const b = S.bookings[S.resched]; b.day = S.day; b.time = S.time; b.dayTxt = DACC[days[S.day].getDay()]; b.status = 'moved'; S.resched = null; tab('bookings'); toast('Naujas laikas patvirtintas'); break; }
+    case 'refund': { const b = activeBooking(); b.status = 'ref'; tab('bookings'); toast(b.total + ' € grąžinsime per 1–3 d. d.'); break; }
+    case 'like': {
+      S.liked[v] = !S.liked[v];
+      el.classList.toggle('on', !!S.liked[v]);
+      el.querySelector('path').setAttribute('fill', S.liked[v] ? 'currentColor' : 'none');
+      el.lastChild.textContent = S.videos[v].likes + (S.liked[v] ? 1 : 0);
+      break;
+    }
+    case 'amt': S.gift.amt = +v; render(false); break;
+    case 'giftDo': S.gift.to = ($('#g-to') || {}).value || ''; S.stack = ['home', 'giftOk']; render(true); break;
+  }
+}
+
+/* scenarijai šalia telefono */
+function ensureUser(){ if (!S.user) S.user = {name:'Gabija', city:'Kaunas'}; }
+function sampleBooking(){
+  S.sport = 'kaitavimas'; S.prov = 0; S.offer = 0; S.people = 1; S.time = '10:00';
+  S.day = days.findIndex((_, i) => wxOf('kaitavimas', i).c === 'good' && wxOf('kaitavimas', (i + 1) % 7).c !== 'bad');
+  if (S.day < 0) S.day = 1;
+  makeBooking();
+}
+$('#scn').addEventListener('click', e => {
+  const b = e.target.closest('[data-scn]'); if (!b) return;
+  const k = b.dataset.scn;
+  if (matchMedia('(max-width:900px)').matches) $('.phone').scrollIntoView({behavior:'smooth', block:'center'});
+  $('#push').classList.remove('show');
+  if (k === 'signup'){ S.stack = ['welcome', 'signup']; render(true); }
+  if (k === 'quiz'){ ensureUser(); S.quiz = {step:0, a:[]}; S.stack = ['home', 'quiz']; render(true); }
+  if (k === 'book'){ ensureUser(); S.sport = 'kaitavimas'; S.filters = {}; S.stack = ['home', 'results']; render(true); }
+  if (k === 'alert'){ ensureUser(); if (!S.bookings.some(x => x.status === 'ok' || x.status === 'moved')) sampleBooking(); S.alerted = false; S.stack = ['bookings']; render(true); setTimeout(triggerAlert, 500); }
+  if (k === 'progress'){ ensureUser(); S.stack = ['progress']; render(true); }
+  if (k === 'community'){ ensureUser(); S.stack = ['community']; render(true); }
+});
+$('#resetDemo').addEventListener('click', () => { clearTimeout(S.pushTimer); $('#push').classList.remove('show'); S = fresh(); render(true); });
+
+function tick(){ const d = new Date(); $('#clock').textContent = d.getHours() + ':' + String(d.getMinutes()).padStart(2, '0'); }
+tick(); setInterval(tick, 30000);
+render(true);
+</script>
+
+</body></html>

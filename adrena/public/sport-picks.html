@@ -1,0 +1,276 @@
+<!doctype html>
+<html lang="lt">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Sport photo picks – Adrena</title>
+<style>
+  body { margin: 0; font-family: "Archivo", system-ui, sans-serif; background: #0E1B2C; color: #EEF4F5; padding: 40px 24px 80px; }
+  h1 { font-size: 28px; font-weight: 800; margin: 0 0 8px; }
+  .sub { color: #9FB1BC; margin-bottom: 48px; font-size: 15px; }
+  .sport-block { margin-bottom: 56px; }
+  .sport-title { font-size: 22px; font-weight: 700; margin: 0 0 6px; color: #fff; }
+  .sport-note { font-size: 13.5px; color: #9FB1BC; margin: 0 0 16px; }
+  .own-badge { display: inline-block; background: #0FA3A0; color: #fff; font-size: 11px; font-weight: 700; padding: 2px 8px; border-radius: 4px; letter-spacing: .05em; text-transform: uppercase; margin-left: 8px; vertical-align: middle; }
+  .candidates { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; }
+  @media (max-width: 700px) { .candidates { grid-template-columns: 1fr; } }
+  .card { background: #132638; border-radius: 12px; overflow: hidden; border: 2px solid transparent; transition: border-color .2s; }
+  .card:hover { border-color: #0FA3A0; }
+  .card img { width: 100%; aspect-ratio: 4/3; object-fit: cover; display: block; }
+  .card-body { padding: 12px 14px 14px; }
+  .card-num { font-size: 11px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: #FF8A3D; margin-bottom: 4px; }
+  .card-desc { font-size: 14px; color: #EEF4F5; margin: 0 0 4px; line-height: 1.4; }
+  .card-photo { font-size: 13px; color: #9FB1BC; margin: 0 0 8px; }
+  .card-link { display: inline-block; font-size: 12px; color: #0FA3A0; text-decoration: none; word-break: break-all; }
+  .card-link:hover { text-decoration: underline; }
+  .free-badge { display: inline-block; background: rgba(23,138,85,.18); color: #58D580; font-size: 10.5px; font-weight: 700; padding: 2px 7px; border-radius: 4px; letter-spacing: .05em; text-transform: uppercase; margin-top: 6px; }
+  .own-preview { display: grid; grid-template-columns: repeat(2, 1fr); gap: 14px; max-width: 600px; }
+  .own-card { background: #132638; border-radius: 12px; overflow: hidden; }
+  .own-card img { width: 100%; aspect-ratio: 4/3; object-fit: cover; display: block; }
+  .own-card-body { padding: 10px 12px; font-size: 13px; color: #9FB1BC; }
+  hr { border: 0; border-top: 1px solid #22374A; margin: 48px 0; }
+  .pick-label { display: block; margin-top: 10px; font-size: 12.5px; color: #9FB1BC; }
+  .pick-label b { color: #EEF4F5; }
+</style>
+</head>
+<body>
+
+<h1>Sporto šakų nuotraukų pasirinkimas</h1>
+<p class="sub">
+  Sporto šakoms su savo nuotraukomis jos jau pasirinktos. Kitoms 5 šakoms – 3 kandidatai iš Unsplash (nemokama licencija).<br>
+  <strong>Pasakyk, kuri nuotrauka tinka kiekvienai šakai</strong> (pvz. „Banglentės: 2").
+</p>
+
+<!-- OWN PHOTOS -->
+<div class="sport-block">
+  <div class="sport-title">Kaitavimas <span class="own-badge">Sava nuotrauka</span></div>
+  <p class="sport-note">Naudosime media/marius.jpg arba media/foto-0807.jpg – pasakyk, kurią.</p>
+  <div class="own-preview">
+    <div class="own-card"><img src="media/marius.jpg" alt="Marius kaitavimas" onerror="this.closest('.own-card').style.display='none'"><div class="own-card-body">A – marius.jpg</div></div>
+    <div class="own-card"><img src="media/foto-0807.jpg" alt="Kaitavimas foto-0807" onerror="this.closest('.own-card').style.display='none'"><div class="own-card-body">B – foto-0807.jpg</div></div>
+  </div>
+</div>
+
+<div class="sport-block">
+  <div class="sport-title">Vandenlentės <span class="own-badge">Sava nuotrauka</span></div>
+  <p class="sport-note">Naudosime media/vandenlente.jpg arba media/foto-7530.jpg – pasakyk, kurią.</p>
+  <div class="own-preview">
+    <div class="own-card"><img src="media/vandenlente.jpg" alt="Vandenlente" onerror="this.closest('.own-card').style.display='none'"><div class="own-card-body">A – vandenlente.jpg</div></div>
+    <div class="own-card"><img src="media/foto-7530.jpg" alt="Vandenlentė foto-7530" onerror="this.closest('.own-card').style.display='none'"><div class="own-card-body">B – foto-7530.jpg</div></div>
+  </div>
+</div>
+
+<div class="sport-block">
+  <div class="sport-title">Slidės ir snieglentės <span class="own-badge">Sava nuotrauka</span></div>
+  <p class="sport-note">Naudosime media/povilas-snieglente.jpg.</p>
+  <div class="own-preview">
+    <div class="own-card"><img src="media/povilas-snieglente.jpg" alt="Povilas snieglente" onerror="this.closest('.own-card').style.display='none'"><div class="own-card-body">povilas-snieglente.jpg</div></div>
+  </div>
+</div>
+
+<hr>
+
+<!-- UNSPLASH CANDIDATES -->
+
+<div class="sport-block">
+  <div class="sport-title">Banglentės</div>
+  <p class="sport-note">Paieška: „surfer wave" – 3 nemokamos nuotraukos</p>
+  <div class="candidates">
+    <div class="card">
+      <img src="https://images.unsplash.com/photo-1498330177096-689e3fb901ca?w=600&q=80&auto=format&fit=crop" alt="Barrel wave Newport Beach" loading="lazy">
+      <div class="card-body">
+        <div class="card-num">Kandidatas 1</div>
+        <div class="card-desc">Blue barrel wave near Newport Beach</div>
+        <div class="card-photo">📷 Jeremy Bishop</div>
+        <a class="card-link" href="https://unsplash.com/photos/barrel-wave-in-newport-beach-iftBhUFfecE" target="_blank">unsplash.com/photos/iftBhUFfecE</a>
+        <div class="free-badge">✓ Nemokama licencija</div>
+        <span class="pick-label">Pasirink: <b>Banglentės 1</b></span>
+      </div>
+    </div>
+    <div class="card">
+      <img src="https://images.unsplash.com/photo-1513569143478-b38b2c0ef97f?w=600&q=80&auto=format&fit=crop" alt="Person surfing during sunset" loading="lazy">
+      <div class="card-body">
+        <div class="card-num">Kandidatas 2</div>
+        <div class="card-desc">Person surfing during sunset</div>
+        <div class="card-photo">📷 Ryan Loughlin</div>
+        <a class="card-link" href="https://unsplash.com/photos/person-surfing-during-sunset-HXqpJnLyHzg" target="_blank">unsplash.com/photos/HXqpJnLyHzg</a>
+        <div class="free-badge">✓ Nemokama licencija</div>
+        <span class="pick-label">Pasirink: <b>Banglentės 2</b></span>
+      </div>
+    </div>
+    <div class="card">
+      <img src="https://images.unsplash.com/photo-1559627755-42212e5c5fdf?w=600&q=80&auto=format&fit=crop" alt="Surfer paddling in turquoise ocean" loading="lazy">
+      <div class="card-body">
+        <div class="card-num">Kandidatas 3</div>
+        <div class="card-desc">Surfer paddling in deep turquoise ocean</div>
+        <div class="card-photo">📷 Silas Baisch</div>
+        <a class="card-link" href="https://unsplash.com/photos/surfer-paddling-in-turquoise-ocean-L78RstAZuTY" target="_blank">unsplash.com/photos/L78RstAZuTY</a>
+        <div class="free-badge">✓ Nemokama licencija</div>
+        <span class="pick-label">Pasirink: <b>Banglentės 3</b></span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="sport-block">
+  <div class="sport-title">Parasparnis</div>
+  <p class="sport-note">Paieška: „paraglider coast" – 3 nemokamos nuotraukos</p>
+  <div class="candidates">
+    <div class="card">
+      <img src="https://images.unsplash.com/photo-1592208128295-5aaa34f1d72b?w=600&q=80&auto=format&fit=crop" alt="Silhouette paraglider sunset" loading="lazy">
+      <div class="card-body">
+        <div class="card-num">Kandidatas 1</div>
+        <div class="card-desc">Silhouette of paraglider during sunset</div>
+        <div class="card-photo">📷 Juliette G.</div>
+        <a class="card-link" href="https://unsplash.com/photos/silhouette-of-person-riding-parachute-during-sunset-bmBLu_oAEj8" target="_blank">unsplash.com/photos/bmBLu_oAEj8</a>
+        <div class="free-badge">✓ Nemokama licencija</div>
+        <span class="pick-label">Pasirink: <b>Parasparnis 1</b></span>
+      </div>
+    </div>
+    <div class="card">
+      <img src="https://images.unsplash.com/photo-1588101847617-4a438d2abea2?w=600&q=80&auto=format&fit=crop" alt="Paraglider blue parachute" loading="lazy">
+      <div class="card-body">
+        <div class="card-num">Kandidatas 2</div>
+        <div class="card-desc">Paraglider with blue parachute in blue sky</div>
+        <div class="card-photo">📷 Charbel Aoun</div>
+        <a class="card-link" href="https://unsplash.com/photos/man-in-blue-and-black-jacket-riding-on-blue-and-white-parachute-fy7xmvbdXTY" target="_blank">unsplash.com/photos/fy7xmvbdXTY</a>
+        <div class="free-badge">✓ Nemokama licencija</div>
+        <span class="pick-label">Pasirink: <b>Parasparnis 2</b></span>
+      </div>
+    </div>
+    <div class="card">
+      <img src="https://images.unsplash.com/photo-1709483095705-f2a589eb28d9?w=600&q=80&auto=format&fit=crop" alt="Parasailing over ocean" loading="lazy">
+      <div class="card-body">
+        <div class="card-num">Kandidatas 3</div>
+        <div class="card-desc">Parasailing over ocean on sunny day</div>
+        <div class="card-photo">📷 Sébastien Goldberg</div>
+        <a class="card-link" href="https://unsplash.com/photos/a-person-para-sailing-in-the-ocean-on-a-sunny-day-YlJaYg1qb9w" target="_blank">unsplash.com/photos/YlJaYg1qb9w</a>
+        <div class="free-badge">✓ Nemokama licencija</div>
+        <span class="pick-label">Pasirink: <b>Parasparnis 3</b></span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="sport-block">
+  <div class="sport-title">Parašiutas</div>
+  <p class="sport-note">Paieška: „skydiving" – 3 nemokamos nuotraukos</p>
+  <div class="candidates">
+    <div class="card">
+      <img src="https://images.unsplash.com/photo-1788112123049-d5c346baebd2?w=600&q=80&auto=format&fit=crop" alt="Skydiver silhouette with parachute" loading="lazy">
+      <div class="card-body">
+        <div class="card-num">Kandidatas 1</div>
+        <div class="card-desc">Skydiver silhouette descending with parachute and flag</div>
+        <div class="card-photo">📷 Vitalii Onyshchuk</div>
+        <a class="card-link" href="https://unsplash.com/photos/skydiver-with-parachute-and-flag-OwYyu5DTa8M" target="_blank">unsplash.com/photos/OwYyu5DTa8M</a>
+        <div class="free-badge">✓ Nemokama licencija</div>
+        <span class="pick-label">Pasirink: <b>Parašiutas 1</b></span>
+      </div>
+    </div>
+    <div class="card">
+      <img src="https://images.unsplash.com/photo-1659221876406-31a3746f41b9?w=600&q=80&auto=format&fit=crop" alt="Man skydiving with parachute" loading="lazy">
+      <div class="card-body">
+        <div class="card-num">Kandidatas 2</div>
+        <div class="card-desc">Man skydiving with parachute open</div>
+        <div class="card-photo">📷 Kamil Pietrzak</div>
+        <a class="card-link" href="https://unsplash.com/photos/a-man-skydiving-with-a-parachute-ht1xt4FfmFs" target="_blank">unsplash.com/photos/ht1xt4FfmFs</a>
+        <div class="free-badge">✓ Nemokama licencija</div>
+        <span class="pick-label">Pasirink: <b>Parašiutas 2</b></span>
+      </div>
+    </div>
+    <div class="card">
+      <img src="https://images.unsplash.com/photo-1769002859023-255e68980443?w=600&q=80&auto=format&fit=crop" alt="Person flipping through blue sky" loading="lazy">
+      <div class="card-body">
+        <div class="card-num">Kandidatas 3</div>
+        <div class="card-desc">Person flips through the air against blue sky</div>
+        <div class="card-photo">📷 DM David</div>
+        <a class="card-link" href="https://unsplash.com/photos/a-person-flips-through-the-air-against-a-blue-sky-q-sILIe2k8s" target="_blank">unsplash.com/photos/q-sILIe2k8s</a>
+        <div class="free-badge">✓ Nemokama licencija</div>
+        <span class="pick-label">Pasirink: <b>Parašiutas 3</b></span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="sport-block">
+  <div class="sport-title">Laipiojimas</div>
+  <p class="sport-note">Paieška: „rock climbing sunset" – 3 nemokamos nuotraukos</p>
+  <div class="candidates">
+    <div class="card">
+      <img src="https://images.unsplash.com/photo-1557685888-2d3621ddf615?w=600&q=80&auto=format&fit=crop" alt="Man hanging on cliff" loading="lazy">
+      <div class="card-body">
+        <div class="card-num">Kandidatas 1</div>
+        <div class="card-desc">Man hanging on cliff face</div>
+        <div class="card-photo">📷 Scott Osborn</div>
+        <a class="card-link" href="https://unsplash.com/photos/man-hanging-on-cliff-kBgA6DPgcFQ" target="_blank">unsplash.com/photos/kBgA6DPgcFQ</a>
+        <div class="free-badge">✓ Nemokama licencija</div>
+        <span class="pick-label">Pasirink: <b>Laipiojimas 1</b></span>
+      </div>
+    </div>
+    <div class="card">
+      <img src="https://images.unsplash.com/photo-1724615949074-d5ea17327905?w=600&q=80&auto=format&fit=crop" alt="Man climbing mountain" loading="lazy">
+      <div class="card-body">
+        <div class="card-num">Kandidatas 2</div>
+        <div class="card-desc">Man climbing up the side of a mountain</div>
+        <div class="card-photo">📷 Andria Elia Photography</div>
+        <a class="card-link" href="https://unsplash.com/photos/a-man-climbing-up-the-side-of-a-mountain-ui54wis17BY" target="_blank">unsplash.com/photos/ui54wis17BY</a>
+        <div class="free-badge">✓ Nemokama licencija</div>
+        <span class="pick-label">Pasirink: <b>Laipiojimas 2</b></span>
+      </div>
+    </div>
+    <div class="card">
+      <img src="https://images.unsplash.com/photo-1706196067725-a7e6c1f6983c?w=600&q=80&auto=format&fit=crop" alt="Climber on mountain" loading="lazy">
+      <div class="card-body">
+        <div class="card-num">Kandidatas 3</div>
+        <div class="card-desc">Climber ascending rocky mountain face</div>
+        <div class="card-photo">📷 Luis Andrés Villalón Vega</div>
+        <a class="card-link" href="https://unsplash.com/photos/a-man-climbing-up-the-side-of-a-mountain-IczZ09qo9ok" target="_blank">unsplash.com/photos/IczZ09qo9ok</a>
+        <div class="free-badge">✓ Nemokama licencija</div>
+        <span class="pick-label">Pasirink: <b>Laipiojimas 3</b></span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="sport-block">
+  <div class="sport-title">Nardymas</div>
+  <p class="sport-note">Paieška: „scuba diver blue" – 3 nemokamos nuotraukos</p>
+  <div class="candidates">
+    <div class="card">
+      <img src="https://images.unsplash.com/photo-1616690571998-85f9c9d89a81?w=600&q=80&auto=format&fit=crop" alt="Diver underwater" loading="lazy">
+      <div class="card-body">
+        <div class="card-num">Kandidatas 1</div>
+        <div class="card-desc">Man in diving suit underwater</div>
+        <div class="card-photo">📷 Adrien Delforge</div>
+        <a class="card-link" href="https://unsplash.com/photos/man-in-black-and-white-diving-suit-under-water-yZrhORWUATg" target="_blank">unsplash.com/photos/yZrhORWUATg</a>
+        <div class="free-badge">✓ Nemokama licencija</div>
+        <span class="pick-label">Pasirink: <b>Nardymas 1</b></span>
+      </div>
+    </div>
+    <div class="card">
+      <img src="https://images.unsplash.com/photo-1747762658850-8a9e36aceb9d?w=600&q=80&auto=format&fit=crop" alt="Scuba diver blue ocean" loading="lazy">
+      <div class="card-body">
+        <div class="card-num">Kandidatas 2</div>
+        <div class="card-desc">Scuba diver swims through blue ocean water</div>
+        <div class="card-photo">📷 Janesca</div>
+        <a class="card-link" href="https://unsplash.com/photos/a-scuba-diver-swims-through-blue-ocean-water-2apoXmYvb7c" target="_blank">unsplash.com/photos/2apoXmYvb7c</a>
+        <div class="free-badge">✓ Nemokama licencija</div>
+        <span class="pick-label">Pasirink: <b>Nardymas 2</b></span>
+      </div>
+    </div>
+    <div class="card">
+      <img src="https://images.unsplash.com/photo-1759414478236-292c50016d7f?w=600&q=80&auto=format&fit=crop" alt="Divers coral reef" loading="lazy">
+      <div class="card-body">
+        <div class="card-num">Kandidatas 3</div>
+        <div class="card-desc">Divers explore a coral reef with bubbles rising</div>
+        <div class="card-photo">📷 Ekaterina Zlotnikova</div>
+        <a class="card-link" href="https://unsplash.com/photos/divers-explore-a-coral-reef-underwater-with-bubbles-rising-Cv7s20kUcDw" target="_blank">unsplash.com/photos/Cv7s20kUcDw</a>
+        <div class="free-badge">✓ Nemokama licencija</div>
+        <span class="pick-label">Pasirink: <b>Nardymas 3</b></span>
+      </div>
+    </div>
+  </div>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,3 @@
+node_modules/
+# Playwright check screenshots
+tiles-*.png
