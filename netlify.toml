@@ -1,0 +1,13 @@
+# Netlify config for the Adrena site (lives in adrena/ inside this repo)
+[build]
+  base      = "adrena"            # all paths below are relative to this
+  publish   = "public"            # static site
+  functions = "netlify/functions" # /api/weather (LHMT forecast proxy)
+  command   = ""                  # no build step
+
+[functions]
+  node_bundler = "esbuild"
+
+[dev]
+  framework = "#static"
+  port      = 8888

@@ -1,12 +1,12 @@
 // Adrena local server
 // Serves public/ as static files
 // GET /api/weather?place=<code>  — proxies api.meteo.lt with 30-min cache
+// (LHMT logic is in lib/lhmt.js; on Netlify the same thing runs as netlify/functions/weather.mjs)
 // No npm dependencies required.
 
 'use strict';
 
 const http  = require('http');
-const https = require('https');
 const fs    = require('fs');
 const path  = require('path');
 const url   = require('url');
@@ -31,65 +31,10 @@ const MIME = {
   '.txt':  'text/plain; charset=utf-8',
 };
 
-// Allowed place codes (whitelist to prevent abuse)
-const ALLOWED_PLACES = new Set([
-  'svencele',
-  'neringa-nida',
-  'neringa-pervalka',
-  'klaipeda',
-  'kauno-marios',
-  'palanga',
-]);
+const { ALLOWED_PLACES, CACHE_MS, fetchWeather, trimForecast } = require('./lib/lhmt');
 
 // In-memory weather cache: place → { data, expires }
 const weatherCache = new Map();
-const CACHE_MS = 30 * 60 * 1000; // 30 minutes
-
-function fetchWeather(place) {
-  return new Promise(function (resolve, reject) {
-    const apiUrl = 'https://api.meteo.lt/v1/places/' + place + '/forecasts/long-term';
-    const req = https.get(apiUrl, { headers: { Accept: 'application/json' } }, function (res) {
-      let body = '';
-      res.on('data', function (chunk) { body += chunk; });
-      res.on('end', function () {
-        if (res.statusCode !== 200) {
-          return reject(new Error('LHMT returned ' + res.statusCode));
-        }
-        try { resolve(JSON.parse(body)); }
-        catch (e) { reject(new Error('Invalid JSON from LHMT')); }
-      });
-    });
-    req.on('error', reject);
-    req.setTimeout(8000, function () { req.destroy(new Error('LHMT timeout')); });
-  });
-}
-
-function trimForecast(raw) {
-  if (!raw || !Array.isArray(raw.forecastTimestamps)) return null;
-  const now    = Date.now();
-  const cutoff = now + 7 * 24 * 60 * 60 * 1000;
-  // Return ALL available slots (hourly for first ~2 days, then 3-hourly).
-  // Clients filter/group as needed; strip widget uses currentSlot(), forecast table uses all.
-  const slots  = raw.forecastTimestamps.filter(function (t) {
-    const ts = new Date(t.forecastTimeUtc + 'Z').getTime();
-    return ts >= now - 60 * 60 * 1000 && ts <= cutoff; // include 1h back so "now" always has a slot
-  }).map(function (t) {
-    return {
-      time:     t.forecastTimeUtc,
-      temp:     t.airTemperature,
-      feels:    t.feelsLikeTemperature,
-      wind:     t.windSpeed,
-      gust:     t.windGust,
-      windDir:  t.windDirection,
-      cloud:    t.cloudCover,
-      pressure: t.seaLevelPressure,
-      humidity: t.relativeHumidity,
-      precip:   t.totalPrecipitation,
-      cond:     t.conditionCode,
-    };
-  });
-  return { place: raw.place ? raw.place.code : null, slots: slots };
-}
 
 function serveStatic(req, res, filePath) {
   fs.readFile(filePath, function (err, data) {
