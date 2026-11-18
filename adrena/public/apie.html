@@ -12,10 +12,11 @@
 <meta property="og:image" content="media/adrena-produkto-foto-1920x1080.png">
 <meta property="og:description" content="Kas kuria Adreną: Marius ir Povilas, abu patys sportuojantys ekstremaliomis sporto šakomis.">
 <script>try{var t=localStorage.getItem('adrena-theme');if(t)document.documentElement.setAttribute('data-theme',t)}catch(e){}</script>
+<script>try{if(!sessionStorage.getItem('adrena-loaded')&&!matchMedia('(prefers-reduced-motion: reduce)').matches){document.documentElement.classList.add('is-loading');sessionStorage.setItem('adrena-loaded','1')}}catch(e){}</script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:ital,wdth,wght@0,62..125,400..900;1,62..125,700..900&family=Archivo+Narrow:wght@500;600&display=swap">
-<link rel="stylesheet" href="assets/css/style.css?v=3">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wdth,wght@12..96,75..100,400..800&family=Fraunces:ital,opsz,wght,SOFT@0,9..144,400..700,100;1,9..144,400..700,100&display=swap">
+<link rel="stylesheet" href="assets/css/style.css?v=9">
 </head>
 <body data-page="about">
 <header id="site-header"></header>
@@ -23,6 +24,8 @@
 <main>
 
 <section class="page-hero">
+  <svg class="deco deco-cloud" data-deco aria-hidden="true" viewBox="0 0 220 110"><path d="M48 100a36 36 0 0 1-4-72 44 44 0 0 1 80-14 38 38 0 0 1 62 30 30 30 0 0 1-4 56z" style="fill:var(--paper)"/></svg>
+  <svg class="deco deco-squiggle" data-deco aria-hidden="true" viewBox="0 0 240 40"><path d="M4 20c18-18 36-18 54 0s36 18 54 0 36-18 54 0 36 18 54 0" fill="none" style="stroke:var(--sun)" stroke-width="8" stroke-linecap="round"/></svg>
   <div class="wrap">
     <div class="eyebrow">Apie mus</div>
     <h1>Marius ir Povilas</h1>
@@ -83,7 +86,7 @@
       </div>
     </div>
     <div class="measure">
-      <div class="eyebrow" style="color:var(--teal-text)">Ką matuosime</div>
+      <div class="eyebrow">Ką matuosime</div>
       <ul>
         <li>Kiek klientų tęsia po pirmos pamokos</li>
         <li>Aktyvaus sporto valandos per metus</li>
@@ -95,7 +98,7 @@
 </section>
 
 <!-- GALERIJA -->
-<section id="galerija">
+<section id="galerija" class="gallery-sec">
   <div class="wrap">
     <div class="sec-head">
       <div class="eyebrow">Galerija</div>
@@ -107,7 +110,7 @@
 </section>
 
 <!-- PARTNERIAI -->
-<section id="partneriai">
+<section id="partneriai" class="partner-sec">
   <div class="wrap">
     <div class="sec-head">
       <div class="eyebrow">Partneriai</div>
@@ -129,6 +132,6 @@
 
 <footer id="site-footer"></footer>
 <script src="assets/js/config.js?v=4"></script>
-<script src="assets/js/site.js?v=4"></script>
+<script src="assets/js/site.js?v=7"></script>
 </body>
 </html>

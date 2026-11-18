@@ -12,21 +12,25 @@
 <meta property="og:image" content="media/adrena-produkto-foto-1920x1080.png">
 <meta property="og:description" content="Kaip veikia Adrenos orų apsauga, instruktorių patikra, progreso kelias ir saugūs mokėjimai.">
 <script>try{var t=localStorage.getItem('adrena-theme');if(t)document.documentElement.setAttribute('data-theme',t)}catch(e){}</script>
+<script>try{if(!sessionStorage.getItem('adrena-loaded')&&!matchMedia('(prefers-reduced-motion: reduce)').matches){document.documentElement.classList.add('is-loading');sessionStorage.setItem('adrena-loaded','1')}}catch(e){}</script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:ital,wdth,wght@0,62..125,400..900;1,62..125,700..900&family=Archivo+Narrow:wght@500;600&display=swap">
-<link rel="stylesheet" href="assets/css/style.css?v=3">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wdth,wght@12..96,75..100,400..800&family=Fraunces:ital,opsz,wght,SOFT@0,9..144,400..700,100;1,9..144,400..700,100&display=swap">
+<link rel="stylesheet" href="assets/css/style.css?v=9">
 </head>
 <body data-page="how">
 <header id="site-header"></header>
 
 <main>
 
-<section class="page-hero">
+<section class="page-hero has-photo">
+  <svg class="deco deco-cloud" data-deco aria-hidden="true" viewBox="0 0 220 110"><path d="M48 100a36 36 0 0 1-4-72 44 44 0 0 1 80-14 38 38 0 0 1 62 30 30 30 0 0 1-4 56z" style="fill:var(--paper)"/></svg>
+  <svg class="deco deco-squiggle" data-deco aria-hidden="true" viewBox="0 0 240 40"><path d="M4 20c18-18 36-18 54 0s36 18 54 0 36-18 54 0 36 18 54 0" fill="none" style="stroke:var(--sun)" stroke-width="8" stroke-linecap="round"/></svg>
   <div class="wrap">
     <div class="eyebrow">Technologijos</div>
     <h1>Kaip veikia Adrena</h1>
     <p>Didžiausia Adrenos naujovė yra orų prognozių susiejimas su užsakymais. Programėlė pati stebi sąlygas ir pasirūpina, kad pamoka vyktų tada, kai iš tikrųjų galima sportuoti.</p>
+    <figure class="hero-photo"><img src="media/kaip-veikia-banga.webp" alt="Banglentininkas didelės bangos vamzdyje" width="568" height="852"></figure>
   </div>
 </section>
 
@@ -38,7 +42,7 @@
       <h2>Kaip veikia orų apsauga</h2>
       <p class="lead">Nuo orų duomenų gavimo iki automatinio sprendimo: viskas vyksta be tavo įsikišimo.</p>
     </div>
-    <p style="margin-bottom:24px"><a href="vejas.html?vieta=svencele&sportas=kaitavimas_prad" class="btn btn-teal" style="display:inline-flex">Žiūrėti gyvą vėjo prognozę →</a></p>
+    <p class="cta-line"><a href="vejas.html?vieta=svencele&sportas=kaitavimas_prad" class="btn btn-teal">Žiūrėti gyvą vėjo prognozę →</a></p>
     <ol class="flow">
       <li><span class="flow-n">1</span><b>Orų duomenys</b><p>Prognozę imame iš Lietuvos hidrometeorologijos tarnybos atvirųjų duomenų (api.meteo.lt) kiekvienai pamokų vietai.</p></li>
       <li><span class="flow-n">2</span><b>Taisyklės kiekvienai šakai</b><p>Kaitavimui svarbus vėjas (pradedantiesiems 6–10 m/s), banglentėms bangų aukštis, kitoms šakoms lietus ir perkūnija.</p></li>
@@ -67,8 +71,9 @@
 </section>
 
 <!-- ORŲ TAISYKLĖS -->
-<section id="oru-taisykles">
+<section id="oru-taisykles" class="split-sec flip">
   <div class="wrap">
+    <div class="split-grid">
     <div class="sec-head">
       <div class="eyebrow">Orų taisyklės</div>
       <h2>Kada pamoka vyksta, o kada ne</h2>
@@ -88,6 +93,7 @@
         <p>Perkūnija ar intensyvi liūtis automatiškai perkelia pamoką. Instruktorius gali papildomai nustatyti savo taisykles.</p>
       </div>
     </div>
+  </div>
   </div>
 </section>
 
@@ -124,7 +130,7 @@
 
 <footer id="site-footer"></footer>
 <script src="assets/js/config.js?v=4"></script>
-<script src="assets/js/site.js?v=4"></script>
-<script src="assets/js/weather.js?v=3"></script>
+<script src="assets/js/site.js?v=7"></script>
+<script src="assets/js/weather.js?v=5"></script>
 </body>
 </html>

@@ -12,10 +12,11 @@
 <meta property="og:image" content="media/adrena-produkto-foto-1920x1080.png">
 <meta property="og:description" content="Rask patikrintą instruktorių, užsisakyk kaitavimo, slidinėjimo, nardymo ar kitos sporto šakos pamoką per kelias minutes. Orų apsauga įtraukta.">
 <script>try{var t=localStorage.getItem('adrena-theme');if(t)document.documentElement.setAttribute('data-theme',t)}catch(e){}</script>
+<script>try{if(!sessionStorage.getItem('adrena-loaded')&&!matchMedia('(prefers-reduced-motion: reduce)').matches){document.documentElement.classList.add('is-loading');sessionStorage.setItem('adrena-loaded','1')}}catch(e){}</script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:ital,wdth,wght@0,62..125,400..900;1,62..125,700..900&family=Archivo+Narrow:wght@500;600&display=swap">
-<link rel="stylesheet" href="assets/css/style.css?v=3">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wdth,wght@12..96,75..100,400..800&family=Fraunces:ital,opsz,wght,SOFT@0,9..144,400..700,100;1,9..144,400..700,100&display=swap">
+<link rel="stylesheet" href="assets/css/style.css?v=9">
 </head>
 <body data-page="home">
 <header id="site-header"></header>
@@ -24,28 +25,233 @@
 
 <!-- HERO -->
 <section class="hero" id="pradzia">
-  <div class="wrap">
-    <div>
-      <div class="eyebrow" style="color:var(--orange)">Ekstremalaus sporto pamokos vienoje vietoje</div>
-      <h1 style="margin-top:18px">Adrenalinas, kurį gali <em>išmokti</em></h1>
-      <p class="lead">Adrena sujungia visas ekstremalaus sporto šakas vienoje programėlėje. Rasi patikrintą instruktorių, matysi aiškią kainą ir laisvus laikus, o pamoką užsisakysi per kelias minutes. Jei oras netinkamas, programėlė pati pasiūlys kitą laiką.</p>
-      <div class="hero-ctas">
+  <div class="wrap hero-grid">
+    <div class="eyebrow">Ekstremalaus sporto pamokos vienoje vietoje</div>
+    <h1>Adrenalinas, kurį gali <em>išmokti</em></h1>
+    <figure class="hero-media">
+      <img src="media/hero-kaitavimas-saulelydis.webp" alt="Kaituotojas plaukia saulėlydžio metu" width="1040" height="1560" fetchpriority="high">
+    </figure>
+    <p class="lead">Adrena sujungia visas ekstremalaus sporto šakas vienoje programėlėje. Rasi patikrintą instruktorių, matysi aiškią kainą ir laisvus laikus, o pamoką užsisakysi per kelias minutes. Jei oras netinkamas, programėlė pati pasiūlys kitą laiką.</p>
+    <div class="hero-ctas">
         <a class="btn btn-primary" href="#laukianciuju-sarasas">Prisijunk prie laukiančiųjų sąrašo</a>
         <a class="btn btn-ghost" href="prototipas.html">Išbandyk programėlę</a>
       </div>
-    </div>
   </div>
-  <svg class="waves" viewBox="0 0 1600 260" preserveAspectRatio="none" aria-hidden="true">
-    <g>
-      <path d="M0 150 C130 100 260 100 400 140 S660 190 800 130 S1060 90 1200 140 S1460 180 1720 120" stroke="#0FA3A0" stroke-width="3"/>
-      <path d="M0 190 C140 150 280 150 420 180 S680 220 820 170 S1080 140 1220 180 S1480 210 1720 160" stroke="#0FA3A0" stroke-width="2" opacity=".6"/>
-      <path d="M0 225 C150 195 290 195 430 215 S690 250 830 210 S1090 185 1230 215 S1490 240 1720 200" stroke="#FF5A36" stroke-width="2" opacity=".55"/>
-    </g>
-  </svg>
+  <svg class="deco deco-wind" data-deco aria-hidden="true" viewBox="0 0 320 160"><g fill="none" style="stroke:var(--sun)" stroke-width="8" stroke-linecap="round"><path d="M8 40h200a28 28 0 1 0-28-28"/><path d="M8 80h260a28 28 0 1 1-28 28"/><path d="M48 120h96"/></g></svg>
+</section>
+
+<!-- FILMAS -->
+<section class="film" aria-hidden="true">
+  <div class="wrap">
+    <figure class="film-frame">
+      <video src="media/kaitavimas-fpv.mp4" poster="media/kaitavimas-fpv-poster.webp" muted loop playsinline preload="metadata"></video>
+    </figure>
+  </div>
+</section>
+
+<!-- KAITAVIMO ANIMACIJA (scroll) -->
+<section class="adrena-kite" aria-label="Kaitavimo animacija: slink žemyn" data-kite-color="#FF5A36" data-suit-color="#13212E" data-captions="false">
+<div class="adrena-kite__stage"><template class="adrena-kite__tpl">
+
+<svg viewBox="{{vb}}" preserveAspectRatio="xMidYMid slice" role="img" aria-label="Kaituotojas važiuoja per marias, šoka backroll ir nusileidžia" style="position: absolute; inset: 0; width: 100%; height: 100%; display: block">
+<defs>
+<linearGradient id="adrena-k-sky" gradientUnits="userSpaceOnUse" x1="0" y1="0" x2="0" y2="582"><stop offset="0" stop-color="{{skyTop}}"></stop><stop offset="1" stop-color="{{skyBot}}"></stop></linearGradient>
+<linearGradient id="adrena-k-sea" gradientUnits="userSpaceOnUse" x1="0" y1="582" x2="0" y2="900"><stop offset="0" stop-color="{{seaTop}}"></stop><stop offset="1" stop-color="{{seaBot}}"></stop></linearGradient>
+<linearGradient id="adrena-k-far" gradientUnits="userSpaceOnUse" x1="0" y1="582" x2="0" y2="702"><stop offset="0" stop-color="#062F38" stop-opacity="0.22"></stop><stop offset="1" stop-color="#062F38" stop-opacity="0"></stop></linearGradient>
+<linearGradient id="adrena-k-inner" x1="0" y1="0" x2="0" y2="1"><stop offset="0.25" stop-color="#000000" stop-opacity="0"></stop><stop offset="1" stop-color="#000000" stop-opacity="0.3"></stop></linearGradient>
+<linearGradient id="adrena-k-sheet" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#FFFFFF" stop-opacity="0"></stop><stop offset="1" stop-color="#FFFFFF" stop-opacity="0.85"></stop></linearGradient>
+<radialGradient id="adrena-k-sun"><stop offset="0" stop-color="{{sunColor}}" stop-opacity="0.6"></stop><stop offset="1" stop-color="{{sunColor}}" stop-opacity="0"></stop></radialGradient>
+<clipPath id="adrena-k-canopy"><path d="M-165 48 C-150 -72 150 -72 165 48 Q142 39 118 14 Q89 14 60 -2 Q30 4 0 -6 Q-30 4 -60 -2 Q-89 14 -118 14 Q-142 39 -165 48Z"></path></clipPath>
+</defs>
+
+<rect x="-1200" y="-1400" width="4000" height="1982" fill="url(#adrena-k-sky)"></rect>
+<circle cx="1250" cy="{{sunY}}" r="{{sunGlow}}" fill="url(#adrena-k-sun)"></circle>
+<circle cx="1250" cy="{{sunY}}" r="64" fill="{{sunColor}}"></circle>
+
+<g transform="{{cloudT}}">
+<g fill="{{cloudShade}}"><ellipse cx="270" cy="192" rx="120" ry="16"></ellipse><ellipse cx="826" cy="128" rx="82" ry="11"></ellipse><ellipse cx="1462" cy="258" rx="84" ry="12"></ellipse><ellipse cx="2058" cy="172" rx="126" ry="16"></ellipse></g>
+<g fill="{{cloudFill}}">
+<g opacity="0.95"><ellipse cx="260" cy="170" rx="96" ry="34"></ellipse><ellipse cx="205" cy="182" rx="62" ry="26"></ellipse><ellipse cx="322" cy="184" rx="70" ry="24"></ellipse></g>
+<g opacity="0.8"><ellipse cx="820" cy="110" rx="70" ry="24"></ellipse><ellipse cx="780" cy="120" rx="46" ry="18"></ellipse><ellipse cx="866" cy="122" rx="52" ry="17"></ellipse></g>
+<g opacity="0.9"><ellipse cx="1480" cy="240" rx="80" ry="28"></ellipse><ellipse cx="1430" cy="250" rx="52" ry="20"></ellipse></g>
+<g opacity="0.85"><ellipse cx="2050" cy="150" rx="100" ry="34"></ellipse><ellipse cx="2000" cy="162" rx="64" ry="24"></ellipse><ellipse cx="2110" cy="164" rx="70" ry="22"></ellipse></g>
+</g>
+</g>
+
+<g transform="{{windT}}" fill="none" stroke="#FFFFFF" stroke-width="3" stroke-linecap="round" opacity="0.55">
+<path d="M-400 360 h200"></path><path d="M200 330 h180 q30 0 30 -18"></path><path d="M760 400 h220"></path><path d="M1300 300 h160 q26 0 26 16"></path><path d="M1900 380 h200"></path><path d="M2500 320 h180 q30 0 30 -18"></path><path d="M3060 400 h220"></path>
+</g>
+
+<path d="{{birds}}" fill="none" stroke="#24384A" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"></path>
+
+<g transform="{{duneT}}">
+<path d="M-1200 552 L-40 560 C140 510 300 492 460 522 S760 556 900 512 S1260 486 1420 520 S1760 556 1960 512 L2800 520 V610 H-1200Z" fill="{{sandColor}}"></path>
+<g fill="#2F5A3F"><path d="M300 520 l14 -46 l14 46Z"></path><path d="M322 524 l11 -36 l11 36Z"></path><path d="M980 506 l16 -52 l16 52Z"></path><path d="M1006 510 l12 -40 l12 40Z"></path><path d="M1560 522 l14 -44 l14 44Z"></path><path d="M-200 548 l14 -40 l14 40Z"></path></g>
+<g fill="none" stroke="#7E9C4E" stroke-width="2.5" stroke-linecap="round">
+<path d="M400 528 q-2 -14 4 -24 M406 528 q2 -12 10 -18 M396 528 q-6 -10 -12 -14" transform="rotate({{grassRot}} 402 528)"></path>
+<path d="M560 518 q-2 -14 4 -24 M566 518 q2 -12 10 -18 M556 518 q-6 -10 -12 -14" transform="rotate({{grassRot}} 562 518)"></path>
+<path d="M1180 504 q-2 -14 4 -24 M1186 504 q2 -12 10 -18 M1176 504 q-6 -10 -12 -14" transform="rotate({{grassRot}} 1182 504)"></path>
+<path d="M1700 530 q-2 -14 4 -24 M1706 530 q2 -12 10 -18 M1696 530 q-6 -10 -12 -14" transform="rotate({{grassRot}} 1702 530)"></path>
+</g>
+<path d="M-1200 568 L-40 574 C200 556 420 562 640 572 S1100 580 1400 566 S1800 560 1960 570 L2800 570 V586 H-1200Z" fill="#6E9E5E"></path>
+<path d="M-1200 578 L2800 578 V586 H-1200Z" fill="{{beachColor}}"></path>
+<g>
+<rect x="690" y="556" width="40" height="24" fill="#B7814F"></rect><rect x="690" y="556" width="9" height="24" fill="#96663B"></rect>
+<path d="M684 558 L710 540 L736 558Z" fill="#13212E"></path><path d="M710 540 L736 558 L730 558 L710 545Z" fill="#2B3B4A"></path>
+<rect x="705" y="566" width="10" height="14" fill="#5E4026"></rect>
+<path d="M742 581 q12 -14 26 0" fill="none" stroke="#FF5A36" stroke-width="4" stroke-linecap="round"></path>
+<path d="M776 582 q10 -11 21 0" fill="none" stroke="#0FA3A0" stroke-width="4" stroke-linecap="round"></path>
+</g>
+</g>
+
+<rect x="-1200" y="582" width="4000" height="1400" fill="url(#adrena-k-sea)"></rect>
+<rect x="-1200" y="582" width="4000" height="120" fill="url(#adrena-k-far)"></rect>
+<rect x="-1200" y="582" width="4000" height="5" fill="#FFFFFF" opacity="0.22"></rect>
+<path d="{{shimmer}}" fill="{{sunColor}}" opacity="{{reflectOp}}"></path>
+<path d="{{sparkles}}" fill="#FFFFFF" opacity="0.9"></path>
+
+<g transform="{{boatT}}"><path d="M300 586 h44 l-6 8 h-32Z" fill="#13212E"></path><path d="M322 584 V532 L346 580Z" fill="#FFFFFF"></path><path d="M318 584 V542 L300 580Z" fill="#E7EEF1"></path></g>
+
+<g class="kd-small" stroke-linecap="round" stroke-linejoin="round">
+<g transform="{{bg1T}}"><path d="M-12 0 L12 0" stroke="#13212E" stroke-width="3" fill="none"></path><path d="M-2 -1 L2 -14 L-3 -26" stroke="#13212E" stroke-width="4.5" fill="none"></path><circle cx="-4" cy="-31" r="4" fill="#13212E"></circle><path d="M1 -20 L56 -86 M1 -20 L70 -78" stroke="#13212E" stroke-width="0.9" opacity="0.7" fill="none"></path><path d="M50 -84 C52 -104 82 -106 84 -80 C76 -92 60 -94 50 -84Z" fill="#0FA3A0"></path></g>
+<g transform="{{bg2T}}"><path d="M-12 0 L12 0" stroke="#13212E" stroke-width="3" fill="none"></path><path d="M-2 -1 L2 -14 L-3 -26" stroke="#13212E" stroke-width="4.5" fill="none"></path><circle cx="-4" cy="-31" r="4" fill="#13212E"></circle><path d="M1 -20 L56 -86 M1 -20 L70 -78" stroke="#13212E" stroke-width="0.9" opacity="0.7" fill="none"></path><path d="M50 -84 C52 -104 82 -106 84 -80 C76 -92 60 -94 50 -84Z" fill="#F4B942"></path></g>
+<g transform="{{bg3T}}"><path d="M-12 0 L12 0" stroke="#13212E" stroke-width="3" fill="none"></path><path d="M2 -1 L-2 -14 L3 -26" stroke="#13212E" stroke-width="4.5" fill="none"></path><circle cx="4" cy="-31" r="4" fill="#13212E"></circle><path d="M-1 -20 L-56 -86 M-1 -20 L-70 -78" stroke="#13212E" stroke-width="0.9" opacity="0.7" fill="none"></path><path d="M-50 -84 C-52 -104 -82 -106 -84 -80 C-76 -92 -60 -94 -50 -84Z" fill="#FF5A36"></path></g>
+</g>
+
+<path d="{{wave1}}" fill="none" stroke="#86DCD6" stroke-width="3" opacity="0.7"></path>
+<path d="{{wave2}}" fill="none" stroke="#A6E6DF" stroke-width="3" opacity="0.5"></path>
+
+<ellipse cx="{{shadowX}}" cy="680" rx="{{shadowRx}}" ry="9" fill="#06343C" opacity="{{shadowOp}}"></ellipse>
+<path d="{{rings}}" fill="none" stroke="#FFFFFF" stroke-width="2" opacity="{{ringOp}}"></path>
+<path d="{{chop}}" fill="none" stroke="#CFF3EE" stroke-width="2" stroke-linecap="round" opacity="0.7"></path>
+<path d="{{wake}}" fill="none" stroke="#FFFFFF" stroke-width="9" stroke-linecap="round" stroke-linejoin="round" opacity="0.3"></path>
+<path d="{{foamNear}}" fill="#FFFFFF" opacity="0.85"></path>
+<path d="{{foamMid}}" fill="#FFFFFF" opacity="0.55"></path>
+<path d="{{foamFar}}" fill="#FFFFFF" opacity="0.28"></path>
+<path d="{{spray}}" fill="#FFFFFF" opacity="0.85"></path>
+<path d="{{sheet}}" fill="url(#adrena-k-sheet)" opacity="{{burstOp}}"></path>
+<path d="{{burst}}" fill="#FFFFFF" opacity="{{burstOp}}"></path>
+<path d="{{splash}}" fill="#FFFFFF" opacity="{{splashOp}}"></path>
+
+<path d="{{frontLines}}" fill="none" stroke="#13212E" stroke-width="1.6" opacity="0.85"></path>
+<path d="{{steerLines}}" fill="none" stroke="#13212E" stroke-width="1.6" opacity="0.85"></path>
+<path d="{{lineGlint}}" fill="none" stroke="#FFFFFF" stroke-width="0.8" opacity="0.45"></path>
+<path d="{{floaters}}" fill="#FF5A36"></path>
+
+<g transform="{{kiteT}}">
+<path d="M-118 -12 L-50 40 L-40 70 M-60 -36 L-50 40 M118 -12 L50 40 L40 70 M60 -36 L50 40" fill="none" stroke="#13212E" stroke-width="1.2" opacity="0.6"></path>
+<circle cx="-50" cy="40" r="2.5" fill="#13212E"></circle><circle cx="50" cy="40" r="2.5" fill="#13212E"></circle>
+<g clip-path="url(#adrena-k-canopy)">
+<rect x="-200" y="-90" width="400" height="180" fill="{{kiteColor}}"></rect>
+<path d="M-200 -90 L-24 -90 L-128 90 L-200 90Z" fill="{{kiteDark}}"></path>
+<path d="M-24 -90 L4 -90 L-100 90 L-128 90Z" fill="#FFFFFF" opacity="0.92"></path>
+<path d="M4 -90 L12 -90 L-92 90 L-100 90Z" fill="#13212E" opacity="0.85"></path>
+<path d="M-89 -26 L-86 6 M-30 -41 L-29 -3 M30 -41 L29 -3 M89 -26 L86 6" fill="none" stroke="{{kiteDark}}" stroke-width="1" opacity="0.6"></path>
+<path d="M-150 34 L-136 6 M150 34 L136 6" fill="none" stroke="#13212E" stroke-width="7" opacity="0.5"></path>
+<rect x="-200" y="-90" width="400" height="180" fill="url(#adrena-k-inner)"></rect>
+</g>
+<g fill="none" stroke-linecap="round">
+<path d="M-114 -12 L-108 15 M-56 -36 L-54 -1 M4 -42 L4 -5 M64 -36 L62 -1 M122 -12 L116 15" stroke="#000000" stroke-width="5" opacity="0.14"></path>
+<path d="M-118 -12 L-112 14 M-60 -36 L-58 -2 M0 -42 L0 -6 M60 -36 L58 -2 M118 -12 L112 14" stroke="{{kiteDark}}" stroke-width="6"></path>
+<path d="M-119 -10 L-114 12 M-61 -34 L-59 -3 M-1 -40 L-1 -7 M59 -34 L57 -3 M117 -10 L111 12" stroke="#FFFFFF" stroke-width="1.8" opacity="0.55"></path>
+</g>
+<text x="30" y="-16" text-anchor="middle" transform="rotate(4 30 -16)" style="font-family: 'Bricolage Grotesque', sans-serif; font-style: italic; font-weight: 800; font-size: 15px; letter-spacing: 0.5px" fill="#FFFFFF">ADRENA</text>
+<path d="M-165 48 C-150 -72 150 -72 165 48 C146 -54 -146 -54 -165 48Z" fill="#13212E"></path>
+<path d="M-150 20 C-128 -58 128 -58 150 20" fill="none" stroke="#FFFFFF" stroke-width="2.5" stroke-linecap="round" opacity="0.5"></path>
+<circle cx="-165" cy="48" r="4.5" fill="#13212E"></circle><circle cx="165" cy="48" r="4.5" fill="#13212E"></circle>
+<circle cx="-24" cy="-37" r="3.2" fill="#C9D2D8"></circle><circle cx="-24" cy="-37" r="1.4" fill="#13212E"></circle>
+<circle cx="-162" cy="44" r="2" fill="#C9D2D8"></circle><circle cx="162" cy="44" r="2" fill="#C9D2D8"></circle>
+</g>
+
+<g transform="{{riderT}}">
+<path d="{{armFar}}" fill="{{suitShade}}"></path>
+<path d="{{legBackShade}}" fill="{{suitShade}}"></path>
+<path d="{{legBack}}" fill="{{suitColor}}"></path>
+<path d="{{padBack}}" fill="{{suitShade}}"></path>
+<path d="{{shortBack}}" fill="#D9952A"></path>
+<g transform="{{boardT}}">
+<path d="M-60 4 l5 9 l7 -9Z M48 4 l7 9 l5 -9Z" fill="#13212E"></path>
+<path d="M-86 -12 Q-80 -4 -62 -3 L62 -3 Q80 -4 86 -12 L84 -8 Q78 4 62 4 L-62 4 Q-78 4 -84 -8Z" fill="#13212E"></path>
+<path d="M-80 -8 Q-74 -3 -62 -3 L62 -3 Q74 -3 80 -8" fill="none" stroke="#F4B942" stroke-width="3"></path>
+<path d="M-14 -3 L14 -3" fill="none" stroke="#0FA3A0" stroke-width="3"></path>
+<path d="M-82 -6 Q-76 2 -62 2 L62 2 Q76 2 82 -6" fill="none" stroke="#FFFFFF" stroke-width="1.4" opacity="0.4"></path>
+<path d="M-46 -3 Q-46 -14 -36 -14 L-26 -14 Q-20 -14 -20 -7 L-20 -3Z" fill="{{suitShade}}"></path>
+<path d="M20 -3 Q20 -14 30 -14 L40 -14 Q46 -14 46 -7 L46 -3Z" fill="{{suitColor}}"></path>
+<path d="M-48 -3 Q-33 -21 -18 -3 M18 -3 Q33 -21 48 -3" fill="none" stroke="#FF5A36" stroke-width="5" stroke-linecap="round"></path>
+</g>
+<path d="M-16 -84 C-26 -102 -36 -124 -38 -140 C-34 -152 -16 -156 -8 -148 C2 -130 10 -108 14 -86 Z" fill="{{suitColor}}"></path>
+<path d="M-36 -136 C-32 -118 -24 -100 -14 -86 L-6 -86 C-16 -102 -26 -120 -30 -138 Z" fill="{{suitShade}}"></path>
+<path d="M-22 -142 C-16 -124 -8 -106 0 -88" fill="none" stroke="{{suitShade}}" stroke-width="1.5"></path>
+<path d="M-6 -146 C2 -130 9 -110 12 -90" fill="none" stroke="{{suitLight}}" stroke-width="2" stroke-linecap="round"></path>
+<path d="M-33 -140 C-29 -122 -21 -104 -13 -90" fill="none" stroke="#9AA6AF" stroke-width="1.2" stroke-dasharray="2 2"></path>
+<rect x="-36" y="-144" width="4" height="8" rx="1.5" fill="#C9D2D8" transform="rotate(-20 -34 -140)"></rect>
+<ellipse cx="-14" cy="-144" rx="9" ry="4" fill="#FFFFFF" opacity="0.18" transform="rotate(-25 -14 -144)"></ellipse>
+<path d="M-12 -130 q3 -4 6 0 t6 0" fill="none" stroke="#FF5A36" stroke-width="2" stroke-linecap="round" transform="rotate(-20 -6 -130)"></path>
+<path d="{{legFrontShade}}" fill="{{suitShade}}"></path>
+<path d="{{legFront}}" fill="{{suitColor}}"></path>
+<path d="{{legFrontEdge}}" fill="none" stroke="{{suitLight}}" stroke-width="2" stroke-linecap="round"></path>
+<path d="{{padFront}}" fill="#2B3B4A"></path>
+<path d="{{padGlint}}" fill="none" stroke="#FFFFFF" stroke-width="1.4" stroke-linecap="round" opacity="0.35"></path>
+<path d="{{shortFront}}" fill="#F4B942"></path>
+<g transform="rotate(-22 -2 -98)">
+<rect x="-26" y="-106" width="42" height="15" rx="6" fill="#0FA3A0"></rect>
+<rect x="-26" y="-96" width="42" height="5" rx="2.5" fill="#0B6F7C"></rect>
+<rect x="-12" y="-104" width="7" height="11" rx="2" fill="#C9D2D8"></rect>
+<rect x="15" y="-103" width="15" height="7" rx="3.5" fill="#C9D2D8"></rect>
+<rect x="16" y="-103" width="13" height="2" rx="1" fill="#FFFFFF" opacity="0.7"></rect>
+</g>
+<circle cx="30" cy="-110" r="4.5" fill="none" stroke="#13212E" stroke-width="2.2"></circle>
+<path d="M-24 -94 C-10 -84 14 -90 27 -107" fill="none" stroke="#FF5A36" stroke-width="1.4" stroke-linecap="round"></path>
+<path d="{{depower}}" fill="none" stroke="#13212E" stroke-width="1.6"></path>
+<rect x="-31" y="-158" width="10" height="12" rx="3" fill="#C98E6B"></rect>
+<circle cx="-26" cy="-168" r="13" fill="#C98E6B"></circle>
+<circle cx="-24.5" cy="-169.5" r="11.5" fill="#E9B48F"></circle>
+<circle cx="-31" cy="-167" r="3" fill="#C98E6B"></circle>
+<path d="M-13.5 -168 l3 4 l-3 1" fill="none" stroke="#C98E6B" stroke-width="1.5" stroke-linecap="round"></path>
+<path d="M-15 -160 Q-19 -155.5 -27 -157" fill="none" stroke="#C98E6B" stroke-width="1.5" stroke-linecap="round"></path>
+<path d="M-40 -166 Q-44 -157 -37 -153 Q-38 -160 -35 -164Z" fill="#5A3B26"></path>
+<path d="M-41 -168 C-41 -188 -9 -190 -9 -170 L-11 -168 Z" fill="#F4B942"></path>
+<path d="M-41 -168 L-9 -170 L-9 -166.5 L-41 -164.5Z" fill="#D9952A"></path>
+<path d="M-31 -184 l6 0 M-24 -186 l6 0" fill="none" stroke="#D9952A" stroke-width="2" stroke-linecap="round"></path>
+<path d="M-36 -182 C-30 -188 -18 -188 -13 -180" fill="none" stroke="#FFFFFF" stroke-width="2" stroke-linecap="round" opacity="0.5"></path>
+<path d="M-22 -170 L-38 -167" fill="none" stroke="#13212E" stroke-width="2"></path>
+<path d="M-22 -171 L-10 -171 Q-9 -165 -14 -164 L-20 -164 Q-22 -165 -22 -171Z" fill="#13212E"></path>
+<path d="M-19 -169 l6 0" fill="none" stroke="#0FA3A0" stroke-width="1.5" stroke-linecap="round"></path>
+<path d="{{bar}}" fill="none" stroke="#13212E" stroke-width="6" stroke-linecap="round"></path>
+<path d="{{barGrips}}" fill="none" stroke="#FF5A36" stroke-width="6" stroke-linecap="round"></path>
+<path d="{{strap}}" fill="none" stroke="#13212E" stroke-width="2.5" stroke-linecap="round"></path>
+<circle cx="{{ballX}}" cy="{{ballY}}" r="3.5" fill="#FF5A36"></circle>
+<g transform="{{handFarT}}"><circle cx="0" cy="0" r="6" fill="#C98E6B"></circle><path d="M2 -5 q5 0 5 3 M3 -1 q5 0 5 3 M2 3 q5 0 4 3" fill="none" stroke="#A8724F" stroke-width="1.6" stroke-linecap="round"></path></g>
+<path d="{{armNearShade}}" fill="{{suitShade}}"></path>
+<path d="{{armNear}}" fill="{{suitColor}}"></path>
+<path d="{{armNearEdge}}" fill="none" stroke="{{suitLight}}" stroke-width="1.8" stroke-linecap="round"></path>
+<g transform="{{handNearT}}"><circle cx="0" cy="0" r="6.5" fill="#E9B48F"></circle><path d="M2 -5 q5 0 5 3 M3 -1 q5 0 5 3 M2 3 q5 0 4 3" fill="none" stroke="#C98E6B" stroke-width="1.6" stroke-linecap="round"></path><path d="M-4 -3 q2 -3 5 -3" fill="none" stroke="#FFFFFF" stroke-width="1.2" stroke-linecap="round" opacity="0.5"></path></g>
+</g>
+<path d="{{waterCover}}" fill="{{seaTop}}" opacity="0.9"></path>
+<path class="kd-small" d="{{drips}}" fill="#E9F8F7" opacity="0.85"></path>
+
+<path d="{{wave3}}" fill="none" stroke="#CFF3EE" stroke-width="4" opacity="0.6"></path>
+<path d="{{wave4}}" fill="none" stroke="#A6E6DF" stroke-width="4" opacity="0.4"></path>
+<rect x="-1200" y="864" width="4000" height="1100" fill="#0A5A66" opacity="0.4"></rect>
+</svg>
+
+<div data-if="showCaptions">
+<div aria-live="polite" style="position: absolute; {{capBox}}; pointer-events: none; font-family: 'Bricolage Grotesque', sans-serif; font-weight: 800; font-stretch: 75%; text-transform: uppercase; line-height: 1; letter-spacing: -0.03em; color: #FFFFFF; text-shadow: 0 2px 16px rgba(6,40,48,0.45)">
+<p style="margin: 0; position: absolute; inset: auto 0 0 0; opacity: {{c1o}}; transform: translateY({{c1y}}px)">Pagauk vėją.</p>
+<p style="margin: 0; position: absolute; inset: auto 0 0 0; opacity: {{c2o}}; transform: translateY({{c2y}}px)">Šok.</p>
+<p style="margin: 0; position: absolute; inset: auto 0 0 0; opacity: {{c3o}}; transform: translateY({{c3y}}px)">Nusileisk ir kartok.</p>
+</div>
+</div>
+<div style="position: absolute; left: 50%; top: 24px; transform: translateX(-50%); padding: 8px 16px; border-radius: 999px; background: rgba(255,255,255,0.85); color: #0E1B2C; font-size: 15px; font-weight: 600; opacity: {{hintOp}}">Slink žemyn</div>
+<div style="position: absolute; left: 0; bottom: 0; height: 6px; background: #FF5A36; width: {{barW}}"></div>
+
+</template></div>
 </section>
 
 <!-- PROBLEMA IR SPRENDIMAS -->
-<section id="ideja">
+<section id="ideja" class="statement">
+  <svg class="deco deco-dots" data-deco aria-hidden="true" viewBox="0 0 120 120"><g style="fill:var(--sea)"><circle cx="16" cy="16" r="10"/><circle cx="60" cy="16" r="10"/><circle cx="104" cy="16" r="10"/><circle cx="16" cy="60" r="10"/><circle cx="60" cy="60" r="10"/><circle cx="16" cy="104" r="10"/></g></svg>
+  <svg class="deco deco-cloud" data-deco aria-hidden="true" viewBox="0 0 220 110"><path d="M48 100a36 36 0 0 1-4-72 44 44 0 0 1 80-14 38 38 0 0 1 62 30 30 30 0 0 1-4 56z" style="fill:var(--paper)"/></svg>
   <div class="wrap">
     <div class="sec-head">
       <div class="eyebrow">Apie ką mes</div>
@@ -64,8 +270,9 @@
 </section>
 
 <!-- KUO IŠSKIRTINIAI -->
-<section id="isskirtinumas">
+<section id="isskirtinumas" class="split-sec">
   <div class="wrap">
+    <div class="split-grid">
     <div class="sec-head">
       <div class="eyebrow">Kuo esame išskirtiniai</div>
       <h2>Ko neturi kitos programos</h2>
@@ -76,7 +283,8 @@
       <div><b>Orų apsauga</b><p>Kai sąlygos netinka, pamoka perkeliama arba pinigai grąžinami automatiškai.</p></div>
       <div><b>Sąžiningas modelis instruktoriams</b><p>Didesnį komisinį jie moka tik už naujus klientus, kuriuos atvedame mes.</p></div>
     </div>
-    <div class="vs-wrap">
+    </div>
+    <div class="vs-wrap full">
       <table class="vs">
         <thead><tr><th scope="col"><span class="sr">Galimybė</span></th><th scope="col" class="me">Adrena</th><th scope="col">Socialiniai tinklai</th><th scope="col">Dovanų kuponų svetainės</th><th scope="col">Turistinės platformos</th><th scope="col">Rezervacijų programos</th></tr></thead>
         <tbody>
@@ -88,16 +296,18 @@
         </tbody>
       </table>
     </div>
-    <p class="vs-legend"><span class="y"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M7 12.5l3.2 3.2L17 9"/></svg>Yra</span><span class="h"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 2a10 10 0 0 1 0 20z"/></svg>Iš dalies</span><span class="n"><svg viewBox="0 0 24 24"><path d="M7 12h10"/></svg>Nėra</span><span>Palyginimas pagal mūsų pačių apžvalgą, 2026 m.</span></p>
+    <p class="vs-legend span-all"><span class="y"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M7 12.5l3.2 3.2L17 9"/></svg>Yra</span><span class="h"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 2a10 10 0 0 1 0 20z"/></svg>Iš dalies</span><span class="n"><svg viewBox="0 0 24 24"><path d="M7 12h10"/></svg>Nėra</span><span>Palyginimas pagal mūsų pačių apžvalgą, 2026 m.</span></p>
   </div>
 </section>
 
 <!-- SPORTO ŠAKOS -->
 <section id="sporto-sakos">
   <div class="wrap">
-    <div class="sec-head">
-      <div class="eyebrow">Sporto šakos</div>
-      <h2>Kurią šaką išbandysi?</h2>
+    <div class="row-head">
+      <div class="sec-head">
+        <div class="eyebrow">Sporto šakos</div>
+        <h2>Kurią šaką išbandysi?</h2>
+      </div>
       <p class="lead">Nuo kaitavimo prie Kuršių marių iki parasparnio skrydžio virš Neringos. Pradėk nuo pamokos, o paskui kelk lygį.</p>
     </div>
     <div class="sports-home-grid" id="sports-home-grid"></div>
@@ -112,9 +322,10 @@
       <div class="eyebrow">Prototipas</div>
       <h2>Pabandyk jau dabar</h2>
       <p class="lead">Dar laukiama paleidimo? Išbandyk veikiančią programėlės demonstraciją. Užsiregistruok, ieškok instruktoriaus, rezervuok pamoką ir gauk orų pranešimą.</p>
-      <a class="btn btn-primary" href="prototipas.html" style="margin-top:8px">Išbandyk programėlę</a>
+      <a class="btn btn-primary" href="prototipas.html">Išbandyk programėlę</a>
     </div>
-    <div class="phone-wrap" aria-hidden="true" style="pointer-events:none;opacity:.85">
+    <div class="phone-wrap" aria-hidden="true" style="pointer-events:none">
+      <svg class="deco deco-blob" data-deco aria-hidden="true" viewBox="0 0 400 440"><path d="M206 12c88-8 178 52 186 150 8 92-40 154-96 206-58 54-150 76-218 30C12 352-8 262 18 186 44 104 118 20 206 12z" style="fill:var(--sun)"/></svg>
       <div class="phone">
         <div class="screen">
           <div class="notch"></div>
@@ -131,13 +342,13 @@
 </section>
 
 <!-- PARTNERIS -->
-<section id="partneris">
+<section id="partneris" class="partner-sec">
   <div class="wrap">
-    <div class="sec-head" style="margin-bottom:24px">
+    <div class="sec-head">
       <div class="eyebrow">Mūsų partneris</div>
       <h2>Kartu su PUČIA.LT</h2>
     </div>
-    <a class="p-card" href="https://www.pucia.lt" target="_blank" rel="noopener" style="max-width:520px">
+    <a class="p-card" href="https://www.pucia.lt" target="_blank" rel="noopener">
       <span class="p-tag">Partneris</span>
       <span class="p-name">PUČIA.LT</span>
       <span class="p-desc">IKO sertifikuotas kaitavimo centras Svencelėje prie Kuršių marių. Nuoma, pamokos, apgyvendinimas ant kranto.</span>
@@ -147,7 +358,7 @@
 </section>
 
 <!-- GALERIJA (strip) -->
-<section id="galerija">
+<section id="galerija" class="gallery-sec">
   <div class="wrap">
     <div class="sec-head">
       <div class="eyebrow">Galerija</div>
@@ -155,16 +366,16 @@
       <p class="lead">Nuotraukos ir vaizdo įrašai iš mūsų pačių sportavimo.</p>
     </div>
     <div class="gallery gallery-strip" id="gallery-strip"></div>
-    <p style="margin-top:20px"><a href="apie.html" style="color:var(--teal-text);font-weight:600">Daugiau nuotraukų →</a></p>
+    <p class="more-link"><a href="apie.html">Daugiau nuotraukų →</a></p>
   </div>
 </section>
 
 <!-- LAUKIANČIŲJŲ SĄRAŠAS -->
 <section class="form-section" id="laukianciuju-sarasas">
   <div class="wrap">
-    <div class="sec-head" style="max-width:600px">
-      <div class="eyebrow" style="color:var(--orange)">Laukiančiųjų sąrašas</div>
-      <h2 style="color:#fff">Būk pirmasis, kai Adrena paleidžiama</h2>
+    <div class="sec-head">
+      <div class="eyebrow">Laukiančiųjų sąrašas</div>
+      <h2>Būk pirmasis, kai Adrena paleidžiama</h2>
       <p class="lead">Programėlė dar kuriama. Prisijunk prie laukiančiųjų sąrašo ir sužinosi, kai galėsi užsisakyti pirmą pamoką.</p>
     </div>
     <div class="form-box">
@@ -204,7 +415,7 @@
           <input type="checkbox" name="consent" required>
           Sutinku, kad mano kontaktiniai duomenys būtų naudojami informuoti apie Adrenos paleidimą. Skaityk <a href="privatumas.html">privatumo politiką</a>.
         </label>
-        <button type="submit" class="btn btn-primary form-submit" style="width:100%">Prisijungti prie laukiančiųjų</button>
+        <button type="submit" class="btn btn-primary form-submit">Prisijungti prie laukiančiųjų</button>
         <div class="form-status" role="status" aria-live="polite" hidden></div>
       </form>
     </div>
@@ -215,6 +426,7 @@
 
 <footer id="site-footer"></footer>
 <script src="assets/js/config.js?v=4"></script>
-<script src="assets/js/site.js?v=4"></script>
+<script src="assets/js/site.js?v=7"></script>
+<script src="assets/js/kite-scroll.js?v=2" defer></script>
 </body>
 </html>

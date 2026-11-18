@@ -12,10 +12,11 @@
 <meta property="og:image" content="media/adrena-produkto-foto-1920x1080.png">
 <meta property="og:description" content="Veikianti Adrenos programėlės demonstracija – išbandyk registraciją, pamokų paiešką, rezervaciją ir orų apsaugą.">
 <script>try{var t=localStorage.getItem('adrena-theme');if(t)document.documentElement.setAttribute('data-theme',t)}catch(e){}</script>
+<script>try{if(!sessionStorage.getItem('adrena-loaded')&&!matchMedia('(prefers-reduced-motion: reduce)').matches){document.documentElement.classList.add('is-loading');sessionStorage.setItem('adrena-loaded','1')}}catch(e){}</script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:ital,wdth,wght@0,62..125,400..900;1,62..125,700..900&family=Archivo+Narrow:wght@500;600&display=swap">
-<link rel="stylesheet" href="assets/css/style.css?v=3">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wdth,wght@12..96,75..100,400..800&family=Fraunces:ital,opsz,wght,SOFT@0,9..144,400..700,100;1,9..144,400..700,100&display=swap">
+<link rel="stylesheet" href="assets/css/style.css?v=9">
 </head>
 <body data-page="proto">
 <header id="site-header"></header>
@@ -25,9 +26,9 @@
 <section id="prototipas">
   <div class="wrap demo">
     <div class="demo-side">
-      <div class="sec-head" style="margin-bottom:6px">
+      <div class="sec-head">
         <div class="eyebrow">Prototipas</div>
-        <h1 style="font-size:clamp(30px,4.2vw,46px);font-weight:800">Išbandyk Adreną</h1>
+        <h1>Išbandyk Adreną</h1>
         <p class="lead">Tai veikianti programėlės demonstracija. Spausk telefone kaip tikroje programėlėje arba pasirink scenarijų.</p>
       </div>
       <div class="scn" id="scn">
@@ -61,7 +62,7 @@
 
 <footer id="site-footer"></footer>
 <script src="assets/js/config.js?v=4"></script>
-<script src="assets/js/site.js?v=4"></script>
-<script src="assets/js/demo.js?v=3"></script>
+<script src="assets/js/site.js?v=7"></script>
+<script src="assets/js/demo.js?v=5"></script>
 </body>
 </html>

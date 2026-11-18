@@ -48,8 +48,8 @@
   var langHref = base + otherLangDir + otherLangFile;
 
   /* ---- SVGs ---- */
-  var logoHeader = '<svg viewBox="0 20 404 92" role="img" aria-hidden="true"><g transform="translate(-6 16.5) scale(0.93)"><defs><linearGradient id="hg" x1="0" y1="1" x2="1" y2="0"><stop offset="0" stop-color="#FF5A36"/><stop offset="1" stop-color="#FF8A3D"/></linearGradient><mask id="hm" maskUnits="userSpaceOnUse" x="0" y="0" width="100" height="100"><rect width="100" height="100" fill="#fff"/><path d="M16 64 C27 52 39 52 50 62 S73 72 84 58" fill="none" stroke="#000" stroke-width="20" stroke-linecap="round"/></mask></defs><path d="M18 84 L50 16 L82 84" fill="none" stroke="url(#hg)" stroke-width="13" stroke-linecap="round" stroke-linejoin="round" mask="url(#hm)"/><path d="M16 64 C27 52 39 52 50 62 S73 72 84 58" fill="none" stroke="#0FA3A0" stroke-width="9" stroke-linecap="round"/></g><g transform="translate(100 0)"><g fill="none" stroke="#FFFFFF" stroke-width="9" stroke-linecap="round" stroke-linejoin="round"><circle cx="21.5" cy="80" r="17"/><path d="M38.5 63 V97"/><circle cx="76.5" cy="80" r="17"/><path d="M93.5 36 V97"/><path d="M114.5 97 V63 M114.5 80 A17 17 0 0 1 131.5 63"/><path d="M148.5 80 H182.5 A17 17 0 1 0 177.5 92"/><path d="M203.5 63 V97 M203.5 80 A17 17 0 0 1 237.5 80 V97"/><circle cx="275.5" cy="80" r="17"/><path d="M292.5 63 V97"/></g></g></svg>';
-  var logoFooter = '<svg viewBox="0 20 404 92" aria-label="Adrena" role="img"><g transform="translate(-6 16.5) scale(0.93)"><defs><linearGradient id="fg2" x1="0" y1="1" x2="1" y2="0"><stop offset="0" stop-color="#FF5A36"/><stop offset="1" stop-color="#FF8A3D"/></linearGradient><mask id="fm2" maskUnits="userSpaceOnUse" x="0" y="0" width="100" height="100"><rect width="100" height="100" fill="#fff"/><path d="M16 64 C27 52 39 52 50 62 S73 72 84 58" fill="none" stroke="#000" stroke-width="20" stroke-linecap="round"/></mask></defs><path d="M18 84 L50 16 L82 84" fill="none" stroke="url(#fg2)" stroke-width="13" stroke-linecap="round" stroke-linejoin="round" mask="url(#fm2)"/><path d="M16 64 C27 52 39 52 50 62 S73 72 84 58" fill="none" stroke="#0FA3A0" stroke-width="9" stroke-linecap="round"/></g><g transform="translate(100 0)"><g fill="none" stroke="#FFFFFF" stroke-width="9" stroke-linecap="round" stroke-linejoin="round"><circle cx="21.5" cy="80" r="17"/><path d="M38.5 63 V97"/><circle cx="76.5" cy="80" r="17"/><path d="M93.5 36 V97"/><path d="M114.5 97 V63 M114.5 80 A17 17 0 0 1 131.5 63"/><path d="M148.5 80 H182.5 A17 17 0 1 0 177.5 92"/><path d="M203.5 63 V97 M203.5 80 A17 17 0 0 1 237.5 80 V97"/><circle cx="275.5" cy="80" r="17"/><path d="M292.5 63 V97"/></g></g></svg>';
+  var logoHeader = '<svg viewBox="0 20 404 92" role="img" aria-hidden="true"><g transform="translate(-6 16.5) scale(0.93)"><defs><mask id="hm" maskUnits="userSpaceOnUse" x="0" y="0" width="100" height="100"><rect width="100" height="100" fill="#fff"/><path d="M16 64 C27 52 39 52 50 62 S73 72 84 58" fill="none" stroke="#000" stroke-width="20" stroke-linecap="round"/></mask></defs><path d="M18 84 L50 16 L82 84" fill="none" style="stroke:var(--logo-a,#C8381B)" stroke-width="13" stroke-linecap="round" stroke-linejoin="round" mask="url(#hm)"/><path d="M16 64 C27 52 39 52 50 62 S73 72 84 58" fill="none" style="stroke:var(--logo-w,#1D5BB5)" stroke-width="9" stroke-linecap="round"/></g><g transform="translate(100 0)"><g fill="none" stroke="currentColor" stroke-width="9" stroke-linecap="round" stroke-linejoin="round"><circle cx="21.5" cy="80" r="17"/><path d="M38.5 63 V97"/><circle cx="76.5" cy="80" r="17"/><path d="M93.5 36 V97"/><path d="M114.5 97 V63 M114.5 80 A17 17 0 0 1 131.5 63"/><path d="M148.5 80 H182.5 A17 17 0 1 0 177.5 92"/><path d="M203.5 63 V97 M203.5 80 A17 17 0 0 1 237.5 80 V97"/><circle cx="275.5" cy="80" r="17"/><path d="M292.5 63 V97"/></g></g></svg>';
+  var logoFooter = '<svg viewBox="0 20 404 92" aria-label="Adrena" role="img"><g transform="translate(-6 16.5) scale(0.93)"><defs><mask id="fm2" maskUnits="userSpaceOnUse" x="0" y="0" width="100" height="100"><rect width="100" height="100" fill="#fff"/><path d="M16 64 C27 52 39 52 50 62 S73 72 84 58" fill="none" stroke="#000" stroke-width="20" stroke-linecap="round"/></mask></defs><path d="M18 84 L50 16 L82 84" fill="none" style="stroke:var(--logo-a,#C8381B)" stroke-width="13" stroke-linecap="round" stroke-linejoin="round" mask="url(#fm2)"/><path d="M16 64 C27 52 39 52 50 62 S73 72 84 58" fill="none" style="stroke:var(--logo-w,#1D5BB5)" stroke-width="9" stroke-linecap="round"/></g><g transform="translate(100 0)"><g fill="none" stroke="currentColor" stroke-width="9" stroke-linecap="round" stroke-linejoin="round"><circle cx="21.5" cy="80" r="17"/><path d="M38.5 63 V97"/><circle cx="76.5" cy="80" r="17"/><path d="M93.5 36 V97"/><path d="M114.5 97 V63 M114.5 80 A17 17 0 0 1 131.5 63"/><path d="M148.5 80 H182.5 A17 17 0 1 0 177.5 92"/><path d="M203.5 63 V97 M203.5 80 A17 17 0 0 1 237.5 80 V97"/><circle cx="275.5" cy="80" r="17"/><path d="M292.5 63 V97"/></g></g></svg>';
   var themeIcon = '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="5"/><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/></svg>';
 
   /* ---- Nav ---- */
@@ -222,11 +222,11 @@
   /* ---- Home sport tiles ---- */
   // One place to swap photos. img2x present = WebP with srcset; otherwise single size.
   var SPORT_TILES = [
-    { id:'kaitavimas',   name:'Kaitavimas',            link:'prototipas.html', grad:'135deg,#0FA3A0,#0E5E7E', pos:'40% 22%', alt:'Kaituotojas ant bangų saulėlydžio metu', img:base+'media/sports/kaitavimas.webp' },
-    { id:'banglentes',   name:'Banglentės',            link:'prototipas.html', grad:'135deg,#1C7ED6,#0E4E6E', pos:'50% 50%', alt:'Banglentininkas ant bangos saulėlydžio metu', img:base+'media/sports/banglentes.webp', img2x:base+'media/sports/banglentes_2x.webp' },
-    { id:'vandenlentes', name:'Vandenlentės',          link:'prototipas.html', grad:'135deg,#0E6E8C,#163E63', pos:'35% 30%', alt:'Vandenlentininkas šokinėja nuo kliūties vandenlenčių parke', img:base+'media/sports/vandenlentes.webp' },
-    { id:'slides',       name:'Slidės ir snieglentės', link:'prototipas.html', grad:'135deg,#7FA7C9,#3D5A80', pos:'45% 45%', alt:'Snieglentininkas posūkyje ant šlaito', img:base+'media/sports/slides.webp' },
-    { id:'parasparnis',  name:'Parasparnis',           link:'prototipas.html', grad:'135deg,#FF8A3D,#E2542F', pos:'50% 50%', alt:'Parasparnis saulėlydžio danguje', img:base+'media/sports/parasparnis.webp', img2x:base+'media/sports/parasparnis_2x.webp' },
+    { id:'kaitavimas',   name:'Kaitavimas',            link:'prototipas.html', grad:'135deg,#0FA3A0,#0E5E7E', pos:'55% 50%', alt:'Kaituotojas šuolio metu su lenta rankoje', img:base+'media/sports/kaitavimas-v2.webp' },
+    { id:'banglentes',   name:'Banglentės',            link:'prototipas.html', grad:'135deg,#1C7ED6,#0E4E6E', pos:'45% 50%', alt:'Banglentininkas šoka virš bangos keteros', img:base+'media/sports/banglentes-v2.webp' },
+    { id:'vandenlentes', name:'Vandenlentės',          link:'prototipas.html', grad:'135deg,#0E6E8C,#163E63', pos:'40% 35%', alt:'Vandenlentininkas apsiverčia ore virš tramplino', img:base+'media/sports/vandenlentes-v2.webp' },
+    { id:'slides',       name:'Slidės ir snieglentės', link:'prototipas.html', grad:'135deg,#7FA7C9,#3D5A80', pos:'40% 40%', alt:'Slidininkas šoka per purų sniegą', img:base+'media/sports/slides-v2.webp' },
+    { id:'parasparnis',  name:'Parasparnis',           link:'prototipas.html', grad:'135deg,#FF8A3D,#E2542F', pos:'50% 35%', alt:'Parasparnis skrenda virš kalnų sutemų danguje', img:base+'media/sports/parasparnis-v2.webp' },
     { id:'parasiutas',   name:'Parašiutas',            link:'prototipas.html', grad:'135deg,#FF5A36,#A83256', pos:'50% 50%', alt:'Parašiutininkas su parašiutu danguje', img:base+'media/sports/parasiutas.webp', img2x:base+'media/sports/parasiutas_2x.webp' },
     { id:'laipiojimas',  name:'Laipiojimas',           link:'prototipas.html', grad:'135deg,#9A7A52,#4E3B2A', pos:'50% 50%', alt:'Laipiotojas ant uolos', img:base+'media/sports/laipiojimas.webp', img2x:base+'media/sports/laipiojimas_2x.webp' },
     { id:'nardymas',     name:'Nardymas',              link:'prototipas.html', grad:'135deg,#1E4E7A,#0E1B2C', pos:'50% 50%', alt:'Naras mėlyname vandenyje', img:base+'media/sports/nardymas.webp', img2x:base+'media/sports/nardymas_2x.webp' },
@@ -270,6 +270,91 @@
     els.forEach(function (el) { el.classList.add('reveal'); obs.observe(el); });
   }
   setTimeout(setupReveal, 80);
+
+  var reduceMotionMQ = window.matchMedia('(prefers-reduced-motion: reduce)');
+
+  /* ---- Loader: counter + filling wave, first visit per session ---- */
+  (function () {
+    var root = document.documentElement;
+    if (!root.classList.contains('is-loading')) return;
+    var el = document.createElement('div');
+    el.className = 'loader'; el.setAttribute('aria-hidden', 'true');
+    el.innerHTML = '<div class="loader-inner"><div class="loader-count">0</div><div class="loader-wave"><i></i></div></div>';
+    document.body.appendChild(el);
+    root.classList.remove('is-loading');
+    var count = el.querySelector('.loader-count'), wave = el.querySelector('.loader-wave');
+    var start = null, DUR = 900;
+    function step(t) {
+      if (start === null) start = t;
+      var k = Math.min(1, (t - start) / DUR), e = 1 - Math.pow(1 - k, 3);
+      count.textContent = Math.round(e * 100);
+      wave.style.setProperty('--p', e);
+      if (k < 1) requestAnimationFrame(step);
+      else setTimeout(function () {
+        el.classList.add('done');
+        setTimeout(function () { el.remove(); }, 700);
+      }, 150);
+    }
+    requestAnimationFrame(step);
+  })();
+
+  /* ---- Film clip: play only while visible; grows and straightens as it scrolls in ---- */
+  (function () {
+    var frame = document.querySelector('.film-frame');
+    if (!frame) return;
+    var v = frame.querySelector('video');
+    if (reduceMotionMQ.matches) return; // poster only
+    if (window.IntersectionObserver) {
+      new IntersectionObserver(function (es) {
+        es.forEach(function (e) {
+          if (e.isIntersecting) { v.preload = 'auto'; var pr = v.play(); if (pr && pr.catch) pr.catch(function () {}); }
+          else v.pause();
+        });
+      }, { threshold: 0.2 }).observe(frame);
+    } else { v.autoplay = true; }
+    var ticking = false;
+    function upd() {
+      ticking = false;
+      var r = frame.getBoundingClientRect(), vh = window.innerHeight;
+      var f = (vh - r.top) / (vh * 0.6);
+      frame.style.setProperty('--f', Math.max(0, Math.min(1, f)).toFixed(3));
+    }
+    window.addEventListener('scroll', function () { if (!ticking) { ticking = true; requestAnimationFrame(upd); } }, { passive: true });
+    upd();
+  })();
+
+  /* ---- Header takes the hero colour while the red area is under it ---- */
+  (function () {
+    var hero = document.querySelector('section.hero');
+    var film = document.querySelector('section.film');
+    var top = document.getElementById('site-header');
+    if (!hero || !top) return;
+    function redBottom() {
+      if (film) { var r = film.getBoundingClientRect(); return r.top + r.height / 2; }
+      return hero.getBoundingClientRect().bottom;
+    }
+    function upd() { top.classList.toggle('on-hero', redBottom() > 80); }
+    upd(); window.addEventListener('scroll', upd, { passive: true });
+  })();
+
+  /* ---- Stacked cards fan out as you scroll (--p 0 = stacked, 1 = spread) ---- */
+  (function () {
+    var fans = document.querySelectorAll('.edge');
+    if (!fans.length || reduceMotionMQ.matches) return;
+    var ticking = false;
+    function upd() {
+      ticking = false;
+      var vh = window.innerHeight;
+      fans.forEach(function (f) {
+        var r = f.getBoundingClientRect();
+        var p = (vh * 0.9 - r.top) / (vh * 0.55);
+        f.style.setProperty('--p', Math.max(0, Math.min(1, p)).toFixed(3));
+      });
+    }
+    window.addEventListener('scroll', function () { if (!ticking) { ticking = true; requestAnimationFrame(upd); } }, { passive: true });
+    window.addEventListener('resize', upd);
+    upd();
+  })();
 
   /* ---- Gallery lightbox ---- */
   (function () {
