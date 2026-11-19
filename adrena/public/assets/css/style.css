@@ -202,7 +202,7 @@ html.is-loading::after {
 .hero .wrap { position: relative; z-index: 1; }
 .hero-grid {
   display: grid; gap: 32px; grid-template-columns: 1fr;
-  grid-template-areas: "title" "eyebrow" "lead" "ctas";
+  grid-template-areas: "title" "media" "eyebrow" "lead" "ctas";
 }
 .hero h1 { grid-area: title; font-size: clamp(56px, 13.4vw, 216px); line-height: .84; letter-spacing: -.02em; }
 .hero h1 em { font-style: normal; color: var(--sun); }
@@ -223,86 +223,22 @@ html.is-loading::after {
 @media (max-width: 1279px) { .hero .deco-wind { display: none; } }
 @media (min-width: 960px) {
   .hero-grid {
-    grid-template-columns: 1fr 1fr; column-gap: 48px; row-gap: 24px;
-    grid-template-areas: "title title" "eyebrow ctas" "lead ctas";
+    grid-template-columns: 1fr minmax(280px, 344px) 1fr; column-gap: 48px; row-gap: 24px;
+    grid-template-areas: "title title title" "eyebrow media ctas" "lead media ctas";
     grid-template-rows: auto auto 1fr;
   }
   .hero-media { margin-top: -32px; width: 100%; align-self: start; }
-  .hero .eyebrow { align-self: end; padding-top: 40px; }
+  .hero .eyebrow { align-self: end; padding-top: 80px; }
   .hero .lead { align-self: start; }
   .hero-ctas { flex-direction: column; align-items: flex-end; justify-self: end; align-self: end; }
 }
 .waves { display: none; }
-
-/* ==== Kitesurfer scroll animation (section.adrena-kite, script kite-scroll.js) ==== */
-/* The homepage hero: kitesurfer scene + a solid text column (script kite-scroll.js).
-   The page scrolls normally. The scene sticks only while the text column passes it (about one extra
-   screen at most), and the trick's progress follows that ordinary scroll, finishing before the hero leaves.
-   Base styles = no JS / reduced motion: everything static. */
-.adrena-kite {
-  --story-ease: cubic-bezier(.2, .8, .2, 1);
-  position: relative; padding-block: 0; background: var(--cream); color: var(--ink);
-  display: grid; grid-template-columns: minmax(0, 1fr);
-}
-.adrena-kite__stage { position: relative; overflow: hidden; background: #8fcdea; height: 55svh; min-height: 320px; order: -1; z-index: 1; }
-.adrena-kite:not(.is-drawn) .adrena-kite__stage { display: none; } /* no JS: no picture, just the text */
-.adrena-kite__svg { position: absolute; inset: 0; width: 100%; height: 100%; display: block; }
-@media (max-width: 600px) { .adrena-kite .kd-small { opacity: 0; } }
-
-/* Text column: always on the page background (cream in light theme, deep ink in dark), never on the picture */
-.story { position: relative; display: flex; flex-direction: column; gap: 32px; background: var(--cream);
-  padding: 40px max(24px, env(safe-area-inset-left, 0px)) 64px; }
-.story-ch { margin: 0; }
-.story-ch .ln, .story-ch .ln > span { display: block; }
-.story-eyebrow { color: var(--ink-soft); } /* brand red measured 4.43:1 on cream at this size; secondary ink passes AA */
-.story-h1 { font-size: clamp(44px, 12vw, 88px); line-height: .88; margin-top: 16px; }
-.story-h1 .ln > span { text-wrap: balance; }
-/* inline-block keeps the highlight to the glyph box, so it never covers the accents of the line above */
-.story-h1 em { font-style: normal; display: inline-block; line-height: .84; padding: .08em .08em 0; margin-top: .06em; background: var(--sun); color: var(--on-sun); }
-/* long lines: sentence case, one block per sentence so it wraps naturally */
-.story-line { font-family: var(--f-display); font-weight: 600; font-stretch: 92%; text-transform: none;
-  font-size: clamp(24px, 1.2vw + 20px, 40px); line-height: 1.22; letter-spacing: -.005em; color: var(--ink); max-width: 24ch; }
-.story-line .ln > span { text-wrap: pretty; }
-.story-strong { font-weight: 750; }
-.story-ctas { display: flex; flex-direction: column; align-items: flex-start; gap: 16px; margin-top: 8px; }
-.story-ctas .btn { font-size: 20px; padding: 16px 32px; min-height: 64px; }
-.story-ctas .btn-ghost { color: var(--ink); background: var(--paper); box-shadow: inset 0 0 0 2px var(--ink); }
-.story-ctas .btn-ghost:hover { background: var(--ink); color: var(--cream); }
-@media (max-width: 599px) { .story-ctas, .story-ctas .ln, .story-ctas .ln > span { width: 100%; } .story-ctas .btn { width: 100%; justify-content: center; text-align: center; } }
-
-/* Scroll hint on the picture: a solid pill, gone as soon as scrolling starts */
-.story-hint { display: none; }
-.is-story .story-hint {
-  display: block; position: absolute; left: 50%; bottom: 24px; transform: translateX(-50%);
-  padding: 8px 16px; border-radius: 999px; background: #FFFAEE; color: #1E2A32;
-  font: 600 16px/1.2 var(--f-display); transition: opacity .4s ease; pointer-events: none;
-}
-.is-story .story-hint.is-gone { opacity: 0; }
-
-/* ---- Animated mode (JS on, motion allowed) ---- */
-.is-story .adrena-kite__stage { position: sticky; top: 80px; }
-/* each line rises out of a mask as it scrolls into view; the spare block padding keeps Lithuanian accents inside the mask */
-.is-story .story-ch .ln { overflow: hidden; padding-block: .14em; margin-block: -.14em; }
-.is-story .story-ctas .ln { padding: 8px; margin: -8px; } /* room for the button hover tilt and the focus ring */
-.is-story .story-ch .ln > span { transform: translateY(110%); opacity: 0;
-  transition: transform .9s var(--story-ease) calc(var(--i, 0) * 70ms), opacity .5s ease calc(var(--i, 0) * 70ms); }
-.is-story .story-ch.is-in .ln > span { transform: none; opacity: 1; }
-
-/* Desktop: solid text column on the left, scene on the right, sticking while the column scrolls past */
-@media (min-width: 960px) {
-  .adrena-kite { grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); align-items: start; }
-  .story { grid-column: 1; grid-row: 1; gap: 48px; padding: 72px 48px 96px max(48px, calc((100vw - var(--wrap)) / 2 - 48px)); }
-  .adrena-kite__stage { grid-column: 2; grid-row: 1; order: 0; height: calc(100vh - 80px); height: calc(100svh - 80px); min-height: 480px; border-radius: 0 0 0 32px; }
-  .story-h1 { font-size: clamp(44px, 4.8vw, 104px); }
-  .story { min-height: calc(100svh - 80px); justify-content: flex-start; }
-}
 
 /* ==== Film: wide clip that bridges the red hero and the cream page ==== */
 .hero { padding-bottom: 0; min-height: 0; }
 .hero-grid { padding-bottom: 56px; }
 .film { padding-block: 0; }
 .film::before { content: ""; position: absolute; inset: 0 0 50% 0; background: var(--brand); }
-.adrena-kite + .film::before { display: none; } /* the old red hero is gone; the clip sits on the page background */
 .film .wrap { position: relative; }
 .film-frame {
   --f: 1; position: relative; margin: 0; aspect-ratio: 16/9; border-radius: 32px; overflow: hidden; background: var(--ink);
