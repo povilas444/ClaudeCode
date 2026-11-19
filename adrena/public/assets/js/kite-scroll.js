@@ -12,23 +12,26 @@ class DCLogic { constructor() { this.props = {}; this.state = {}; } setState(o) 
 class Component extends DCLogic {
 componentDidMount() {
 if (REDUCE) return; // reduced motion: one still frame, nothing listens to scroll
-// Layout is measured only on load/resize. The scroll path reads scrollY alone, so no layout work per frame.
-// Pinned while scrollY runs from (sectionTop - stickyTop) over (sectionHeight - stageHeight); the stage
-// height is in svh, so the iOS address bar showing/hiding does not shift the progress.
+// The page scrolls normally. The trick's progress is plain scroll distance: 0 at the top of the page,
+// 1 once half of the scene has scrolled away (long before the next sections are fully on screen).
+// Layout is measured only on load/resize; the scroll path reads scrollY alone, so no layout work per frame.
 this._measure = () => {
 const el = this._track;
 if (!el) return;
 const sticky = parseFloat(getComputedStyle(stage).top) || 0;
-this._start = el.getBoundingClientRect().top + window.scrollY - sticky;
-this._span = Math.max(1, el.offsetHeight - stage.offsetHeight);
+const top = el.getBoundingClientRect().top + window.scrollY;
+this._start = Math.max(0, top - sticky);
+this._span = Math.max(1, top - sticky + el.offsetHeight - stage.offsetHeight * 0.5 - this._start);
+if (story) story.measure();
 };
 this._onWin = () => {
 if (this._raf) return;
 this._raf = requestAnimationFrame(() => {
 this._raf = 0;
-const v = Math.max(0, Math.min(1, (window.scrollY - this._start) / this._span));
+const y = window.scrollY;
+const v = Math.max(0, Math.min(1, (y - this._start) / this._span));
 const cur = (this.state && this.state.p) || 0;
-if (Math.abs(v - cur) > 0.0005) this.setState({ p: v });
+if (Math.abs(v - cur) > 0.0005 || y !== this.state.y) this.setState({ p: v, y });
 });
 };
 this._onResize = () => { this._measure(); this._onWin(); };
@@ -363,43 +366,31 @@ function update() {
   const v = c.renderVals();
   for (const [el, name, t] of binds) { const s = fill(t, v); if (name === null) { if (el.nodeValue !== s) el.nodeValue = s; } else if (el.getAttribute(name) !== s) el.setAttribute(name, s); }
   for (const el of ifs) el.style.display = v[el.dataset.if] ? '' : 'none';
-  if (story) story.render(v.p, v.mode);
+  if (story) story.render(c.state.y || 0, v.p);
 }
 
-/* ---- Hero text chapters: driven by the same p as the drawing, in the same frame (writes only) ----
-   Chapters follow the trick: ride, set-up/pop, rotation + kiteloop, top of the jump, landing. */
-const CH = [0, 0.35, 0.50, 0.66, 0.79]; // start of each chapter
-const chapterOf = p => { let i = 0; while (i + 1 < CH.length && p >= CH[i + 1]) i++; return i; };
+/* ---- Hero text: each block slides up out of its mask as it scrolls into view (same scroll value, same frame) ---- */
 const story = (() => {
-  const box = stage.querySelector('.story');
+  const box = root.querySelector('.story');
   if (!box || REDUCE) return null;
   const chs = [...box.querySelectorAll('.story-ch')];
   const hint = stage.querySelector('.story-hint');
-  const bars = [...stage.querySelectorAll('.story-progress i')];
   chs.forEach(ch => ch.querySelectorAll('.ln').forEach((ln, i) => ln.style.setProperty('--i', i)));
-  let cur = -1, mode = '', hintGone = null;
-  const fills = bars.map(() => -1);
+  let thr = chs.map(() => 0), shown = chs.map(() => null), hintGone = null;
   return {
-    render(p, m) {
-      if (m !== mode) { mode = m; box.dataset.mode = m; }
-      const c = chapterOf(p);
-      if (c !== cur) { cur = c; chs.forEach((ch, i) => { ch.dataset.state = i < c ? 'past' : i > c ? 'future' : 'active'; }); }
-      const gone = p > 0.01;
-      if (hint && gone !== hintGone) { hintGone = gone; hint.classList.toggle('is-gone', gone); }
-      bars.forEach((b, i) => {
-        const a = CH[i], z = i + 1 < CH.length ? CH[i + 1] : 1;
-        const fv = Math.round(Math.max(0, Math.min(1, (p - a) / (z - a))) * 100) / 100;
-        if (fv !== fills[i]) { fills[i] = fv; b.style.setProperty('--f', fv); }
+    // cached on load/resize: the scrollY at which each block's top reaches 88% of the viewport
+    measure() { const vh = window.innerHeight; thr = chs.map(ch => ch.getBoundingClientRect().top + window.scrollY - vh * 0.88); },
+    render(y) {
+      chs.forEach((ch, i) => {
+        const on = shown[i] ? y > thr[i] - 48 : y >= thr[i]; // small hysteresis, no flicker at the edge
+        if (on !== shown[i]) { shown[i] = on; ch.classList.toggle('is-in', on); }
       });
-    },
-    // keyboard users can Tab onto a CTA that is not on screen yet: jump the story to the landing chapter
-    toEnd() { if (cur < CH.length - 1 && c._span) window.scrollTo({ top: c._start + CH[CH.length - 1] * c._span + 2, behavior: 'instant' }); }
+      const gone = y > 8;
+      if (hint && gone !== hintGone) { hintGone = gone; hint.classList.toggle('is-gone', gone); }
+    }
   };
 })();
-if (story) {
-  root.classList.add('is-story');
-  root.querySelector('.story-ctas').addEventListener('focusin', () => story.toEnd());
-}
+if (story) root.classList.add('is-story');
 function schedule() { if (!raf) raf = requestAnimationFrame(update); }
 const v0 = c.renderVals();
 if (v0.trackRef) v0.trackRef(root);

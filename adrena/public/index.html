@@ -16,7 +16,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wdth,wght@12..96,75..100,400..800&family=Fraunces:ital,opsz,wght,SOFT@0,9..144,400..700,100;1,9..144,400..700,100&display=swap">
-<link rel="stylesheet" href="assets/css/style.css?v=11">
+<link rel="stylesheet" href="assets/css/style.css?v=12">
 </head>
 <body data-page="home">
 <header id="site-header"></header>
@@ -25,6 +25,21 @@
 
 <!-- HERO: kaitavimo animacija + tekstas, valdomi to paties slinkimo (kite-scroll.js) -->
 <section class="adrena-kite" id="pradzia" aria-labelledby="hero-title" data-kite-color="#FF5A36" data-suit-color="#13212E" data-captions="false">
+<!-- Hero tekstas: tikras HTML (SEO, ekrano skaitytuvai), slenka kartu su puslapiu -->
+<div class="story">
+  <div class="story-ch" data-ch="1">
+    <div class="eyebrow story-eyebrow"><span class="ln"><span>Ekstremalaus sporto pamokos vienoje vietoje</span></span></div>
+    <h1 id="hero-title" class="story-h1"><span class="ln"><span>Adrenalinas,</span></span> <span class="ln"><span>kurį gali</span></span> <span class="ln"><span><em>išmokti</em></span></span></h1>
+  </div>
+  <p class="story-ch story-line" data-ch="2"><span class="ln"><span>Adrena sujungia visas ekstremalaus sporto šakas vienoje programėlėje.</span></span></p>
+  <p class="story-ch story-line" data-ch="3"><span class="ln"><span>Rasi patikrintą instruktorių, matysi aiškią kainą ir laisvus laikus, o pamoką užsisakysi per kelias minutes.</span></span></p>
+  <p class="story-ch story-line story-strong" data-ch="4"><span class="ln"><span>Jei oras netinkamas, programėlė pati pasiūlys kitą laiką.</span></span></p>
+  <div class="story-ch story-ctas" data-ch="5">
+    <span class="ln"><span><a class="btn btn-primary" href="#laukianciuju-sarasas">Prisijunk prie laukiančiųjų sąrašo</a></span></span>
+    <span class="ln"><span><a class="btn btn-ghost" href="prototipas.html">Išbandyk programėlę</a></span></span>
+  </div>
+</div>
+
 <div class="adrena-kite__stage"><template class="adrena-kite__tpl">
 
 <svg class="adrena-kite__svg" viewBox="{{vb}}" preserveAspectRatio="xMidYMid slice" role="img" aria-label="Kaituotojas važiuoja per marias, šoka backroll ir nusileidžia">
@@ -217,25 +232,7 @@
 </div>
 </div>
 </template>
-
-<!-- Hero tekstas: tikras HTML (SEO, ekrano skaitytuvai). Be JS arba su sumažintu judesiu rodomas paprastai, vienas po kito. -->
-<div class="story" data-mode="narrow">
-  <div class="story-ch" data-ch="1">
-    <div class="eyebrow story-eyebrow"><span class="ln"><span>Ekstremalaus sporto pamokos vienoje vietoje</span></span></div>
-    <h1 id="hero-title" class="story-h1"><span class="ln"><span>Adrenalinas,</span></span> <span class="ln"><span>kurį gali</span></span> <span class="ln"><span><em>išmokti</em></span></span></h1>
-  </div>
-  <p class="story-ch story-big" data-ch="2"><span class="ln"><span>Adrena sujungia visas ekstremalaus sporto šakas</span></span> <span class="ln"><span>vienoje programėlėje.</span></span></p>
-  <p class="story-ch story-mid" data-ch="3"><span class="ln"><span>Rasi patikrintą instruktorių, matysi aiškią kainą ir laisvus laikus,</span></span> <span class="ln"><span>o pamoką užsisakysi per kelias minutes.</span></span></p>
-  <p class="story-ch story-big story-calm" data-ch="4"><span class="ln"><span>Jei oras netinkamas,</span></span> <span class="ln"><span>programėlė pati pasiūlys kitą laiką.</span></span></p>
-  <div class="story-ch story-ctas" data-ch="5">
-    <span class="ln"><span><a class="btn btn-primary" href="#laukianciuju-sarasas">Prisijunk prie laukiančiųjų sąrašo</a></span></span>
-    <span class="ln"><span><a class="btn btn-ghost" href="prototipas.html">Išbandyk programėlę</a></span></span>
-  </div>
-</div>
-
 <div class="story-hint" aria-hidden="true">Slink žemyn</div>
-<div class="story-progress" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></div>
-
 </div>
 </section>
 
@@ -427,6 +424,6 @@
 <footer id="site-footer"></footer>
 <script src="assets/js/config.js?v=4"></script>
 <script src="assets/js/site.js?v=8"></script>
-<script src="assets/js/kite-scroll.js?v=3" defer></script>
+<script src="assets/js/kite-scroll.js?v=4" defer></script>
 </body>
 </html>
