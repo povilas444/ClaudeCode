@@ -194,7 +194,7 @@ html.is-loading::after {
 .btn-teal { background: var(--sea); color: var(--on-fill); }
 .btn-teal:hover { background: var(--ink); color: var(--cream); }
 
-/* ==== Home hero: one colour fills the screen ==== */
+/* ==== Home hero: one colour fills the screen, the headline is the picture ==== */
 .hero {
   background: var(--brand); color: var(--on-fill); padding-block: 24px 80px; overflow: hidden;
   min-height: calc(100svh - 80px);
@@ -202,20 +202,22 @@ html.is-loading::after {
 .hero .wrap { position: relative; z-index: 1; }
 .hero-grid {
   display: grid; gap: 32px; grid-template-columns: 1fr;
-  grid-template-areas: "title" "media" "eyebrow" "lead" "ctas";
+  grid-template-areas: "title" "eyebrow" "lead" "ctas";
 }
-.hero h1 { grid-area: title; font-size: clamp(56px, 13.4vw, 216px); line-height: .84; letter-spacing: -.02em; }
-.hero h1 em { font-style: normal; color: var(--sun); }
-.hero-media {
-  grid-area: media; justify-self: center; width: min(320px, 72vw); aspect-ratio: 9/16;
-  border-radius: 32px; overflow: hidden; background: var(--ink);
-  transform: rotate(-7deg); box-shadow: 0 32px 64px -24px rgba(30,42,50,.55);
+/* poster-size headline: as wide as the page allows, but never so tall that the rest falls far below the fold */
+.hero h1 { grid-area: title; font-size: clamp(64px, min(19.5vw, 24svh), 256px); line-height: .84; letter-spacing: -.025em; }
+.hero h1 em {
+  font-style: normal; color: var(--sun); display: inline-block; padding-bottom: .16em;
+  background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 96 24'%3E%3Cpath d='M0 12c12-12 24-12 36 0s24 12 36 0 24-12 36 0' fill='none' stroke='%23F2B33D' stroke-width='5' stroke-linecap='round'/%3E%3C/svg%3E") repeat-x left bottom / .5em .125em;
 }
-.hero-media { margin: 0; }
-.hero-media img, .hero-media video { width: 100%; height: 100%; object-fit: cover; }
-.hero .eyebrow { grid-area: eyebrow; color: var(--sun); text-transform: none; font-size: 21px; font-stretch: 90%; align-self: end; }
-.hero .lead { grid-area: lead; color: var(--on-fill); max-width: 40ch; }
+.hero .eyebrow {
+  grid-area: eyebrow; justify-self: start; align-self: end;
+  background: var(--sun); color: var(--on-sun); border-radius: 20px; padding: 8px 16px;
+  text-transform: uppercase; font-size: clamp(16px, 1.4vw, 20px); font-stretch: 90%; letter-spacing: .04em;
+}
+.hero .lead { grid-area: lead; color: var(--on-fill); max-width: 32ch; font-size: clamp(21px, 1.2vw + 14px, 30px); line-height: 1.45; }
 .hero-ctas { grid-area: ctas; display: flex; flex-wrap: wrap; gap: 16px; }
+.hero-ctas .btn { font-size: 20px; padding: 16px 32px; min-height: 64px; }
 .hero .btn-primary { background: var(--paper); color: var(--brand); }
 .hero .btn-primary:hover { background: var(--sun); color: var(--on-sun); }
 .hero .btn-ghost { color: var(--on-fill); }
@@ -223,15 +225,21 @@ html.is-loading::after {
 @media (max-width: 1279px) { .hero .deco-wind { display: none; } }
 @media (min-width: 960px) {
   .hero-grid {
-    grid-template-columns: 1fr minmax(280px, 344px) 1fr; column-gap: 48px; row-gap: 24px;
-    grid-template-areas: "title title title" "eyebrow media ctas" "lead media ctas";
+    grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr); column-gap: 48px; row-gap: 24px;
+    grid-template-areas: "title title" "eyebrow ctas" "lead ctas";
     grid-template-rows: auto auto 1fr;
   }
-  .hero-media { margin-top: -32px; width: 100%; align-self: start; }
-  .hero .eyebrow { align-self: end; padding-top: 80px; }
+  .hero .eyebrow { margin-top: 24px; }
   .hero .lead { align-self: start; }
   .hero-ctas { flex-direction: column; align-items: flex-end; justify-self: end; align-self: end; }
 }
+/* short entrance: headline rises, then the rest follows */
+@media (prefers-reduced-motion: no-preference) {
+  .hero h1 { animation: hero-rise .9s cubic-bezier(.2, .8, .2, 1) both; }
+  .hero .eyebrow, .hero .lead, .hero-ctas { animation: hero-rise .9s cubic-bezier(.2, .8, .2, 1) .15s both; }
+  .hero-ctas { animation-delay: .25s; }
+}
+@keyframes hero-rise { from { opacity: 0; transform: translateY(32px); } to { opacity: 1; transform: none; } }
 .waves { display: none; }
 
 /* ==== Film: wide clip that bridges the red hero and the cream page ==== */
