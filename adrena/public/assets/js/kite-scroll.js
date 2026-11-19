@@ -5,32 +5,44 @@ if (!root) return;
 const stage = root.querySelector('.adrena-kite__stage');
 // markup sits in a <template> so the {{placeholders}} are never parsed as live SVG attributes
 const tpl = stage.querySelector('template.adrena-kite__tpl');
+const REDUCE = typeof matchMedia === 'function' && matchMedia('(prefers-reduced-motion: reduce)').matches;
 const parts = tpl ? tpl.content.cloneNode(true) : null;
 class DCLogic { constructor() { this.props = {}; this.state = {}; } setState(o) { Object.assign(this.state, o); schedule(); } }
 
 class Component extends DCLogic {
 componentDidMount() {
+if (REDUCE) return; // reduced motion: one still frame, nothing listens to scroll
+// Layout is measured only on load/resize. The scroll path reads scrollY alone, so no layout work per frame.
+// Pinned while scrollY runs from (sectionTop - stickyTop) over (sectionHeight - stageHeight); the stage
+// height is in svh, so the iOS address bar showing/hiding does not shift the progress.
+this._measure = () => {
+const el = this._track;
+if (!el) return;
+const sticky = parseFloat(getComputedStyle(stage).top) || 0;
+this._start = el.getBoundingClientRect().top + window.scrollY - sticky;
+this._span = Math.max(1, el.offsetHeight - stage.offsetHeight);
+};
 this._onWin = () => {
 if (this._raf) return;
 this._raf = requestAnimationFrame(() => {
 this._raf = 0;
-const el = this._track;
-if (!el) return;
-const r = el.getBoundingClientRect();
-const span = Math.max(1, el.offsetHeight - window.innerHeight);
-const v = Math.max(0, Math.min(1, -r.top / span));
+const v = Math.max(0, Math.min(1, (window.scrollY - this._start) / this._span));
 const cur = (this.state && this.state.p) || 0;
 if (Math.abs(v - cur) > 0.0005) this.setState({ p: v });
 });
 };
+this._onResize = () => { this._measure(); this._onWin(); };
+this._measure();
 window.addEventListener('scroll', this._onWin, { passive: true });
-window.addEventListener('resize', this._onWin);
+window.addEventListener('resize', this._onResize);
+window.addEventListener('load', this._onResize);
 this._onWin();
 }
 componentWillUnmount() {
 if (this.ro) this.ro.disconnect();
 window.removeEventListener('scroll', this._onWin);
-window.removeEventListener('resize', this._onWin);
+window.removeEventListener('resize', this._onResize);
+window.removeEventListener('load', this._onResize);
 if (this._raf) cancelAnimationFrame(this._raf);
 }
 trackRefFn() {
@@ -64,8 +76,7 @@ return this._sh;
 }
 renderVals() {
 const st = this.state || {};
-const reduce = typeof matchMedia === 'function' && matchMedia('(prefers-reduced-motion: reduce)').matches;
-const p = reduce ? 0.3 : (st.p || 0);
+const p = REDUCE ? 1 : (st.p || 0); // reduced motion shows the final frame
 const aw = st.aw || 1440, ah = st.ah || 900;
 const A = aw / ah;
 const lerp = (a, b, t) => a + (b - a) * t;
@@ -325,7 +336,8 @@ barGrips: 'M' + P(barTop) + ' L' + P([barTop[0] + 0.5, barTop[1] + 8]) + ' M' + 
 depower: 'M' + P(chicken) + ' L' + P([bx, by]),
 strap: 'M' + P([bx, by]) + ' L' + P(strapEnd), ballX: f(strapEnd[0]), ballY: f(strapEnd[1]),
 handFarT: 'translate(' + P(handFar) + ')', handNearT: 'translate(' + P(handNear) + ')',
-hintOp: p > 0.03 ? 0 : 1, barW: f(p * 100) + '%'
+hintOp: p > 0.03 ? 0 : 1, barW: f(p * 100) + '%',
+p, mode: wide ? 'wide' : A < 0.9 ? 'narrow' : 'mid'
 };
 }
 }
@@ -342,6 +354,7 @@ const walk = el => {
   }
 };
 if (parts) { for (const el of parts.children) walk(el); tpl.replaceWith(parts); } else walk(stage);
+root.classList.add('is-drawn');
 const ifs = [...stage.querySelectorAll('[data-if]')];
 const fill = (t, v) => t.replace(/\{\{\s*([\w.]+)\s*\}\}/g, (m, k) => (typeof v[k] === 'function' ? '' : String(v[k] ?? '')));
 let raf = 0;
@@ -350,6 +363,42 @@ function update() {
   const v = c.renderVals();
   for (const [el, name, t] of binds) { const s = fill(t, v); if (name === null) { if (el.nodeValue !== s) el.nodeValue = s; } else if (el.getAttribute(name) !== s) el.setAttribute(name, s); }
   for (const el of ifs) el.style.display = v[el.dataset.if] ? '' : 'none';
+  if (story) story.render(v.p, v.mode);
+}
+
+/* ---- Hero text chapters: driven by the same p as the drawing, in the same frame (writes only) ----
+   Chapters follow the trick: ride, set-up/pop, rotation + kiteloop, top of the jump, landing. */
+const CH = [0, 0.35, 0.50, 0.66, 0.79]; // start of each chapter
+const chapterOf = p => { let i = 0; while (i + 1 < CH.length && p >= CH[i + 1]) i++; return i; };
+const story = (() => {
+  const box = stage.querySelector('.story');
+  if (!box || REDUCE) return null;
+  const chs = [...box.querySelectorAll('.story-ch')];
+  const hint = stage.querySelector('.story-hint');
+  const bars = [...stage.querySelectorAll('.story-progress i')];
+  chs.forEach(ch => ch.querySelectorAll('.ln').forEach((ln, i) => ln.style.setProperty('--i', i)));
+  let cur = -1, mode = '', hintGone = null;
+  const fills = bars.map(() => -1);
+  return {
+    render(p, m) {
+      if (m !== mode) { mode = m; box.dataset.mode = m; }
+      const c = chapterOf(p);
+      if (c !== cur) { cur = c; chs.forEach((ch, i) => { ch.dataset.state = i < c ? 'past' : i > c ? 'future' : 'active'; }); }
+      const gone = p > 0.01;
+      if (hint && gone !== hintGone) { hintGone = gone; hint.classList.toggle('is-gone', gone); }
+      bars.forEach((b, i) => {
+        const a = CH[i], z = i + 1 < CH.length ? CH[i + 1] : 1;
+        const fv = Math.round(Math.max(0, Math.min(1, (p - a) / (z - a))) * 100) / 100;
+        if (fv !== fills[i]) { fills[i] = fv; b.style.setProperty('--f', fv); }
+      });
+    },
+    // keyboard users can Tab onto a CTA that is not on screen yet: jump the story to the landing chapter
+    toEnd() { if (cur < CH.length - 1 && c._span) window.scrollTo({ top: c._start + CH[CH.length - 1] * c._span + 2, behavior: 'instant' }); }
+  };
+})();
+if (story) {
+  root.classList.add('is-story');
+  root.querySelector('.story-ctas').addEventListener('focusin', () => story.toEnd());
 }
 function schedule() { if (!raf) raf = requestAnimationFrame(update); }
 const v0 = c.renderVals();

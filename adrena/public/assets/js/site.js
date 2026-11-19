@@ -333,7 +333,8 @@
       if (film) { var r = film.getBoundingClientRect(); return r.top + r.height / 2; }
       return hero.getBoundingClientRect().bottom;
     }
-    function upd() { top.classList.toggle('on-hero', redBottom() > 80); }
+    // red header only while the red hero/film area is under it (the kite animation sits above the hero)
+    function upd() { top.classList.toggle('on-hero', hero.getBoundingClientRect().top <= 80 && redBottom() > 80); }
     upd(); window.addEventListener('scroll', upd, { passive: true });
   })();
 

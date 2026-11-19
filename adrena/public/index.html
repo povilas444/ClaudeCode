@@ -16,44 +16,18 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wdth,wght@12..96,75..100,400..800&family=Fraunces:ital,opsz,wght,SOFT@0,9..144,400..700,100;1,9..144,400..700,100&display=swap">
-<link rel="stylesheet" href="assets/css/style.css?v=9">
+<link rel="stylesheet" href="assets/css/style.css?v=11">
 </head>
 <body data-page="home">
 <header id="site-header"></header>
 
 <main>
 
-<!-- HERO -->
-<section class="hero" id="pradzia">
-  <div class="wrap hero-grid">
-    <div class="eyebrow">Ekstremalaus sporto pamokos vienoje vietoje</div>
-    <h1>Adrenalinas, kurį gali <em>išmokti</em></h1>
-    <figure class="hero-media">
-      <img src="media/hero-kaitavimas-saulelydis.webp" alt="Kaituotojas plaukia saulėlydžio metu" width="1040" height="1560" fetchpriority="high">
-    </figure>
-    <p class="lead">Adrena sujungia visas ekstremalaus sporto šakas vienoje programėlėje. Rasi patikrintą instruktorių, matysi aiškią kainą ir laisvus laikus, o pamoką užsisakysi per kelias minutes. Jei oras netinkamas, programėlė pati pasiūlys kitą laiką.</p>
-    <div class="hero-ctas">
-        <a class="btn btn-primary" href="#laukianciuju-sarasas">Prisijunk prie laukiančiųjų sąrašo</a>
-        <a class="btn btn-ghost" href="prototipas.html">Išbandyk programėlę</a>
-      </div>
-  </div>
-  <svg class="deco deco-wind" data-deco aria-hidden="true" viewBox="0 0 320 160"><g fill="none" style="stroke:var(--sun)" stroke-width="8" stroke-linecap="round"><path d="M8 40h200a28 28 0 1 0-28-28"/><path d="M8 80h260a28 28 0 1 1-28 28"/><path d="M48 120h96"/></g></svg>
-</section>
-
-<!-- FILMAS -->
-<section class="film" aria-hidden="true">
-  <div class="wrap">
-    <figure class="film-frame">
-      <video src="media/kaitavimas-fpv.mp4" poster="media/kaitavimas-fpv-poster.webp" muted loop playsinline preload="metadata"></video>
-    </figure>
-  </div>
-</section>
-
-<!-- KAITAVIMO ANIMACIJA (scroll) -->
-<section class="adrena-kite" aria-label="Kaitavimo animacija: slink žemyn" data-kite-color="#FF5A36" data-suit-color="#13212E" data-captions="false">
+<!-- HERO: kaitavimo animacija + tekstas, valdomi to paties slinkimo (kite-scroll.js) -->
+<section class="adrena-kite" id="pradzia" aria-labelledby="hero-title" data-kite-color="#FF5A36" data-suit-color="#13212E" data-captions="false">
 <div class="adrena-kite__stage"><template class="adrena-kite__tpl">
 
-<svg viewBox="{{vb}}" preserveAspectRatio="xMidYMid slice" role="img" aria-label="Kaituotojas važiuoja per marias, šoka backroll ir nusileidžia" style="position: absolute; inset: 0; width: 100%; height: 100%; display: block">
+<svg class="adrena-kite__svg" viewBox="{{vb}}" preserveAspectRatio="xMidYMid slice" role="img" aria-label="Kaituotojas važiuoja per marias, šoka backroll ir nusileidžia">
 <defs>
 <linearGradient id="adrena-k-sky" gradientUnits="userSpaceOnUse" x1="0" y1="0" x2="0" y2="582"><stop offset="0" stop-color="{{skyTop}}"></stop><stop offset="1" stop-color="{{skyBot}}"></stop></linearGradient>
 <linearGradient id="adrena-k-sea" gradientUnits="userSpaceOnUse" x1="0" y1="582" x2="0" y2="900"><stop offset="0" stop-color="{{seaTop}}"></stop><stop offset="1" stop-color="{{seaBot}}"></stop></linearGradient>
@@ -242,10 +216,36 @@
 <p style="margin: 0; position: absolute; inset: auto 0 0 0; opacity: {{c3o}}; transform: translateY({{c3y}}px)">Nusileisk ir kartok.</p>
 </div>
 </div>
-<div style="position: absolute; left: 50%; top: 24px; transform: translateX(-50%); padding: 8px 16px; border-radius: 999px; background: rgba(255,255,255,0.85); color: #0E1B2C; font-size: 15px; font-weight: 600; opacity: {{hintOp}}">Slink žemyn</div>
-<div style="position: absolute; left: 0; bottom: 0; height: 6px; background: #FF5A36; width: {{barW}}"></div>
+</template>
 
-</template></div>
+<!-- Hero tekstas: tikras HTML (SEO, ekrano skaitytuvai). Be JS arba su sumažintu judesiu rodomas paprastai, vienas po kito. -->
+<div class="story" data-mode="narrow">
+  <div class="story-ch" data-ch="1">
+    <div class="eyebrow story-eyebrow"><span class="ln"><span>Ekstremalaus sporto pamokos vienoje vietoje</span></span></div>
+    <h1 id="hero-title" class="story-h1"><span class="ln"><span>Adrenalinas,</span></span> <span class="ln"><span>kurį gali</span></span> <span class="ln"><span><em>išmokti</em></span></span></h1>
+  </div>
+  <p class="story-ch story-big" data-ch="2"><span class="ln"><span>Adrena sujungia visas ekstremalaus sporto šakas</span></span> <span class="ln"><span>vienoje programėlėje.</span></span></p>
+  <p class="story-ch story-mid" data-ch="3"><span class="ln"><span>Rasi patikrintą instruktorių, matysi aiškią kainą ir laisvus laikus,</span></span> <span class="ln"><span>o pamoką užsisakysi per kelias minutes.</span></span></p>
+  <p class="story-ch story-big story-calm" data-ch="4"><span class="ln"><span>Jei oras netinkamas,</span></span> <span class="ln"><span>programėlė pati pasiūlys kitą laiką.</span></span></p>
+  <div class="story-ch story-ctas" data-ch="5">
+    <span class="ln"><span><a class="btn btn-primary" href="#laukianciuju-sarasas">Prisijunk prie laukiančiųjų sąrašo</a></span></span>
+    <span class="ln"><span><a class="btn btn-ghost" href="prototipas.html">Išbandyk programėlę</a></span></span>
+  </div>
+</div>
+
+<div class="story-hint" aria-hidden="true">Slink žemyn</div>
+<div class="story-progress" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></div>
+
+</div>
+</section>
+
+<!-- FILMAS -->
+<section class="film" aria-hidden="true">
+  <div class="wrap">
+    <figure class="film-frame">
+      <video src="media/kaitavimas-fpv.mp4" poster="media/kaitavimas-fpv-poster.webp" muted loop playsinline preload="metadata"></video>
+    </figure>
+  </div>
 </section>
 
 <!-- PROBLEMA IR SPRENDIMAS -->
@@ -426,7 +426,7 @@
 
 <footer id="site-footer"></footer>
 <script src="assets/js/config.js?v=4"></script>
-<script src="assets/js/site.js?v=7"></script>
-<script src="assets/js/kite-scroll.js?v=2" defer></script>
+<script src="assets/js/site.js?v=8"></script>
+<script src="assets/js/kite-scroll.js?v=3" defer></script>
 </body>
 </html>

@@ -202,7 +202,7 @@ html.is-loading::after {
 .hero .wrap { position: relative; z-index: 1; }
 .hero-grid {
   display: grid; gap: 32px; grid-template-columns: 1fr;
-  grid-template-areas: "title" "media" "eyebrow" "lead" "ctas";
+  grid-template-areas: "title" "eyebrow" "lead" "ctas";
 }
 .hero h1 { grid-area: title; font-size: clamp(56px, 13.4vw, 216px); line-height: .84; letter-spacing: -.02em; }
 .hero h1 em { font-style: normal; color: var(--sun); }
@@ -223,27 +223,128 @@ html.is-loading::after {
 @media (max-width: 1279px) { .hero .deco-wind { display: none; } }
 @media (min-width: 960px) {
   .hero-grid {
-    grid-template-columns: 1fr minmax(280px, 344px) 1fr; column-gap: 48px; row-gap: 24px;
-    grid-template-areas: "title title title" "eyebrow media ctas" "lead media ctas";
+    grid-template-columns: 1fr 1fr; column-gap: 48px; row-gap: 24px;
+    grid-template-areas: "title title" "eyebrow ctas" "lead ctas";
     grid-template-rows: auto auto 1fr;
   }
   .hero-media { margin-top: -32px; width: 100%; align-self: start; }
-  .hero .eyebrow { align-self: end; padding-top: 80px; }
+  .hero .eyebrow { align-self: end; padding-top: 40px; }
   .hero .lead { align-self: start; }
   .hero-ctas { flex-direction: column; align-items: flex-end; justify-self: end; align-self: end; }
 }
 .waves { display: none; }
 
 /* ==== Kitesurfer scroll animation (section.adrena-kite, script kite-scroll.js) ==== */
-.adrena-kite { position: relative; height: 400vh; padding-block: 0; background: #8fcdea; font-family: 'Bricolage Grotesque', system-ui, sans-serif; }
-.adrena-kite__stage { position: sticky; top: 80px; height: calc(100vh - 80px); height: calc(100svh - 80px); overflow: hidden; } /* sits under the 80px sticky header */
+/* The homepage hero. Base styles = no JS / reduced motion: a still picture with the hero text stacked under it.
+   .is-story (added by kite-scroll.js) = pinned stage, text chapters swap with the same scroll value as the animation. */
+.adrena-kite {
+  --story-ease: cubic-bezier(.2, .8, .2, 1);
+  --story-ink: #1E2A32;   /* fixed: the illustrated sky is light in both themes */
+  --story-foam: #FFFAEE;  /* fixed: text that sits on the sea */
+  position: relative; padding-block: 0; background: var(--cream);
+}
+.adrena-kite.is-story { background: #8fcdea; }
+.adrena-kite__stage { position: relative; overflow: hidden; }
+.is-drawn .adrena-kite__stage { padding-top: max(64svh, 56vw); } /* room for the still picture above the stacked text */
+.adrena-kite__svg { position: absolute; left: 0; top: 0; width: 100%; height: max(64svh, 56vw); display: block; }
 @media (max-width: 600px) { .adrena-kite .kd-small { opacity: 0; } }
+
+/* Stacked text (fallback) */
+.story { position: relative; background: var(--cream); color: var(--ink); display: flex; flex-direction: column; gap: 24px;
+  padding: 48px max(var(--gutter), env(safe-area-inset-left, 0px)) 72px; max-width: calc(var(--wrap) + 2 * var(--gutter)); margin: 0 auto; }
+.story-ch { margin: 0; }
+.story-ch .ln, .story-ch .ln > span { display: block; }
+.story-ch .ln > span { text-wrap: balance; }
+.story-eyebrow { color: var(--brand-text); }
+.story-h1 { font-size: clamp(48px, 9vw, 136px); line-height: .88; margin-top: 16px; }
+/* inline-block keeps the highlight to the glyph box, so it never covers the accents of the line above */
+.story-h1 em { font-style: normal; display: inline-block; line-height: .84; padding: .08em .08em 0; margin-top: .06em; background: var(--sun); color: var(--on-sun); }
+.story-big, .story-mid { font-family: var(--f-display); font-weight: 800; font-stretch: 75%; text-transform: uppercase; letter-spacing: -.01em; line-height: .98; }
+.story-big { font-size: clamp(28px, 4.4vw, 72px); }
+.story-mid { font-size: clamp(24px, 2.8vw, 44px); line-height: 1.04; }
+.story-ctas { display: flex; flex-wrap: wrap; gap: 16px; margin-top: 8px; }
+.story-ctas .btn-ghost { color: var(--ink); }
+.story-hint, .story-progress { display: none; }
+
+/* ---- Pinned story mode ---- */
+.adrena-kite.is-story { height: 460vh; }
+.is-story .adrena-kite__stage { position: sticky; top: 80px; height: calc(100vh - 80px); height: calc(100svh - 80px); padding-top: 0; } /* sits under the 80px sticky header */
+.is-story .adrena-kite__svg { height: 100%; }
+.is-story .story { position: absolute; inset: 0; max-width: none; margin: 0; padding: 0; background: none; color: var(--story-ink); display: block; pointer-events: none; }
+.is-story .story-ch { position: absolute; opacity: 0; transition: opacity .45s ease; }
+.is-story .story-ch[data-state="active"] { opacity: 1; transition: opacity .5s ease .18s; }
+.is-story .story-ch[data-state="active"] a { pointer-events: auto; }
+/* each line rises out of a mask; the spare block padding keeps Lithuanian accents (ą ę į ų ė) inside the mask */
+.is-story .story-ch .ln { overflow: hidden; padding-block: .14em; margin-block: -.14em; }
+.is-story .story-ch .ln > span { transform: translateY(112%); transition: transform .7s var(--story-ease) calc(var(--i, 0) * 50ms); will-change: transform; }
+.is-story .story-ch[data-state="past"] .ln > span { transform: translateY(-112%); }
+.is-story .story-ch[data-state="active"] .ln > span { transform: none; transition: transform 1s var(--story-ease) calc(var(--i, 0) * 70ms + 180ms); }
+.is-story .story-eyebrow { color: var(--story-ink); }
+.is-story .story-h1 { margin-top: 8px; }
+.is-story .story-h1 em { color: var(--story-ink); }
+.is-story .story-ctas { flex-direction: column; align-items: flex-start; gap: 16px; }
+.is-story .story-ctas .ln { padding: 8px; margin: -8px; } /* room for the button hover tilt and the focus ring */
+.is-story .story-ctas .btn-ghost { color: var(--story-ink); background: rgba(255, 250, 238, .55); }
+.is-story .story-ctas .btn-ghost:hover { background: var(--paper); }
+/* chapters that sit on the water get light text */
+.is-story .story[data-mode="wide"] [data-ch="3"],
+.is-story .story[data-mode="mid"] :is([data-ch="3"], [data-ch="4"]),
+.is-story .story[data-mode="narrow"] :is([data-ch="2"], [data-ch="3"], [data-ch="4"]) { color: var(--story-foam); text-shadow: 0 2px 16px rgba(6, 40, 48, .5); }
+
+/* Wide frames: rider and kite stay left until the jump, so text uses the right side, then the free water, then the left */
+.is-story .story[data-mode="wide"] .story-ch { width: min(36%, 640px); }
+.is-story .story[data-mode="wide"] [data-ch="1"],
+.is-story .story[data-mode="wide"] [data-ch="2"] { right: 64px; top: 12%; }
+.is-story .story[data-mode="wide"] [data-ch="3"] { left: 64px; bottom: 64px; width: min(64%, 1040px); }
+.is-story .story[data-mode="wide"] [data-ch="4"] { left: 64px; top: 12%; width: min(30%, 520px); }
+.is-story .story[data-mode="wide"] [data-ch="5"] { left: 64px; top: 30%; }
+.is-story .story[data-mode="wide"] .story-h1 { font-size: clamp(48px, 5.4vw, 136px); }
+.is-story .story[data-mode="wide"] .story-big { font-size: clamp(40px, 3.6vw, 80px); }
+.is-story .story[data-mode="wide"] .story-calm { font-size: clamp(40px, 3.4vw, 72px); }
+.is-story .story[data-mode="wide"] .story-mid { font-size: clamp(32px, 2.6vw, 56px); }
+
+/* Squarer frames (tablet landscape, 5:4 monitors): the rider rides lower-left and the kite fills the middle,
+   so text uses the right third while riding, the water during the loop, the lower right after it */
+.is-story .story[data-mode="mid"] .story-ch { right: 40px; width: 33%; }
+.is-story .story[data-mode="mid"] :is([data-ch="1"], [data-ch="2"], [data-ch="5"]) { top: 8%; }
+.is-story .story[data-mode="mid"] [data-ch="3"] { left: 40px; width: auto; bottom: 48px; }
+.is-story .story[data-mode="mid"] [data-ch="4"] { bottom: 48px; width: 36%; }
+.is-story .story[data-mode="mid"] .story-h1 { font-size: clamp(44px, 5vw, 96px); }
+.is-story .story[data-mode="mid"] .story-big { font-size: clamp(32px, 3.2vw, 56px); }
+.is-story .story[data-mode="mid"] .story-mid { font-size: clamp(28px, 2.6vw, 44px); }
+.is-story .story[data-mode="mid"] .story-ctas .btn { white-space: normal; }
+
+/* Narrow frames: the camera keeps rider and kite in the middle band, so text sits in the sky above or the water below */
+.is-story .story[data-mode="narrow"] .story-ch { left: 24px; right: 24px; }
+.is-story .story[data-mode="narrow"] [data-ch="1"],
+.is-story .story[data-mode="narrow"] [data-ch="5"] { top: 24px; }
+.is-story .story[data-mode="narrow"] [data-ch="2"],
+.is-story .story[data-mode="narrow"] [data-ch="3"],
+.is-story .story[data-mode="narrow"] [data-ch="4"] { bottom: 40px; }
+.is-story .story[data-mode="narrow"] .story-eyebrow { font-size: 16px; }
+.is-story .story[data-mode="narrow"] .story-h1 { font-size: clamp(40px, 12.4vw, 80px); }
+.is-story .story[data-mode="narrow"] .story-big { font-size: clamp(26px, 7.4vw, 40px); }
+.is-story .story[data-mode="narrow"] .story-mid { font-size: clamp(22px, 6vw, 36px); }
+.is-story .story[data-mode="narrow"] .story-ctas { flex-direction: row; flex-wrap: wrap; }
+
+/* Scroll hint (chapter 1 only) and the 5-step progress bar */
+.is-story .story-hint {
+  display: block; position: absolute; left: 50%; bottom: 32px; transform: translateX(-50%);
+  padding: 8px 16px; border-radius: 999px; background: rgba(255, 250, 238, .88); color: var(--story-ink);
+  font: 600 16px/1.2 var(--f-display); transition: opacity .4s ease; pointer-events: none;
+}
+.is-story .story-hint.is-gone { opacity: 0; }
+.is-story .story-progress { display: flex; gap: 8px; position: absolute; left: 24px; right: 24px; bottom: 8px; height: 4px; pointer-events: none; }
+.story-progress i { flex: 1; border-radius: 2px; background: rgba(255, 250, 238, .45); overflow: hidden; position: relative; }
+.story-progress i::after { content: ""; position: absolute; inset: 0; background: var(--moss); transform-origin: left; transform: scaleX(var(--f, 0)); }
+@media (min-width: 900px) { .is-story .story-progress { left: 64px; right: 64px; bottom: 16px; } .is-story .story-hint { bottom: 40px; } }
 
 /* ==== Film: wide clip that bridges the red hero and the cream page ==== */
 .hero { padding-bottom: 0; min-height: 0; }
 .hero-grid { padding-bottom: 56px; }
 .film { padding-block: 0; }
 .film::before { content: ""; position: absolute; inset: 0 0 50% 0; background: var(--brand); }
+.is-drawn + .film::before { background: #1F5566; } /* the clip now rises out of the hero's sea (its final-frame colour) instead of the old red hero */
 .film .wrap { position: relative; }
 .film-frame {
   --f: 1; position: relative; margin: 0; aspect-ratio: 16/9; border-radius: 32px; overflow: hidden; background: var(--ink);
