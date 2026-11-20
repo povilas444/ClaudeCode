@@ -3,7 +3,8 @@
 Marketing website for Adrena — a Lithuanian extreme sports lesson booking app. Built as a school mini-company (mokinių bendrovė) project by Marius and Povilas.
 
 The site is a **multi-page static website** with:
-- 7 Lithuanian pages (English versions planned for Phase 6)
+- 8 pages in Lithuanian (`public/`) and English (`public/en/`), with an LT | EN switch in the header and footer
+- Homepage hero video: put `hero.webm`, `hero.mp4` and `hero-poster.jpg` in `public/assets/` (until then the old `media/kaitavimas-fpv.mp4` clip plays as a fallback)
 - A fully clickable phone prototype of the app
 - Live weather from LHMT (api.meteo.lt) via a local proxy
 - Waitlist, instructor signup, and contact forms via Formspree

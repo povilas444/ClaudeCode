@@ -5,6 +5,7 @@
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <title>Adrena – ekstremalaus sporto pamokos Lietuvoje</title>
 <meta name="description" content="Rask patikrintą instruktorių, užsisakyk kaitavimo, slidinėjimo, nardymo ar kitos sporto šakos pamoką per kelias minutes. Orų apsauga įtraukta.">
+<link rel="alternate" hreflang="en" href="en/index.html">
 <link rel="icon" href="favicon.svg" type="image/svg+xml">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Adrena">
@@ -16,7 +17,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wdth,wght@12..96,75..100,400..800&family=Fraunces:ital,opsz,wght,SOFT@0,9..144,400..700,100;1,9..144,400..700,100&display=swap">
-<link rel="stylesheet" href="assets/css/style.css?v=14">
+<link rel="stylesheet" href="assets/css/style.css?v=20">
 </head>
 <body data-page="home">
 <header id="site-header"></header>
@@ -26,13 +27,14 @@
 <!-- HERO -->
 <section class="hero" id="pradzia">
   <div class="wrap hero-grid">
-    <div class="eyebrow">Ekstremalaus sporto pamokos vienoje vietoje</div>
-    <h1>Adrenalinas, kurį gali <em>išmokti</em></h1>
-    <p class="lead">Adrena sujungia visas ekstremalaus sporto šakas vienoje programėlėje. Rasi patikrintą instruktorių, matysi aiškią kainą ir laisvus laikus, o pamoką užsisakysi per kelias minutes. Jei oras netinkamas, programėlė pati pasiūlys kitą laiką.</p>
+    <div class="eyebrow">Ekstremalaus sporto pamokos Lietuvoje</div>
+    <h1>Visas ekstremalus sportas. <em>Vienoje programėlėje.</em></h1>
+    <p class="lead">Patikrinti instruktoriai, aiški kaina, laisvi laikai. Užsisakyk per kelias minutes.</p>
+    <p class="hero-tag"><i aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M7 18a4.5 4.5 0 0 1-.6-8.96A6 6 0 0 1 18 10a4 4 0 0 1 0 8z"/></svg></i>Oras nepalankus? Adrena pati pasiūlys kitą laiką.</p>
     <div class="hero-ctas">
-        <a class="btn btn-primary" href="#laukianciuju-sarasas">Prisijunk prie laukiančiųjų sąrašo</a>
-        <a class="btn btn-ghost" href="prototipas.html">Išbandyk programėlę</a>
-      </div>
+      <a class="btn btn-primary" href="#laukianciuju-sarasas">Prisijunk prie laukiančiųjų sąrašo <span class="arr" aria-hidden="true">→</span></a>
+      <a class="btn btn-ghost" href="prototipas.html">Išbandyk programėlę</a>
+    </div>
   </div>
   <svg class="deco deco-wind" data-deco aria-hidden="true" viewBox="0 0 320 160"><g fill="none" style="stroke:var(--sun)" stroke-width="8" stroke-linecap="round"><path d="M8 40h200a28 28 0 1 0-28-28"/><path d="M8 80h260a28 28 0 1 1-28 28"/><path d="M48 120h96"/></g></svg>
 </section>
@@ -41,7 +43,13 @@
 <section class="film" aria-hidden="true">
   <div class="wrap">
     <figure class="film-frame">
-      <video src="media/kaitavimas-fpv.mp4" poster="media/kaitavimas-fpv-poster.webp" muted loop playsinline preload="metadata"></video>
+      <video autoplay muted loop playsinline preload="metadata" poster="assets/hero-poster.jpg" data-fallback-poster="media/kaitavimas-fpv-poster.webp">
+        <source src="assets/hero.webm" type="video/webm">
+        <source src="assets/hero.mp4" type="video/mp4">
+        <source src="media/kaitavimas-fpv.mp4" type="video/mp4"><!-- fallback until hero.* is added -->
+      </video>
+      <span class="film-shade"></span>
+      <span class="film-grain"></span>
     </figure>
   </div>
 </section>
@@ -99,7 +107,7 @@
 </section>
 
 <!-- SPORTO ŠAKOS -->
-<section id="sporto-sakos">
+<section id="sporto-sakos" class="sports-sec">
   <div class="wrap">
     <div class="row-head">
       <div class="sec-head">
@@ -129,7 +137,7 @@
           <div class="notch"></div>
           <div class="sbar"><span>9:41</span><i>●●● ▮</i></div>
           <div style="flex:1;background:linear-gradient(170deg,#0E1B2C 0%,#12324A 62%,#0F6F78 100%);display:flex;flex-direction:column;justify-content:center;align-items:center;gap:16px;padding:24px;color:#fff;text-align:center">
-            <div style="font-family:var(--f-display);font-size:22px;font-weight:800;font-stretch:118%">Adrenalinas, kurį gali išmokti</div>
+            <div style="font-family:var(--f-display);font-size:22px;font-weight:800;font-stretch:118%">Visas ekstremalus sportas. Vienoje programėlėje.</div>
             <div style="font-size:14px;color:#B9C8D1">Rask patikrintą instruktorių ir užsisakyk pamoką</div>
             <div style="background:#FF5A36;border-radius:14px;padding:12px 20px;font-weight:700;font-size:15px">Sukurti paskyrą</div>
           </div>
@@ -144,14 +152,22 @@
   <div class="wrap">
     <div class="sec-head">
       <div class="eyebrow">Mūsų partneris</div>
-      <h2>Kartu su PUČIA.LT</h2>
+      <h2>Partneriai ir rėmėjai</h2>
     </div>
-    <a class="p-card" href="https://www.pucia.lt" target="_blank" rel="noopener">
-      <span class="p-tag">Partneris</span>
-      <span class="p-name">PUČIA.LT</span>
-      <span class="p-desc">IKO sertifikuotas kaitavimo centras Svencelėje prie Kuršių marių. Nuoma, pamokos, apgyvendinimas ant kranto.</span>
-      <span class="p-link">Apsilankyti pucia.lt ↗</span>
-    </a>
+    <div class="partners">
+      <a class="p-card" href="https://www.pucia.lt" target="_blank" rel="noopener">
+        <span class="p-tag">Partneris</span>
+        <span class="p-name">PUČIA.LT</span>
+        <span class="p-desc">IKO sertifikuotas kaitavimo centras Svencelėje prie Kuršių marių. Nuoma, pamokos, apgyvendinimas ant kranto.</span>
+        <span class="p-link">Apsilankyti pucia.lt ↗</span>
+      </a>
+      <a class="p-card is-slot" href="kontaktai.html">
+        <span class="p-tag">Rėmėjai</span>
+        <span class="p-name">Tapk rėmėju</span>
+        <span class="p-desc">Padėk jauniems žmonėms pradėti ekstremalų sportą ir būk matomas kartu su Adrena.</span>
+        <span class="p-link">Susisiekti →</span>
+      </a>
+    </div>
   </div>
 </section>
 
@@ -169,12 +185,17 @@
 </section>
 
 <!-- LAUKIANČIŲJŲ SĄRAŠAS -->
-<section class="form-section" id="laukianciuju-sarasas">
+<section class="form-section is-cta" id="laukianciuju-sarasas">
   <div class="wrap">
     <div class="sec-head">
       <div class="eyebrow">Laukiančiųjų sąrašas</div>
-      <h2>Būk pirmasis, kai Adrena paleidžiama</h2>
+      <h2>Būk pirmas, kai Adrena startuos</h2>
       <p class="lead">Programėlė dar kuriama. Prisijunk prie laukiančiųjų sąrašo ir sužinosi, kai galėsi užsisakyti pirmą pamoką.</p>
+      <ul class="cta-points">
+        <li>Nemokama, užtrunka 30 sekundžių</li>
+        <li>Pirmas sužinosi apie paleidimą</li>
+        <li>Atsisakyti gali bet kada</li>
+      </ul>
     </div>
     <div class="form-box">
       <form class="sf-form" data-form-type="waitlist" method="POST" novalidate>
@@ -205,6 +226,7 @@
             <label class="sf-check"><input type="checkbox" name="sports" value="Vandenlentės"> Vandenlentės</label>
             <label class="sf-check"><input type="checkbox" name="sports" value="Slidės ir snieglentės"> Slidės ir snieglentės</label>
             <label class="sf-check"><input type="checkbox" name="sports" value="Parasparnis"> Parasparnis</label>
+            <label class="sf-check"><input type="checkbox" name="sports" value="Parašiutas"> Parašiutas</label>
             <label class="sf-check"><input type="checkbox" name="sports" value="Laipiojimas"> Laipiojimas</label>
             <label class="sf-check"><input type="checkbox" name="sports" value="Nardymas"> Nardymas</label>
           </div>
@@ -223,7 +245,7 @@
 </main>
 
 <footer id="site-footer"></footer>
-<script src="assets/js/config.js?v=4"></script>
-<script src="assets/js/site.js?v=9"></script>
+<script src="assets/js/config.js?v=20"></script>
+<script src="assets/js/site.js?v=20"></script>
 </body>
 </html>

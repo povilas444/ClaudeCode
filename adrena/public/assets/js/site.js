@@ -1,4 +1,4 @@
-﻿/* site.js — header/footer injection, nav, theme, copy buttons, gallery */
+/* site.js — header/footer injection, nav, theme, copy buttons, gallery */
 (function () {
   'use strict';
 
@@ -7,15 +7,15 @@
   // cls hero = full-width row on top. alt is screen-reader text only (no captions on photos).
   // home: true = shown in the homepage strip.
   const GALLERY = [
-    {src:'../media/video-slidinejimas.mp4',       ar:'16/9', cls:'hero', alt:'Slidinėjimas per šviežią sniegą, vaizdas iš slidininko akių'},
-    {src:'../media/kaitavimas-suolis.webp',       ar:'3/4',  alt:'Kaituotojas šuolio metu prieš mėlyną dangų', home:true},
-    {src:'../media/video-kaitavimas.mp4',         ar:'9/16', alt:'Kaitavimas mariose, vaizdas iš kaituotojo akių', home:true},
-    {src:'../media/vandenlente-saulelydis.webp',  ar:'3/4',  alt:'Vandenlentė už valties saulėlydžio metu', home:true},
-    {src:'../media/kaitavimas-mariose.webp',      ar:'3/4',  alt:'Kaituotojas seklioje marių įlankoje'},
-    {src:'../media/video-sniego-kaitavimas.mp4',  ar:'9/16', alt:'Sniego kaitavimas ant užšalusio ežero', home:true},
-    {src:'../media/kaitavimas-krante.webp',       ar:'3/4',  alt:'Kaituotojas ruošiasi startui ant kranto'},
-    {src:'../media/snieglente-sniege.webp',       ar:'3/4',  alt:'Snieglentininkas sniege su snieglente rankoje'},
-    {src:'../media/banglentes-papludimys.webp',   ar:'3/4',  alt:'Du banglentininkai su lentomis paplūdimyje', pos:'50% 45%'},
+    {src:'../media/video-slidinejimas.mp4',       ar:'16/9', cls:'hero', alt:'Slidinėjimas per šviežią sniegą, vaizdas iš slidininko akių', en:'Skiing through fresh powder, seen from the skier\'s eyes'},
+    {src:'../media/kaitavimas-suolis.webp',       ar:'3/4',  alt:'Kaituotojas šuolio metu prieš mėlyną dangų', en:'Kitesurfer mid-jump against a blue sky', home:true},
+    {src:'../media/video-kaitavimas.mp4',         ar:'9/16', alt:'Kaitavimas mariose, vaizdas iš kaituotojo akių', en:'Kitesurfing on the lagoon, seen from the rider\'s eyes', home:true},
+    {src:'../media/vandenlente-saulelydis.webp',  ar:'3/4',  alt:'Vandenlentė už valties saulėlydžio metu', en:'Wakeboarding behind a boat at sunset', home:true},
+    {src:'../media/kaitavimas-mariose.webp',      ar:'3/4',  alt:'Kaituotojas seklioje marių įlankoje', en:'Kitesurfer in a shallow lagoon bay'},
+    {src:'../media/video-sniego-kaitavimas.mp4',  ar:'9/16', alt:'Sniego kaitavimas ant užšalusio ežero', en:'Snowkiting on a frozen lake', home:true},
+    {src:'../media/kaitavimas-krante.webp',       ar:'3/4',  alt:'Kaituotojas ruošiasi startui ant kranto', en:'Kitesurfer getting ready to launch on the shore'},
+    {src:'../media/snieglente-sniege.webp',       ar:'3/4',  alt:'Snieglentininkas sniege su snieglente rankoje', en:'Snowboarder in the snow holding a board'},
+    {src:'../media/banglentes-papludimys.webp',   ar:'3/4',  alt:'Du banglentininkai su lentomis paplūdimyje', en:'Two surfers with their boards on the beach', pos:'50% 45%'},
   ];
 
   /* ---- Helpers ---- */
@@ -35,6 +35,7 @@
   var inEN = pathname.indexOf('/en/') !== -1 || pathname.match(/\/en$/);
   var isEN = document.documentElement.lang === 'en' || !!inEN;
   var base = inEN ? '../' : '';
+  var here = base + (isEN ? 'en/' : '');   // folder of the current language
 
   var PAGE_MAP = {
     lt: { home:'index.html', how:'kaip-veikia.html', wind:'vejas.html', proto:'prototipas.html', instr:'instruktoriams.html', about:'apie.html', contact:'kontaktai.html', privacy:'privatumas.html' },
@@ -42,6 +43,8 @@
   };
 
   var activePage = document.body && document.body.dataset.page || '';
+  var P = isEN ? PAGE_MAP.en : PAGE_MAP.lt;
+  if (isEN) GALLERY.forEach(function (g) { if (g.en) g.alt = g.en; });
 
   var otherLangDir  = isEN ? '' : 'en/';
   var otherLangFile = isEN ? (PAGE_MAP.lt[activePage] || 'index.html') : (PAGE_MAP.en[activePage] || 'index.html');
@@ -63,15 +66,22 @@
     {key:'contact', href:base+'kontaktai.html',      label:'Kontaktai'},
   ];
   var NAV_EN = [
-    {key:'home',    href:base+'index.html',           label:'Home'},
-    {key:'how',     href:base+'how-it-works.html',    label:'How it works'},
-    {key:'wind',    href:base+'wind.html',            label:'Wind forecast'},
-    {key:'proto',   href:base+'prototype.html',       label:'Try it', cta:true},
-    {key:'instr',   href:base+'for-instructors.html', label:'For instructors'},
-    {key:'about',   href:base+'about.html',           label:'About us'},
-    {key:'contact', href:base+'contact.html',         label:'Contact'},
+    {key:'home',    href:here+'index.html',           label:'Home'},
+    {key:'how',     href:here+'how-it-works.html',    label:'How it works'},
+    {key:'wind',    href:here+'wind.html',            label:'Wind forecast'},
+    {key:'proto',   href:here+'prototype.html',       label:'Try it', cta:true},
+    {key:'instr',   href:here+'for-instructors.html', label:'For instructors'},
+    {key:'about',   href:here+'about.html',           label:'About us'},
+    {key:'contact', href:here+'contact.html',         label:'Contact'},
   ];
   var NAV = isEN ? NAV_EN : NAV_LT;
+
+  /* LT | EN switch: the current language is plain text, the other one links to the same page in that language */
+  function langSwitch() {
+    var lt = isEN ? '<a href="' + langHref + '" hreflang="lt" lang="lt">LT</a>' : '<span aria-current="true">LT</span>';
+    var en = isEN ? '<span aria-current="true">EN</span>' : '<a href="' + langHref + '" hreflang="en" lang="en">EN</a>';
+    return '<div class="lang-switch" role="group" aria-label="' + (isEN ? 'Language' : 'Kalba') + '">' + lt + en + '</div>';
+  }
 
   /* ---- Inject header ---- */
   var headerEl = document.getElementById('site-header');
@@ -79,27 +89,82 @@
     headerEl.className = 'top';
     headerEl.innerHTML =
       '<div class="wrap">' +
-        '<a class="brand" href="' + base + 'index.html" aria-label="Adrena">' + logoHeader + '</a>' +
+        '<a class="brand" href="' + here + 'index.html" aria-label="Adrena">' + logoHeader + '</a>' +
         '<button class="menu-btn" id="menuBtn" aria-expanded="false" aria-controls="main-nav">' + (isEN ? 'Menu' : 'Meniu') + '</button>' +
         '<nav class="nav" id="main-nav" aria-label="' + (isEN ? 'Main navigation' : 'Pagrindinis meniu') + '">' +
           NAV.map(function (n) {
             var cls = n.cta ? 'cta-s' : activePage === n.key ? 'active' : '';
             return '<a href="' + n.href + '"' + (cls ? ' class="' + cls + '"' : '') + '>' + n.label + '</a>';
           }).join('') +
-          '<button class="theme-toggle" id="themeToggle" aria-label="' + (isEN ? 'Toggle theme' : 'Keisti temą') + '">' + themeIcon + '</button>' +
+          '<div class="nav-tools">' + langSwitch() +
+            '<button class="theme-toggle" id="themeToggle" aria-label="' + (isEN ? 'Toggle theme' : 'Keisti temą') + '">' + themeIcon + '</button>' +
+          '</div>' +
         '</nav>' +
       '</div>';
   }
 
   /* ---- Inject footer ---- */
   var footerEl = document.getElementById('site-footer');
+  var T = isEN ? {
+    tagline: 'Every extreme sport. One app.', pages: 'Pages', contact: 'Contact', partner: 'Partner', sponsor: 'Sponsors',
+    partnerDesc: 'IKO certified kite centre in Svencelė', sponsorCta: 'Become an Adrena sponsor →',
+    company: 'Student company', privacy: 'Privacy policy',
+  } : {
+    tagline: 'Visas ekstremalus sportas. Vienoje programėlėje.', pages: 'Puslapiai', contact: 'Kontaktai', partner: 'Partneris', sponsor: 'Rėmėjai',
+    partnerDesc: 'IKO sertifikuotas kaitavimo centras Svencelėje', sponsorCta: 'Tapk Adrenos rėmėju →',
+    company: 'Mokinių bendrovė', privacy: 'Privatumo politika',
+  };
+
   if (footerEl) {
     footerEl.innerHTML =
-      '<div class="wrap">' +
-        '<a href="' + base + 'index.html" aria-label="Adrena">' + logoFooter + '</a>' +
-        '<span>© 2026 Adrena · Mokinių bendrovė</span>' +
-        '<a href="' + base + (isEN ? 'en/privacy.html' : 'privatumas.html') + '">' + (isEN ? 'Privacy policy' : 'Privatumo politika') + '</a>' +
+      '<div class="wrap foot-grid">' +
+        '<div class="foot-brand">' +
+          '<a href="' + here + 'index.html" aria-label="Adrena">' + logoFooter + '</a>' +
+          '<p class="foot-tagline">' + T.tagline + '</p>' +
+          langSwitch() +
+        '</div>' +
+        '<nav class="foot-col" aria-label="' + T.pages + '"><h3>' + T.pages + '</h3>' +
+          NAV.map(function (n) { return '<a href="' + n.href + '">' + n.label + '</a>'; }).join('') +
+        '</nav>' +
+        '<div class="foot-col"><h3>' + T.contact + '</h3>' +
+          '<a href="mailto:rasauadrena@gmail.com">rasauadrena@gmail.com</a>' +
+          '<a href="tel:+37065351467">+370 653 51467</a>' +
+          '<a href="https://www.instagram.com/adrena_extreme/" target="_blank" rel="noopener">Instagram @adrena_extreme ↗</a>' +
+        '</div>' +
+        '<div class="foot-col"><h3>' + T.partner + '</h3>' +
+          '<a class="foot-partner" href="https://www.pucia.lt" target="_blank" rel="noopener">PUČIA.LT ↗</a>' +
+          '<span class="foot-note">' + T.partnerDesc + '</span>' +
+          '<h3 style="margin-top:16px">' + T.sponsor + '</h3>' +
+          '<a href="' + here + P.contact + '">' + T.sponsorCta + '</a>' +
+        '</div>' +
+      '</div>' +
+      '<div class="wrap foot-bottom">' +
+        '<span>© 2026 Adrena · ' + T.company + '</span>' +
+        '<a href="' + here + P.privacy + '">' + T.privacy + '</a>' +
       '</div>';
+  }
+
+  /* ---- Final call to action before the footer (pages without their own sign-up form) ---- */
+  var NO_CTA = { home: 1, instr: 1 };
+  var mainEl = document.querySelector('main');
+  if (mainEl && footerEl && !NO_CTA[activePage]) {
+    var band = document.createElement('section');
+    band.className = 'cta-band';
+    band.innerHTML =
+      '<svg class="deco" aria-hidden="true" viewBox="0 0 320 160"><g fill="none" style="stroke:var(--sun)" stroke-width="8" stroke-linecap="round"><path d="M8 40h200a28 28 0 1 0-28-28"/><path d="M8 80h260a28 28 0 1 1-28 28"/><path d="M48 120h96"/></g></svg>' +
+      '<div class="wrap">' +
+        '<div>' +
+          '<div class="eyebrow" style="color:var(--sun)">' + (isEN ? 'Waitlist' : 'Laukiančiųjų sąrašas') + '</div>' +
+          '<h2 style="margin-top:16px">' + (isEN ? 'Be first when <em>Adrena</em> launches' : 'Būk pirmas, kai <em>Adrena</em> startuos') + '</h2>' +
+          '<p>' + (isEN ? 'Join the waitlist for free. We will let you know as soon as you can book your first lesson.'
+                       : 'Prisijunk prie laukiančiųjų sąrašo nemokamai. Pranešime, kai tik galėsi užsisakyti pirmą pamoką.') + '</p>' +
+        '</div>' +
+        '<div class="cta-actions">' +
+          '<a class="btn btn-light" href="' + here + 'index.html#' + (isEN ? 'waitlist' : 'laukianciuju-sarasas') + '">' + (isEN ? 'Join the waitlist' : 'Prisijunk prie sąrašo') + ' <span class="arr" aria-hidden="true">→</span></a>' +
+          (activePage === 'proto' ? '' : '<a class="btn btn-ghost" href="' + here + P.proto + '">' + (isEN ? 'Try the app' : 'Išbandyk programėlę') + '</a>') +
+        '</div>' +
+      '</div>';
+    mainEl.appendChild(band);
   }
 
   /* ---- Delegated events ---- */
@@ -156,7 +221,7 @@
     var reduceMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     var pos = 'object-position:' + (g.pos || '50% 50%');
     var media = isVideo(g)
-      ? '<video src="' + esc(g.src) + '" poster="' + esc(g.src.replace(/\.(mp4|webm)$/i, '-poster.webp')) + '" muted loop playsinline' + (reduceMotion ? '' : ' autoplay') + ' preload="' + (reduceMotion ? 'none' : 'auto') + '" aria-label="' + esc(g.alt) + '" style="' + pos + '"></video>'
+      ? '<video src="' + esc(g.src) + '" poster="' + esc(g.src.replace(/\.(mp4|webm)$/i, '-poster.webp')) + '" muted loop playsinline' + (reduceMotion ? '' : ' autoplay') + ' preload="' + (reduceMotion ? 'none' : 'metadata') + '" aria-label="' + esc(g.alt) + '" style="' + pos + '"></video>'
       : '<img src="' + esc(g.src) + '" alt="' + esc(g.alt) + '" loading="lazy" style="' + pos + '" onerror="this.closest(\'.g-item\').style.display=\'none\'">';
     // Videos keep their exact shape; photos start at 6:7 and stretch to fill the column (cover crop)
     var shape = plain ? '' : ' style="aspect-ratio:' + (isVideo(g) ? g.ar : '6/7') + '"';
@@ -221,6 +286,8 @@
 
   /* ---- Home sport tiles ---- */
   // One place to swap photos. img2x present = WebP with srcset; otherwise single size.
+  var SPORT_EN = { kaitavimas:'Kitesurfing', banglentes:'Surfing', vandenlentes:'Wakeboarding', slides:'Skiing & snowboarding',
+    parasparnis:'Paragliding', parasiutas:'Skydiving', laipiojimas:'Climbing', nardymas:'Diving' };
   var SPORT_TILES = [
     { id:'kaitavimas',   name:'Kaitavimas',            link:'prototipas.html', grad:'135deg,#0FA3A0,#0E5E7E', pos:'55% 50%', alt:'Kaituotojas šuolio metu su lenta rankoje', img:base+'media/sports/kaitavimas-v2.webp' },
     { id:'banglentes',   name:'Banglentės',            link:'prototipas.html', grad:'135deg,#1C7ED6,#0E4E6E', pos:'45% 50%', alt:'Banglentininkas šoka virš bangos keteros', img:base+'media/sports/banglentes-v2.webp' },
@@ -235,13 +302,13 @@
   var sportGrid = document.getElementById('sports-home-grid');
   if (sportGrid) {
     sportGrid.innerHTML = SPORT_TILES.map(function (t) {
-      var srcset = t.img2x ? ' srcset="' + esc(t.img) + ' 900w, ' + esc(t.img2x) + ' 1800w" sizes="(max-width:760px) 50vw, 25vw"' : '';
-      var tileBg = 'background:linear-gradient(' + t.grad + ')';
-      var overlay = 'background:linear-gradient(to top, rgba(14,27,44,.9) 0%, rgba(14,27,44,.1) 55%, transparent 100%)';
-      return '<a href="' + esc(t.link) + '" class="sport-home-tile" aria-label="' + esc(t.name) + '" style="' + tileBg + '">' +
-        '<img src="' + esc(t.img) + '"' + srcset + ' alt="' + esc(t.alt) + '" loading="lazy" width="450" height="300" style="object-position:' + t.pos + '" onerror="this.style.display=\'none\'">' +
-        '<span class="tile-overlay" style="' + overlay + '"></span>' +
-        '<span class="tile-label">' + esc(t.name) + '</span>' +
+      var name = isEN ? SPORT_EN[t.id] : t.name;
+      var srcset = t.img2x ? ' srcset="' + esc(t.img) + ' 900w, ' + esc(t.img2x) + ' 1800w" sizes="(max-width:1023px) 50vw, 300px"' : '';
+      // the gradient only shows if the photo fails to load; the visible name is the link text
+      return '<a href="' + esc(here + P.proto) + '" class="sport-home-tile" style="background:linear-gradient(' + t.grad + ')">' +
+        '<img src="' + esc(t.img) + '"' + srcset + ' alt="" loading="lazy" decoding="async" width="450" height="300" style="object-position:' + t.pos + '" onerror="this.style.display=\'none\'">' +
+        '<span class="tile-overlay"></span>' +
+        '<span class="tile-label">' + esc(name) + '<span class="arr" aria-hidden="true">→</span></span>' +
       '</a>';
     }).join('');
   }
@@ -251,14 +318,19 @@
     if (!window.IntersectionObserver) return;
     if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
     var selectors = [
-      '.sec-head', '.compare', '.edge', '.vs-wrap', '.vs-legend',
-      '.flow', '.tech', '.impact', '.measure',
-      '.values', '.instr', '.team', '.biz',
-      '.gallery', '.gallery-strip', '.partners',
+      '.sec-head', '.row-head .lead', '.compare', '.edge', '.vs-wrap', '.vs-legend',
+      '.flow > li', '.tech > div', '.impact > div', '.measure',
+      '.values > .value', '.instr', '.team > .member', '.biz',
+      '.gallery', '.gallery-strip', '.partners > *', '.sports-home-grid > a',
       '.faq', '.c-list', '.demo-side', '.phone-wrap',
-      '.demo-teaser-text', '.form-box',
+      '.demo-teaser-text', '.form-box', '.form-card', '.cta-band .wrap > *',
     ];
     var els = document.querySelectorAll(selectors.join(','));
+    // siblings in a grid come in one after another (60ms apart, capped)
+    els.forEach(function (el) {
+      var sib = el.parentElement ? Array.prototype.indexOf.call(el.parentElement.children, el) : 0;
+      if (sib > 0) el.style.setProperty('--rd', Math.min(sib, 7) * 60 + 'ms');
+    });
     var obs = new IntersectionObserver(function (entries) {
       entries.forEach(function (entry) {
         if (entry.isIntersecting) {
@@ -298,20 +370,31 @@
     requestAnimationFrame(step);
   })();
 
-  /* ---- Film clip: play only while visible; grows and straightens as it scrolls in ---- */
+  /* ---- Film clip: 0.8x speed, plays only while on screen, poster only for reduced motion ---- */
   (function () {
     var frame = document.querySelector('.film-frame');
     if (!frame) return;
     var v = frame.querySelector('video');
-    if (reduceMotionMQ.matches) return; // poster only
+    // until hero-poster.jpg is added, fall back to the old poster
+    var fb = v.getAttribute('data-fallback-poster');
+    if (fb) { var pi = new Image(); pi.onerror = function () { v.poster = fb; }; pi.src = v.poster; }
+    if (reduceMotionMQ.matches) {
+      v.removeAttribute('autoplay'); v.autoplay = false; v.preload = 'none';
+      v.load(); // drop any started playback and show the poster
+      return;
+    }
+    var setRate = function () { v.defaultPlaybackRate = 0.8; v.playbackRate = 0.8; };
+    setRate();
+    v.addEventListener('loadedmetadata', setRate);
+    v.addEventListener('play', setRate);
     if (window.IntersectionObserver) {
       new IntersectionObserver(function (es) {
         es.forEach(function (e) {
-          if (e.isIntersecting) { v.preload = 'auto'; var pr = v.play(); if (pr && pr.catch) pr.catch(function () {}); }
+          if (e.isIntersecting) { var pr = v.play(); if (pr && pr.catch) pr.catch(function () {}); }
           else v.pause();
         });
-      }, { threshold: 0.2 }).observe(frame);
-    } else { v.autoplay = true; }
+      }, { threshold: 0.15 }).observe(frame);
+    }
     var ticking = false;
     function upd() {
       ticking = false;
@@ -334,6 +417,15 @@
       return hero.getBoundingClientRect().bottom;
     }
     function upd() { top.classList.toggle('on-hero', redBottom() > 80); }
+    upd(); window.addEventListener('scroll', upd, { passive: true });
+  })();
+
+  /* ---- Header turns into a blurred translucent bar once the page scrolls ---- */
+  (function () {
+    var top = document.getElementById('site-header');
+    if (!top) return;
+    var on = null;
+    function upd() { var s = window.scrollY > 8; if (s !== on) { on = s; top.classList.toggle('scrolled', s); } }
     upd(); window.addEventListener('scroll', upd, { passive: true });
   })();
 

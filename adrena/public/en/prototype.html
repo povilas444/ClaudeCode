@@ -1,1 +1,69 @@
-﻿<!doctype html><html lang="en"><head><meta charset="utf-8"><title>Adrena</title><script>location.replace('../prototipas.html')</script></head><body></body></html>
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Try Adrena | Adrena</title>
+<meta name="description" content="A working demo of the Adrena app – try sign-up, lesson search, booking and weather protection.">
+<link rel="alternate" hreflang="lt" href="../prototipas.html">
+<link rel="icon" href="../favicon.svg" type="image/svg+xml">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Adrena">
+<meta property="og:title" content="Try Adrena: working demo">
+<meta property="og:image" content="../media/adrena-produkto-foto-1920x1080.png">
+<meta property="og:description" content="A working demo of the Adrena app – try sign-up, lesson search, booking and weather protection.">
+<script>try{var t=localStorage.getItem('adrena-theme');if(t)document.documentElement.setAttribute('data-theme',t)}catch(e){}</script>
+<script>try{if(!sessionStorage.getItem('adrena-loaded')&&!matchMedia('(prefers-reduced-motion: reduce)').matches){document.documentElement.classList.add('is-loading');sessionStorage.setItem('adrena-loaded','1')}}catch(e){}</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wdth,wght@12..96,75..100,400..800&family=Fraunces:ital,opsz,wght,SOFT@0,9..144,400..700,100;1,9..144,400..700,100&display=swap">
+<link rel="stylesheet" href="../assets/css/style.css?v=20">
+</head>
+<body data-page="proto">
+<header id="site-header"></header>
+
+<main>
+
+<section id="prototipas">
+  <div class="wrap demo">
+    <div class="demo-side">
+      <div class="sec-head">
+        <div class="eyebrow">Prototype</div>
+        <h1>Try Adrena</h1>
+        <p class="lead">This is a working app demo. Tap the phone like a real app or pick a scenario.</p>
+      </div>
+      <div class="scn" id="scn">
+        <button data-scn="signup"><span>Create an account<small>Name, city and favourite activities</small></span></button>
+        <button data-scn="quiz"><span>Not sure what to try?<small>Three questions and the activities that suit you</small></span></button>
+        <button data-scn="book"><span>Book a kitesurfing lesson<small>Instructor, a time that fits the wind, payment</small></span></button>
+        <button data-scn="alert"><span>Get a weather alert<small>The lesson moves to another day</small></span></button>
+        <button data-scn="progress"><span>Check your progress<small>Level reached and the next step</small></span></button>
+        <button data-scn="community"><span>Community videos<small>Watch and upload your own clip</small></span></button>
+      </div>
+      <p class="demo-note">All instructors, prices, reviews and weather are examples, and payments are not real. Anything you enter or upload in the demo stays in your browser.</p>
+      <button class="reset" id="resetDemo">Restart the demo</button>
+    </div>
+    <div class="phone-wrap">
+      <div class="phone">
+        <div class="screen" id="screen">
+          <div class="notch"></div>
+          <div class="sbar"><span id="clock">9:41</span><i>●●● ▮</i></div>
+          <div class="demo-flag">Demo</div>
+          <button class="push" id="push" type="button" aria-live="polite"></button>
+          <div class="app" id="app"></div>
+          <nav class="tabbar" id="tabbar" aria-label="App menu"></nav>
+          <div class="toast" id="toast" role="status"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer id="site-footer"></footer>
+<script src="../assets/js/config.js?v=20"></script>
+<script src="../assets/js/site.js?v=20"></script>
+<script src="../assets/js/demo.js?v=20"></script>
+</body>
+</html>

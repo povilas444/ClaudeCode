@@ -10,7 +10,7 @@
   }
 
   function toVilnius(utcStr, opts) {
-    return new Intl.DateTimeFormat('lt-LT', Object.assign({ timeZone: VILNIUS }, opts))
+    return new Intl.DateTimeFormat(IS_EN ? 'en-GB' : 'lt-LT', Object.assign({ timeZone: VILNIUS }, opts))
       .format(new Date(utcStr.endsWith('Z') ? utcStr : utcStr + 'Z'));
   }
 
@@ -36,7 +36,7 @@
     return h >= 6 && h < 21;
   }
 
-  const DIR_LT = ['Š', 'ŠR', 'R', 'PR', 'P', 'PV', 'V', 'ŠV'];
+  const DIR_LT = IS_EN ? ['N', 'NE', 'E', 'SE', 'S', 'SW', 'W', 'NW'] : ['Š', 'ŠR', 'R', 'PR', 'P', 'PV', 'V', 'ŠV'];
   function dirLabel(deg) {
     if (deg == null) return '—';
     return DIR_LT[Math.round(((deg % 360) + 360) % 360 / 45) % 8];
@@ -119,7 +119,7 @@
   const dataCache = {};
 
   function fetchData(spotId) {
-    if (BASE === null) return Promise.reject(new Error('Atidaryti serverį su npm start'));
+    if (BASE === null) return Promise.reject(new Error(L('Atidaryti serverį su npm start', 'Start the server with npm start')));
     if (dataCache[spotId] && Date.now() - dataCache[spotId].at < 30 * 60 * 1000) {
       return Promise.resolve(dataCache[spotId].data);
     }
@@ -155,16 +155,16 @@
     const w = cvt(s.wind, S.unit), g = cvt(s.gust, S.unit), ul = UNIT_LABEL[S.unit];
     const v = verdict(S.sportId, s.wind, s.gust, s.windDir, S.spotId, s.cond);
     const reason = verdictReason(S.sportId, s.wind, s.gust, s.cond);
-    const vLabels = { good: 'Tinka', warn: 'Ribinės sąlygos', bad: 'Netinka' };
+    const vLabels = { good: L('Tinka', 'Good'), warn: L('Ribinės sąlygos', 'Borderline'), bad: L('Netinka', 'Not suitable') };
     const temp = s.temp != null ? Math.round(s.temp) + '°C' : '';
-    const feels = s.feels != null && Math.abs(s.feels - s.temp) >= 2 ? ` (jaučiasi ${Math.round(s.feels)}°)` : '';
+    const feels = s.feels != null && Math.abs(s.feels - s.temp) >= 2 ? ` (${L('jaučiasi', 'feels like')} ${Math.round(s.feels)}°)` : '';
 
     return `<div class="wx-now-card">
       <div class="wx-now-top">
         <div class="wx-now-wind">
           <span class="wx-now-val">${w != null ? w : '—'}</span>
           <span class="wx-now-unit">${ul}</span>
-          ${s.gust ? `<span class="wx-now-gust">gūsiai ${g} ${ul}</span>` : ''}
+          ${s.gust ? `<span class="wx-now-gust">${L('gūsiai', 'gusts')} ${g} ${ul}</span>` : ''}
         </div>
         <div class="wx-now-meta">
           ${arrowSvg(s.windDir, dirLabel(s.windDir))}
@@ -202,7 +202,7 @@
     const future = windows.filter(function (w) { return toMs(w.end) > now; }).slice(0, 3);
 
     if (!future.length) {
-      return `<div class="wx-best"><div class="wx-best-title">Geriausias laikas</div><p class="wx-best-none">Artimiausiu metu tinkamų sąlygų nerasta.</p></div>`;
+      return `<div class="wx-best"><div class="wx-best-title">${L('Geriausias laikas', 'Best time')}</div><p class="wx-best-none">${L('Artimiausiu metu tinkamų sąlygų nerasta.', 'No good conditions in the coming days.')}</p></div>`;
     }
 
     const rows = future.map(function (w) {
@@ -216,7 +216,7 @@
     }).join('');
 
     return `<div class="wx-best">
-      <div class="wx-best-title">Geriausias laikas artimiausiu metu</div>
+      <div class="wx-best-title">${L('Geriausias laikas artimiausiu metu', 'Best time in the coming days')}</div>
       ${rows}
     </div>`;
   }
@@ -243,7 +243,7 @@
     dayHdr += '</tr>';
 
     // Time row
-    let timeRow = `<tr class="fc-row-time"><th class="fc-label fc-label-sticky" scope="row">Laikas</th>`;
+    let timeRow = `<tr class="fc-row-time"><th class="fc-label fc-label-sticky" scope="row">${L('Laikas', 'Time')}</th>`;
     slots.forEach(function (s, i) {
       const cls = ['fc-cell', i === nowIdx ? 'is-now' : '', isNightHour(s.time) ? 'is-night' : ''].filter(Boolean).join(' ');
       // Add day-start border
@@ -267,17 +267,17 @@
       return row + '</tr>';
     }
 
-    const windRow = dataRow(`Vėjas ${ul}`, function (s) {
+    const windRow = dataRow(`${L('Vėjas', 'Wind')} ${ul}`, function (s) {
       const v = cvt(s.wind, S.unit), st = windCellStyle(s.wind);
       return { html: v != null ? String(v) : '—', style: `background:${st.bg};color:${st.text};font-weight:700` };
     }, 'fc-row-wind');
 
-    const gustRow = dataRow(`Gūsiai ${ul}`, function (s) {
+    const gustRow = dataRow(`${L('Gūsiai', 'Gusts')} ${ul}`, function (s) {
       const v = cvt(s.gust, S.unit), st = windCellStyle(s.gust);
       return { html: v != null ? String(v) : '—', style: `background:${st.bg};color:${st.text}` };
     }, 'fc-row-gust');
 
-    const dirRow = dataRow('Kryptis', function (s) {
+    const dirRow = dataRow(L('Kryptis', 'Direction'), function (s) {
       return { html: arrowSvg(s.windDir, dirLabel(s.windDir)) + `<span class="fc-dir-lbl">${dirLabel(s.windDir)}</span>` };
     });
 
@@ -285,27 +285,27 @@
       return { html: s.temp != null ? Math.round(s.temp) + '°' : '—' };
     });
 
-    const cloudRow = dataRow('Debesys', function (s) {
+    const cloudRow = dataRow(L('Debesys', 'Clouds'), function (s) {
       return { html: s.cloud != null ? s.cloud + '%' : '—' };
     });
 
-    const precipRow = dataRow('Krituliai mm', function (s) {
+    const precipRow = dataRow(L('Krituliai mm', 'Rain mm'), function (s) {
       const v = s.precip != null ? s.precip.toFixed(1) : '—';
       const style = s.precip > 0.5 ? 'color:#1565C0;font-weight:600' : '';
       return { html: v, style };
     });
 
-    const condRow = dataRow('Sąlygos', function (s) {
+    const condRow = dataRow(L('Sąlygos', 'Conditions'), function (s) {
       return { html: `<span title="${s.cond || ''}">${condIcon(s.cond)}</span>` };
     });
 
-    const suitRow = dataRow('Tinkamas', function (s) {
+    const suitRow = dataRow(L('Tinkamas', 'Suitable'), function (s) {
       const v = verdict(S.sportId, s.wind, s.gust, s.windDir, S.spotId, s.cond);
       const sym = { good: '■', warn: '⚠', bad: '✕' };
       return { html: `<span class="fc-suit wx ${v}">${sym[v]}</span>`, style: '' };
     }, 'fc-row-suit');
 
-    return `<div class="fc-wrap" role="region" aria-label="Orų prognozės lentelė" tabindex="0">
+    return `<div class="fc-wrap" role="region" aria-label="${L('Orų prognozės lentelė', 'Weather forecast table')}" tabindex="0">
       <table class="fc-table" aria-rowcount="${9}">
         <thead>${dayHdr}${timeRow}</thead>
         <tbody>${windRow}${gustRow}${dirRow}${tempRow}${cloudRow}${precipRow}${condRow}${suitRow}</tbody>
@@ -364,7 +364,7 @@
 
     return `<div class="wx-chart-outer">
       <div class="wx-chart-wrap">
-        <svg viewBox="0 0 ${W} ${H}" width="${W}" height="${H}" style="display:block;overflow:visible" aria-label="Vėjo diagrama">
+        <svg viewBox="0 0 ${W} ${H}" width="${W}" height="${H}" style="display:block;overflow:visible" aria-label="${L('Vėjo diagrama', 'Wind chart')}">
           ${yTicks}
           <rect x="${PL}" y="${bandY1.toFixed(1)}" width="${CW}" height="${Math.max(0, bandY2 - bandY1).toFixed(1)}" fill="#0FA3A0" opacity=".12" rx="2"/>
           ${dayLines}
@@ -377,10 +377,10 @@
         </svg>
       </div>
       <div class="wx-chart-legend">
-        <span><svg width="16" height="4" style="vertical-align:middle"><rect y="1" width="16" height="2" rx="1" fill="#0FA3A0"/></svg> Vėjas</span>
-        <span><svg width="16" height="4" style="vertical-align:middle"><line x1="0" y1="2" x2="16" y2="2" stroke="#FF8A3D" stroke-width="2" stroke-dasharray="4 3"/></svg> Gūsiai</span>
-        <span><svg width="16" height="8" style="vertical-align:middle"><rect y="1" width="16" height="6" rx="1" fill="#0FA3A0" opacity=".2"/></svg> Tinkamas diapazonas</span>
-        <span><svg width="10" height="10" style="vertical-align:middle"><line x1="5" y1="0" x2="5" y2="10" stroke="#FF5A36" stroke-width="1.5" stroke-dasharray="3 3"/></svg> Dabar</span>
+        <span><svg width="16" height="4" style="vertical-align:middle"><rect y="1" width="16" height="2" rx="1" fill="#0FA3A0"/></svg> ${L('Vėjas', 'Wind')}</span>
+        <span><svg width="16" height="4" style="vertical-align:middle"><line x1="0" y1="2" x2="16" y2="2" stroke="#FF8A3D" stroke-width="2" stroke-dasharray="4 3"/></svg> ${L('Gūsiai', 'Gusts')}</span>
+        <span><svg width="16" height="8" style="vertical-align:middle"><rect y="1" width="16" height="6" rx="1" fill="#0FA3A0" opacity=".2"/></svg> ${L('Tinkamas diapazonas', 'Good range')}</span>
+        <span><svg width="10" height="10" style="vertical-align:middle"><line x1="5" y1="0" x2="5" y2="10" stroke="#FF5A36" stroke-width="1.5" stroke-dasharray="3 3"/></svg> ${L('Dabar', 'Now')}</span>
       </div>
     </div>`;
   }
@@ -396,26 +396,26 @@
     const warn1 = w.warnHigh ? cvt(w.warnHigh[1], S.unit) : null;
 
     let sportRule = `${sport.name}: `;
-    if (warn0 != null) sportRule += `${warn0}–${good0} ${ul} ribinės, `;
-    sportRule += `${good0}–${good1} ${ul} tinkama, `;
-    if (warn1 != null) sportRule += `${good1}–${warn1} ${ul} ribinės, `;
-    sportRule += `virš ${warn1 || good1} ${ul} netinka`;
-    if (sport.maxGustDelta) sportRule += `. Gūsiai >vėjas+${cvt(sport.maxGustDelta, S.unit)} ${ul} → ribinės`;
-    if (sport.noThunder) sportRule += '. Perkūnija – netinka';
-    if (sport.noOffshore) sportRule += '. Atlandinis vėjas – netinka';
+    if (warn0 != null) sportRule += `${warn0}–${good0} ${ul} ${L('ribinės', 'borderline')}, `;
+    sportRule += `${good0}–${good1} ${ul} ${L('tinkama', 'good')}, `;
+    if (warn1 != null) sportRule += `${good1}–${warn1} ${ul} ${L('ribinės', 'borderline')}, `;
+    sportRule += `${L('virš', 'above')} ${warn1 || good1} ${ul} ${L('netinka', 'not suitable')}`;
+    if (sport.maxGustDelta) sportRule += `. ${L('Gūsiai >vėjas', 'Gusts >wind')}+${cvt(sport.maxGustDelta, S.unit)} ${ul} → ${L('ribinės', 'borderline')}`;
+    if (sport.noThunder) sportRule += L('. Perkūnija – netinka', '. Thunderstorm – not suitable');
+    if (sport.noOffshore) sportRule += L('. Atlandinis vėjas – netinka', '. Offshore wind – not suitable');
 
     return `<div class="wx-legend">
       <div class="wx-legend-verdicts">
-        <span class="wx good">■ Tinka</span>
-        <span class="wx warn">⚠ Ribinės sąlygos</span>
-        <span class="wx bad">✕ Netinka</span>
+        <span class="wx good">■ ${L('Tinka', 'Good')}</span>
+        <span class="wx warn">⚠ ${L('Ribinės sąlygos', 'Borderline')}</span>
+        <span class="wx bad">✕ ${L('Netinka', 'Not suitable')}</span>
       </div>
       <div class="wx-legend-scale">
         ${WIND_SCALE.map(s => `<span style="background:${s.bg};color:${s.text}">${s.max < 999 ? '&lt;'+s.max : '18+'}</span>`).join('')}
         <span class="wx-legend-unit">${ul}</span>
       </div>
       <p class="wx-legend-rule">${sportRule}.</p>
-      <p class="wx-safety">⚠ Prognozės gali keistis. Visada patikrink sąlygas vietoje ir su instruktoriumi. Niekada nesportuok atlandiniam vėjui ar perkūnijai.</p>
+      <p class="wx-safety">⚠ ${L('Prognozės gali keistis. Visada patikrink sąlygas vietoje ir su instruktoriumi. Niekada nesportuok atlandiniam vėjui ar perkūnijai.', 'Forecasts can change. Always check conditions on site and with an instructor. Never ride in offshore wind or a thunderstorm.')}</p>
     </div>`;
   }
 
@@ -433,7 +433,7 @@
     }
 
     if (!slots || !slots.length) {
-      const msg = `<p class="wx-err-msg">Prognozė šiuo metu nepasiekiama. Bandyk vėliau.</p>`;
+      const msg = `<p class="wx-err-msg">${L('Prognozė šiuo metu nepasiekiama. Bandyk vėliau.', 'The forecast is unavailable right now. Please try again later.')}</p>`;
       ['#wx-now', '#wx-best'].forEach(id => { const el = $(id); if (el) el.innerHTML = msg; });
       $('#wx-table') && ($('#wx-table').innerHTML = '');
       $('#wx-chart') && ($('#wx-chart').innerHTML = '');
@@ -450,7 +450,7 @@
     const updEl = $('#wx-updated');
     if (updEl && S.fetchedAt) {
       const h = S.fetchedAt.getHours(), m = S.fetchedAt.getMinutes();
-      updEl.textContent = 'Atnaujinta ' + String(h).padStart(2,'0') + ':' + String(m).padStart(2,'0');
+      updEl.textContent = L('Atnaujinta ', 'Updated ') + String(h).padStart(2,'0') + ':' + String(m).padStart(2,'0');
     }
   }
 
@@ -525,7 +525,7 @@
   function initHeroCard() {
     const card = document.getElementById('hero-cond-live');
     if (!card || BASE === null) return;
-    card.innerHTML = '<span class="cond-loading">Orai kraunami…</span>';
+    card.innerHTML = '<span class="cond-loading">' + L('Orai kraunami…', 'Loading weather…') + '</span>';
     fetchData('svencele').then(function (data) {
       if (!data || !data.slots || !data.slots.length) throw new Error('no data');
       const slots = data.slots;
@@ -537,23 +537,23 @@
       const pct = s.wind != null ? Math.min(100, (s.wind / 15) * 100) : 50;
       card.innerHTML = `
         <div class="cond-top">
-          <div><div class="cond-place">Svencelė · Kuršių marios</div>${hourStr(s.time)} · kaitavimas</div>
-          <a href="vejas.html?vieta=svencele&sportas=kaitavimas_prad" class="cond-tag" style="color:inherit;text-decoration:none">Plačiau →</a>
+          <div><div class="cond-place">Svencelė · ${L('Kuršių marios', 'Curonian Lagoon')}</div>${hourStr(s.time)} · ${L('kaitavimas', 'kitesurfing')}</div>
+          <a href="${L('vejas.html', 'wind.html')}?vieta=svencele&sportas=kaitavimas_prad" class="cond-tag" style="color:inherit;text-decoration:none">${L('Plačiau →', 'More →')}</a>
         </div>
         <div class="cond-big">
           <b>${w}</b>
-          <span>m/s${g ? ` · gūsiai ${g}` : ''}<br>${arrowSvg(s.windDir, dirLabel(s.windDir))} ${dirLabel(s.windDir)}</span>
+          <span>m/s${g ? ` · ${L('gūsiai', 'gusts')} ${g}` : ''}<br>${arrowSvg(s.windDir, dirLabel(s.windDir))} ${dirLabel(s.windDir)}</span>
         </div>
         <div class="meter" aria-hidden="true">
           <div class="meter-bar"><div class="meter-ok"></div><div class="meter-dot" style="left:${pct.toFixed(0)}%"></div></div>
-          <div class="meter-scale"><span>0</span><span>6–10 m/s tinka pradedantiesiems</span><span>15</span></div>
+          <div class="meter-scale"><span>0</span><span>${L('6–10 m/s tinka pradedantiesiems', '6–10 m/s is right for beginners')}</span><span>15</span></div>
         </div>
         <div class="cond-status">
           <span>${s.temp != null ? Math.round(s.temp) + '°C · ' : ''}${condIcon(s.cond)}</span>
-          <span class="pill-ok wx ${v}" style="border-radius:99px;padding:5px 11px;font-size:13.5px">${{good:'Tinka',warn:'Ribinės',bad:'Netinka'}[v]}</span>
+          <span class="pill-ok wx ${v}" style="border-radius:99px;padding:5px 11px;font-size:13.5px">${{good:L('Tinka', 'Good'),warn:L('Ribinės', 'Borderline'),bad:L('Netinka', 'Not suitable')}[v]}</span>
         </div>`;
     }).catch(function () {
-      card.innerHTML = '<div class="cond-status" style="justify-content:center;padding:16px 0;color:var(--band-muted)">Prognozė šiuo metu nepasiekiama</div>';
+      card.innerHTML = '<div class="cond-status" style="justify-content:center;padding:16px 0;color:var(--band-muted)">' + L('Prognozė šiuo metu nepasiekiama', 'Forecast unavailable right now') + '</div>';
     });
   }
 
