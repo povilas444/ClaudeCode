@@ -4,7 +4,7 @@ Marketing website for Adrena — a Lithuanian extreme sports lesson booking app.
 
 The site is a **multi-page static website** with:
 - 8 pages in Lithuanian (`public/`) and English (`public/en/`), with an LT | EN switch in the header and footer
-- Homepage hero: a sunset kitesurf photo (`public/assets/hero-kite.webp` / `.jpg`) with the rider cut out (`hero-kite-cutout.webp` / `.png`, same 1920x1440 frame) and layered in front of the headline. To swap the photo, replace both files with a new photo + matching cutout of the same size.
+- Homepage hero: a sunset kitesurf photo (`public/assets/hero-kite.webp` / `.jpg`) with the rider cut out (`hero-kite-cutout.webp` / `.png`, same 2560x1920 frame) and layered in front of the headline. To swap the photo, replace both files with a new photo + matching cutout of the same size.
 - Kitesurf film under the hero: `public/assets/hero.webm`, `hero.mp4` (1080p60, seconds 56–69 of the Red Bull kiteboarding film) and `hero-poster.jpg`. The old 720p `media/kaitavimas-fpv.mp4` stays as a last fallback.
 - A fully clickable phone prototype of the app
 - Live weather from LHMT (api.meteo.lt) via a local proxy

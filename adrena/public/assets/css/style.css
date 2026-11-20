@@ -250,16 +250,17 @@ html.is-loading::after {
 
 /* ==== Home hero: sunset poster, the rider rides through the headline ====
    Layers, bottom to top: photo · shade · headline · rider cutout · eyebrow and copy.
-   Photo and cutout are the same 1920x1440 frame with identical object-fit/position,
+   Photo and cutout are the same 2560x1920 frame with identical object-fit/position,
    so the cutout always sits exactly on the rider. object-position Y is 50% and the
    rider's shoulders are at 50% of the photo's height, so the shoulders sit at half the
-   hero's height on every screen shape. The headline's baseline is set there: the head
-   and the top of the spray break through the letters, the body stays below them. */
+   hero's height on every screen shape. The headline's baseline is set just below them
+   (at them on portrait screens): the head, arm and top of the spray break through the letters. */
 body[data-page="home"] .top { margin-bottom: calc(-1 * (var(--header-h) + env(safe-area-inset-top, 0px))); }
 .hero {
   --ax: 50%; --ay: 50%;
   /* fills the width, but leaves room for the header + eyebrow above two lines */
-  --title-fs: min(9.6cqw, (max(50svh, 280px) - 128px) / 2, 184px);
+  --title-b: 44%;  /* baseline just under the shoulders: the head and arm cross the second line */
+  --title-fs: min(9.6cqw, (max(56svh, 314px) - 120px) / 2.36, 184px);
   position: relative; isolation: isolate; container-type: inline-size;
   height: 100svh; min-height: 560px; padding: 0; overflow: hidden;
   background: var(--dusk-ink); color: var(--dusk-cream);
@@ -282,7 +283,7 @@ body[data-page="home"] .top { margin-bottom: calc(-1 * (var(--header-h) + env(sa
   position: absolute; inset: 0; margin-inline: auto;
   width: min(1680px, 100% - 2 * max(var(--gutter), 3.5cqw));
 }
-.hero-head { position: absolute; left: 0; right: 0; bottom: 50%; display: flex; flex-direction: column; align-items: flex-start; gap: clamp(8px, 1.2cqw, 20px); }
+.hero-head { position: absolute; left: 0; right: 0; bottom: var(--title-b); display: flex; flex-direction: column; align-items: flex-start; gap: clamp(8px, 1.2cqw, 20px); }
 .hero-eyebrow {
   position: relative; z-index: 4; margin: 0;
   font: 800 clamp(13px, 1cqw, 16px)/1 var(--f-display); letter-spacing: .34em; text-transform: uppercase;
@@ -291,7 +292,7 @@ body[data-page="home"] .top { margin-bottom: calc(-1 * (var(--header-h) + env(sa
 .hero-title {
   position: relative; z-index: 2; margin: 0;
   font-family: "Anton", "Arial Narrow", Impact, sans-serif; font-weight: 400; font-stretch: normal;
-  font-size: var(--title-fs); line-height: 1; /* room for Lithuanian accents (Š, Į) between lines */ letter-spacing: .004em; text-transform: uppercase;
+  font-size: var(--title-fs); line-height: 1.18; /* room for Lithuanian accents (Š, Į) and the comma between lines */ letter-spacing: .004em; text-transform: uppercase;
   color: var(--dusk-cream); text-shadow: 0 .03em .16em rgba(84,28,6,.28);
 }
 .hero-copy {
@@ -310,7 +311,7 @@ body[data-page="home"] .top { margin-bottom: calc(-1 * (var(--header-h) + env(sa
 .hero-btn:hover svg { transform: translateX(4px); }
 /* Wide screens: button sits beside the text, like the credit line of a poster */
 /* the English motto is shorter, so it can be set larger */
-.hero:lang(en) { --title-fs: min(12.4cqw, (max(50svh, 280px) - 128px) / 2, 236px); }
+.hero:lang(en) { --title-fs: min(12.4cqw, (max(56svh, 314px) - 120px) / 2.36, 236px); }
 @media (min-width: 1024px) and (min-aspect-ratio: 4/3) {
   .hero-copy { width: auto; grid-template-columns: minmax(0, 640px) auto; column-gap: var(--sp-5); align-items: end; }
   .hero-copy::before { grid-column: 1 / -1; }
@@ -319,7 +320,7 @@ body[data-page="home"] .top { margin-bottom: calc(-1 * (var(--header-h) + env(sa
 /* Portrait screens: the photo fits the height, the rider is kept in view
    and the headline sits at shoulder height so the head breaks through it */
 @media (max-aspect-ratio: 4/3) {
-  .hero { --ax: 69%; --title-fs: min(14.2cqw, 8.6svh, 120px); }
+  .hero { --ax: 69%; --title-b: 50%; --title-fs: min(14.2cqw, 8.6svh, 120px); }
   .hero:lang(en) { --title-fs: min(19cqw, 9.4svh, 150px); }
 }
 @media (max-width: 480px) {
