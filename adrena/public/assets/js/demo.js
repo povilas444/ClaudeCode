@@ -106,7 +106,7 @@
       return `<div class="welcome">
         <div>
           <svg width="64" height="64" viewBox="8 8 84 84" aria-hidden="true"><defs><linearGradient id="wg" x1="0" y1="1" x2="1" y2="0"><stop offset="0" stop-color="#FF5A36"/><stop offset="1" stop-color="#FF8A3D"/></linearGradient><mask id="wm" maskUnits="userSpaceOnUse" x="0" y="0" width="100" height="100"><rect width="100" height="100" fill="#fff"/><path d="M16 64 C27 52 39 52 50 62 S73 72 84 58" fill="none" stroke="#000" stroke-width="20" stroke-linecap="round"/></mask></defs><path d="M18 84 L50 16 L82 84" fill="none" stroke="url(#wg)" stroke-width="13" stroke-linecap="round" stroke-linejoin="round" mask="url(#wm)"/><path d="M16 64 C27 52 39 52 50 62 S73 72 84 58" fill="none" stroke="#0FA3A0" stroke-width="9" stroke-linecap="round"/></svg>
-          <div class="a-h1">${L('Visas ekstremalus sportas. Vienoje programėlėje.', 'Every extreme sport. One app.')}</div>
+          <div class="a-h1">${L('Adrenalinas, kurį gali išmokti', 'Adrenaline you can learn')}</div>
           <p>${L('Rask patikrintą instruktorių, užsisakyk pamoką ir sek savo progresą.', 'Find a verified instructor, book a lesson and track your progress.')}</p>
         </div>
         <div style="display:grid;gap:10px">

@@ -43,7 +43,7 @@
   --gutter: 16px;
 
   /* Type scale: every heading and text size on the site comes from here */
-  --fs-display: clamp(44px, min(7.4vw, 12.5svh), 128px); /* homepage headline */
+  --fs-display: clamp(56px, min(10.5vw, 15.5svh), 168px); /* homepage motto */
   --fs-h1:   clamp(48px, 7vw, 104px);   /* inner page titles */
   --fs-h2:   clamp(40px, 5.6vw, 80px);  /* section titles */
   --fs-h3:   clamp(24px, 2.4vw, 32px);  /* card titles */
@@ -264,6 +264,11 @@ html.is-loading::after {
   font-style: normal; color: var(--sun); display: inline-block; padding-bottom: .14em;
   background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 96 24'%3E%3Cpath d='M0 12c12-12 24-12 36 0s24 12 36 0 24-12 36 0' fill='none' stroke='%23F2B33D' stroke-width='5' stroke-linecap='round'/%3E%3C/svg%3E") repeat-x left bottom / .5em .125em;
 }
+/* second line: the product promise, clearly smaller than the motto */
+.hero-sub {
+  font-family: var(--f-display); font-weight: 800; font-stretch: 75%; text-transform: uppercase;
+  font-size: clamp(24px, 2.4vw, 36px); line-height: 1; letter-spacing: -.01em; color: var(--on-fill);
+}
 .hero .lead {
   color: var(--on-fill); max-width: 40ch; font-size: clamp(19px, .9vw + 12px, 24px); line-height: 1.45;
   margin-top: var(--sp-1); opacity: .94;
@@ -285,7 +290,7 @@ html.is-loading::after {
 .hero .btn-primary:hover { background: var(--sun); color: var(--on-sun); }
 .hero .btn-ghost { color: var(--on-fill); }
 .hero .deco-wind { right: 4%; top: 96px; width: 224px; opacity: .9; }
-@media (max-width: 1279px) { .hero .deco-wind { display: none; } }
+@media (max-width: 1599px) { .hero .deco-wind { display: none; } }
 @media (max-width: 480px) {
   .hero-ctas { width: 100%; }
   .hero-ctas .btn { width: 100%; font-size: 17px; min-height: 56px; padding-inline: var(--sp-2); white-space: nowrap; }
@@ -295,6 +300,7 @@ html.is-loading::after {
 @media (prefers-reduced-motion: no-preference) {
   .hero h1 { animation: hero-rise .8s var(--ease-out) both; }
   .hero .eyebrow { animation: hero-rise .8s var(--ease-out) both; }
+  .hero-sub { animation: hero-rise .8s var(--ease-out) .06s both; }
   .hero .lead { animation: hero-rise .8s var(--ease-out) .1s both; }
   .hero-tag { animation: hero-rise .8s var(--ease-out) .18s both; }
   .hero-ctas { animation: hero-rise .8s var(--ease-out) .26s both; }
