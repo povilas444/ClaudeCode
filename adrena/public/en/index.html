@@ -16,8 +16,9 @@
 <script>try{if(!sessionStorage.getItem('adrena-loaded')&&!matchMedia('(prefers-reduced-motion: reduce)').matches){document.documentElement.classList.add('is-loading');sessionStorage.setItem('adrena-loaded','1')}}catch(e){}</script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wdth,wght@12..96,75..100,400..800&family=Fraunces:ital,opsz,wght,SOFT@0,9..144,400..700,100;1,9..144,400..700,100&display=swap">
-<link rel="stylesheet" href="../assets/css/style.css?v=21">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Anton&family=Bricolage+Grotesque:opsz,wdth,wght@12..96,75..100,400..800&family=Fraunces:ital,opsz,wght,SOFT@0,9..144,400..700,100;1,9..144,400..700,100&display=swap">
+<link rel="preload" as="image" href="../assets/hero-kite.webp" type="image/webp" fetchpriority="high">
+<link rel="stylesheet" href="../assets/css/style.css?v=22">
 </head>
 <body data-page="home">
 <header id="site-header"></header>
@@ -26,18 +27,20 @@
 
 <!-- HERO -->
 <section class="hero" id="pradzia">
-  <div class="wrap hero-grid">
-    <div class="eyebrow">Extreme sports lessons in Lithuania</div>
-    <h1>Adrenaline you can <em>learn</em></h1>
-    <p class="hero-sub">Every extreme sport. One app.</p>
-    <p class="lead">Verified instructors, clear prices, open slots. Book in minutes.</p>
-    <p class="hero-tag"><i aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M7 18a4.5 4.5 0 0 1-.6-8.96A6 6 0 0 1 18 10a4 4 0 0 1 0 8z"/></svg></i>Bad weather? Adrena suggests a new time for you.</p>
-    <div class="hero-ctas">
-      <a class="btn btn-primary" href="#waitlist">Join the waitlist <span class="arr" aria-hidden="true">→</span></a>
-      <a class="btn btn-ghost" href="prototype.html">Try the app</a>
+  <picture class="hero-bg"><source srcset="../assets/hero-kite.webp" type="image/webp"><img src="../assets/hero-kite.jpg" alt="A kitesurfer carving across the water against a sunset" width="1920" height="1440" fetchpriority="high" decoding="async"></picture>
+  <div class="hero-shade" aria-hidden="true"></div>
+  <picture class="hero-cut" aria-hidden="true"><source srcset="../assets/hero-kite-cutout.webp" type="image/webp"><img src="../assets/hero-kite-cutout.png" alt="" width="1920" height="1440" decoding="async"></picture>
+  <div class="hero-inner">
+    <div class="hero-head">
+      <p class="hero-eyebrow">Adrena</p>
+      <h1 class="hero-title">Adrenaline you can learn</h1>
+    </div>
+    <div class="hero-copy">
+      <p class="hero-sub">Every extreme sport. One app.</p>
+      <p class="hero-lead">Verified instructors, clear prices, open slots. Book in minutes.</p>
+      <a class="btn hero-btn" href="#waitlist">Join the waitlist <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 12h15M13 6l6 6-6 6"/></svg></a>
     </div>
   </div>
-  <svg class="deco deco-wind" data-deco aria-hidden="true" viewBox="0 0 320 160"><g fill="none" style="stroke:var(--sun)" stroke-width="8" stroke-linecap="round"><path d="M8 40h200a28 28 0 1 0-28-28"/><path d="M8 80h260a28 28 0 1 1-28 28"/><path d="M48 120h96"/></g></svg>
 </section>
 
 <!-- FILMAS -->
@@ -247,6 +250,6 @@
 
 <footer id="site-footer"></footer>
 <script src="../assets/js/config.js?v=20"></script>
-<script src="../assets/js/site.js?v=21"></script>
+<script src="../assets/js/site.js?v=22"></script>
 </body>
 </html>

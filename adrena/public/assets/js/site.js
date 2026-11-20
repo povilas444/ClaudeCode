@@ -100,6 +100,7 @@
             '<button class="theme-toggle" id="themeToggle" aria-label="' + (isEN ? 'Toggle theme' : 'Keisti temą') + '">' + themeIcon + '</button>' +
           '</div>' +
         '</nav>' +
+        (activePage === 'home' ? '<a class="btn top-reg" href="#' + (isEN ? 'waitlist' : 'laukianciuju-sarasas') + '">' + (isEN ? 'Sign up' : 'Registruokis') + '</a>' : '') +
       '</div>';
   }
 
@@ -426,6 +427,25 @@
     var on = null;
     function upd() { var s = window.scrollY > 8; if (s !== on) { on = s; top.classList.toggle('scrolled', s); } }
     upd(); window.addEventListener('scroll', upd, { passive: true });
+  })();
+
+  /* ---- Hero parallax: the photo (and the rider cutout glued to it) drifts slower than the headline ----
+     The cutout moves with the photo on purpose: if they moved apart, the rider in the photo
+     would show as a second silhouette behind the cutout. */
+  (function () {
+    var hero = document.querySelector('section.hero');
+    if (!hero || reduceMotionMQ.matches) return;
+    var media = hero.querySelectorAll('.hero-bg, .hero-cut');
+    var text = hero.querySelectorAll('.hero-eyebrow, .hero-title');
+    var ticking = false;
+    function upd() {
+      ticking = false;
+      var y = Math.min(window.scrollY, hero.offsetHeight);
+      media.forEach(function (el) { el.style.translate = '0 ' + (y * 0.4).toFixed(1) + 'px'; });
+      text.forEach(function (el) { el.style.translate = '0 ' + (y * 0.15).toFixed(1) + 'px'; });
+    }
+    window.addEventListener('scroll', function () { if (!ticking) { ticking = true; requestAnimationFrame(upd); } }, { passive: true });
+    upd();
   })();
 
   /* ---- Stacked cards fan out as you scroll (--p 0 = stacked, 1 = spread) ---- */

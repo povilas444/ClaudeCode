@@ -25,6 +25,10 @@
   --on-fill:   #FFFAEE; /* on brand, sea, moss and ink */
   --on-sun:    #1E2A32; /* on sun */
 
+  /* Sunset palette, taken from the homepage hero photo */
+  --dusk-ink:   #17100C; /* near black of the rider and water */
+  --dusk-cream: #FFF4E0; /* warm white of the poster headline */
+
   /* Dark band (waitlist block, footer) */
   --band:       #1E2A32;
   --band-fg:    #FBF1D6;
@@ -43,7 +47,6 @@
   --gutter: 16px;
 
   /* Type scale: every heading and text size on the site comes from here */
-  --fs-display: clamp(56px, min(10.5vw, 15.5svh), 168px); /* homepage motto */
   --fs-h1:   clamp(48px, 7vw, 104px);   /* inner page titles */
   --fs-h2:   clamp(40px, 5.6vw, 80px);  /* section titles */
   --fs-h3:   clamp(24px, 2.4vw, 32px);  /* card titles */
@@ -168,13 +171,11 @@ html.is-loading::after {
   padding-top: env(safe-area-inset-top, 0px);
   transition: background-color .3s var(--ease-out), color .3s, box-shadow .3s;
 }
-.top.on-hero { background: var(--brand); color: var(--on-fill); }
 .top.scrolled {
   background: color-mix(in srgb, var(--cream) 74%, transparent);
   -webkit-backdrop-filter: blur(18px) saturate(160%); backdrop-filter: blur(18px) saturate(160%);
   box-shadow: 0 1px 0 var(--line), 0 16px 32px -28px rgba(30,42,50,.5);
 }
-.top.on-hero.scrolled { background: color-mix(in srgb, var(--brand) 80%, transparent); box-shadow: 0 1px 0 rgba(255,250,238,.16); }
 .top .wrap { display: flex; align-items: center; justify-content: space-between; gap: var(--sp-2); height: var(--header-h); }
 .brand { display: flex; align-items: center; text-decoration: none; color: inherit; }
 .brand svg { height: 32px; width: auto; display: block; }
@@ -210,6 +211,8 @@ html.is-loading::after {
 }
 .lang-switch [aria-current] { background: var(--ink); color: var(--cream); }
 .nav .lang-switch a:hover { background: var(--sun); color: var(--on-sun); }
+/* narrow desktops: tighter links so logo + nav pill fit on one row */
+@media (min-width: 1081px) and (max-width: 1240px) { .nav a { padding-inline: 11px; } .nav-tools { margin-left: 4px; } }
 @media (max-width: 1080px) {
   .menu-btn { display: block; }
   .nav {
@@ -245,74 +248,120 @@ html.is-loading::after {
 .btn-light { background: var(--paper); color: var(--brand); }
 .btn-light:hover { background: var(--sun); color: var(--on-sun); }
 
-/* ==== Home hero: one colour fills the screen, the headline is the picture ==== */
+/* ==== Home hero: sunset poster, the rider rides through the headline ====
+   Layers, bottom to top: photo · shade · headline · rider cutout · eyebrow and copy.
+   Photo and cutout are the same 1920x1440 frame with identical object-fit/position,
+   so the cutout always sits exactly on the rider. object-position Y is 50% and the
+   rider's shoulders are at 50% of the photo's height, so the shoulders sit at half the
+   hero's height on every screen shape. The headline's baseline is set there: the head
+   and the top of the spray break through the letters, the body stays below them. */
+body[data-page="home"] .top { margin-bottom: calc(-1 * (var(--header-h) + env(safe-area-inset-top, 0px))); }
 .hero {
-  background: var(--brand); color: var(--on-fill); padding-block: 24px 80px; overflow: hidden;
-  min-height: calc(100svh - 80px);
+  --ax: 50%; --ay: 50%;
+  /* fills the width, but leaves room for the header + eyebrow above two lines */
+  --title-fs: min(9.6cqw, (max(50svh, 280px) - 128px) / 2, 184px);
+  position: relative; isolation: isolate; container-type: inline-size;
+  height: 100svh; min-height: 560px; padding: 0; overflow: hidden;
+  background: var(--dusk-ink); color: var(--dusk-cream);
 }
-.hero .wrap { position: relative; z-index: 1; }
-/* One column: headline, calm subline, accent tag, then the waitlist button right under it */
-.hero-grid { display: flex; flex-direction: column; align-items: flex-start; gap: var(--sp-3); }
-.hero .eyebrow {
-  font-size: var(--fs-sm); font-stretch: 90%; letter-spacing: .08em; color: var(--sun);
+.hero-bg, .hero-cut, .hero-shade { position: absolute; inset: 0; pointer-events: none; }
+.hero-bg img, .hero-cut img {
+  display: block; width: 100%; height: 100%; max-width: none;
+  object-fit: cover; object-position: var(--ax) var(--ay);
 }
-.hero h1 {
-  font-size: var(--fs-display); line-height: .88; letter-spacing: -.03em;
-  margin-top: calc(-1 * var(--sp-1));
+.hero-bg { z-index: 0; }
+.hero-shade {
+  z-index: 1;
+  background:
+    linear-gradient(180deg, rgba(23,16,12,.38) 0%, rgba(23,16,12,0) 18%),
+    radial-gradient(90% 60% at 0% 100%, rgba(23,16,12,.72) 0%, rgba(23,16,12,.38) 45%, rgba(23,16,12,0) 75%),
+    linear-gradient(0deg, rgba(23,16,12,.5) 0%, rgba(23,16,12,0) 32%);
 }
-.hero h1 em {
-  font-style: normal; color: var(--sun); display: inline-block; padding-bottom: .14em;
-  background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 96 24'%3E%3Cpath d='M0 12c12-12 24-12 36 0s24 12 36 0 24-12 36 0' fill='none' stroke='%23F2B33D' stroke-width='5' stroke-linecap='round'/%3E%3C/svg%3E") repeat-x left bottom / .5em .125em;
+.hero-cut { z-index: 3; }
+.hero-inner {
+  position: absolute; inset: 0; margin-inline: auto;
+  width: min(1680px, 100% - 2 * max(var(--gutter), 3.5cqw));
 }
-/* second line: the product promise, clearly smaller than the motto */
+.hero-head { position: absolute; left: 0; right: 0; bottom: 50%; display: flex; flex-direction: column; align-items: flex-start; gap: clamp(8px, 1.2cqw, 20px); }
+.hero-eyebrow {
+  position: relative; z-index: 4; margin: 0;
+  font: 800 clamp(13px, 1cqw, 16px)/1 var(--f-display); letter-spacing: .34em; text-transform: uppercase;
+  color: var(--dusk-ink);
+}
+.hero-title {
+  position: relative; z-index: 2; margin: 0;
+  font-family: "Anton", "Arial Narrow", Impact, sans-serif; font-weight: 400; font-stretch: normal;
+  font-size: var(--title-fs); line-height: 1; /* room for Lithuanian accents (Š, Į) between lines */ letter-spacing: .004em; text-transform: uppercase;
+  color: var(--dusk-cream); text-shadow: 0 .03em .16em rgba(84,28,6,.28);
+}
+.hero-copy {
+  position: absolute; left: 0; bottom: max(var(--sp-4), 4.5svh); z-index: 4;
+  display: grid; justify-items: start; gap: 12px; width: min(100%, 580px);
+}
+.hero-copy::before { content: ""; width: 56px; height: 4px; border-radius: 2px; background: var(--sun); margin-bottom: 4px; }
 .hero-sub {
-  font-family: var(--f-display); font-weight: 800; font-stretch: 75%; text-transform: uppercase;
-  font-size: clamp(24px, 2.4vw, 36px); line-height: 1; letter-spacing: -.01em; color: var(--on-fill);
+  margin: 0; font-family: var(--f-display); font-weight: 800; font-stretch: 85%;
+  font-size: clamp(24px, 2.2cqw, 34px); line-height: 1.05; letter-spacing: -.01em; color: var(--dusk-cream);
 }
-.hero .lead {
-  color: var(--on-fill); max-width: 40ch; font-size: clamp(19px, .9vw + 12px, 24px); line-height: 1.45;
-  margin-top: var(--sp-1); opacity: .94;
+.hero-lead { margin: 0; font-size: var(--fs-lead); line-height: 1.45; color: rgba(255,244,224,.88); max-width: 46ch; }
+.hero-btn { margin-top: var(--sp-1); background: var(--sun); color: var(--dusk-ink); }
+.hero-btn:hover { background: var(--dusk-cream); color: var(--dusk-ink); }
+.hero-btn svg { width: 20px; height: 20px; flex: none; transition: transform .18s var(--ease-out); }
+.hero-btn:hover svg { transform: translateX(4px); }
+/* Wide screens: button sits beside the text, like the credit line of a poster */
+/* the English motto is shorter, so it can be set larger */
+.hero:lang(en) { --title-fs: min(12.4cqw, (max(50svh, 280px) - 128px) / 2, 236px); }
+@media (min-width: 1024px) and (min-aspect-ratio: 4/3) {
+  .hero-copy { width: auto; grid-template-columns: minmax(0, 640px) auto; column-gap: var(--sp-5); align-items: end; }
+  .hero-copy::before { grid-column: 1 / -1; }
+  .hero-btn { grid-column: 2; grid-row: 2 / span 2; align-self: end; margin: 0; }
 }
-.hero-tag {
-  display: inline-flex; align-items: center; gap: 10px;
-  background: rgba(255,250,238,.14); color: var(--on-fill); border: 1px solid rgba(255,250,238,.28);
-  border-radius: var(--r-pill); padding: 8px 16px 8px 8px;
-  font: 600 var(--fs-sm)/1.25 var(--f-display); font-stretch: 95%;
+/* Portrait screens: the photo fits the height, the rider is kept in view
+   and the headline sits at shoulder height so the head breaks through it */
+@media (max-aspect-ratio: 4/3) {
+  .hero { --ax: 69%; --title-fs: min(14.2cqw, 8.6svh, 120px); }
+  .hero:lang(en) { --title-fs: min(19cqw, 9.4svh, 150px); }
 }
-.hero-tag i {
-  flex: none; width: 28px; height: 28px; border-radius: 50%; background: var(--sun); color: var(--on-sun);
-  display: grid; place-items: center; font-style: normal;
-}
-.hero-tag svg { width: 16px; height: 16px; }
-.hero-ctas { display: flex; flex-wrap: wrap; gap: var(--sp-2); margin-top: var(--sp-1); }
-.hero-ctas .btn { font-size: 20px; padding: var(--sp-2) var(--sp-4); min-height: 64px; }
-.hero .btn-primary { background: var(--paper); color: var(--brand); }
-.hero .btn-primary:hover { background: var(--sun); color: var(--on-sun); }
-.hero .btn-ghost { color: var(--on-fill); }
-.hero .deco-wind { right: 4%; top: 96px; width: 224px; opacity: .9; }
-@media (max-width: 1599px) { .hero .deco-wind { display: none; } }
 @media (max-width: 480px) {
-  .hero-ctas { width: 100%; }
-  .hero-ctas .btn { width: 100%; font-size: 17px; min-height: 56px; padding-inline: var(--sp-2); white-space: nowrap; }
-  .hero-ctas .arr { display: none; }
+  .hero-btn { width: 100%; font-size: 17px; padding-inline: var(--sp-2); white-space: nowrap; }
 }
-/* short entrance: headline rises, then the rest follows */
+/* Entrance: headline rises, then the rider fades in front of it */
 @media (prefers-reduced-motion: no-preference) {
-  .hero h1 { animation: hero-rise .8s var(--ease-out) both; }
-  .hero .eyebrow { animation: hero-rise .8s var(--ease-out) both; }
-  .hero-sub { animation: hero-rise .8s var(--ease-out) .06s both; }
-  .hero .lead { animation: hero-rise .8s var(--ease-out) .1s both; }
-  .hero-tag { animation: hero-rise .8s var(--ease-out) .18s both; }
-  .hero-ctas { animation: hero-rise .8s var(--ease-out) .26s both; }
+  .hero-eyebrow { animation: hero-rise .9s var(--ease-out) both; }
+  .hero-title { animation: hero-rise .9s var(--ease-out) .08s both; }
+  .hero-cut { animation: hero-fade .8s ease-out .55s both; }
+  .hero-copy { animation: hero-rise .8s var(--ease-out) .3s both; }
 }
-@keyframes hero-rise { from { opacity: 0; transform: translateY(24px); } to { opacity: 1; transform: none; } }
+@keyframes hero-rise { from { opacity: 0; transform: translateY(32px); } to { opacity: 1; transform: none; } }
+@keyframes hero-fade { from { opacity: 0; } to { opacity: 1; } }
 .waves { display: none; }
 
+/* Header over the photo: transparent with light links, blurred dark glass once scrolled */
+.top.on-hero { background: transparent; color: var(--dusk-cream); }
+.top.on-hero.scrolled { background: color-mix(in srgb, var(--dusk-ink) 58%, transparent); box-shadow: 0 1px 0 rgba(255,244,224,.12); }
+@media (min-width: 1081px) {
+  .top.on-hero .nav, .top.on-hero.scrolled .nav { background: transparent; color: var(--dusk-cream); padding-inline: 0; }
+  .top.on-hero .nav a { color: var(--dusk-cream); padding-inline: 12px; }
+  .top.on-hero .nav a:hover { background: rgba(255,244,224,.16); }
+  .top.on-hero .nav a.active { background: rgba(255,244,224,.2); color: var(--dusk-cream); }
+  .top.on-hero .nav .cta-s { background: transparent; box-shadow: inset 0 0 0 2px rgba(255,244,224,.5); }
+  .top.on-hero .nav .cta-s:hover { background: rgba(255,244,224,.16); }
+  .top.on-hero .lang-switch, .top.on-hero .theme-toggle { background: rgba(255,244,224,.16); color: var(--dusk-cream); }
+  .top.on-hero .lang-switch a, .top.on-hero .lang-switch span { color: var(--dusk-cream); }
+  .top.on-hero .lang-switch [aria-current] { background: var(--dusk-cream); color: var(--dusk-ink); }
+}
+/* Registration button in the header, only while the header is over the photo */
+.top-reg { display: none; min-height: 44px; padding: 0 20px; font-size: var(--fs-sm); background: var(--sun); color: var(--dusk-ink); order: 2; margin-left: auto; }
+.top-reg:hover { background: var(--dusk-cream); color: var(--dusk-ink); }
+.top .menu-btn { order: 3; }
+.top.on-hero .top-reg { display: inline-flex; }
+@media (min-width: 1081px) { .top .nav { margin-left: auto; } .top-reg { order: 0; margin-left: 0; } }
+@media (min-width: 1081px) and (max-width: 1279px), (max-width: 439px) { .top.on-hero .top-reg { display: none; } }
+@media (max-width: 1080px) { .top.on-hero .menu-btn { background: rgba(255,244,224,.16); color: var(--dusk-cream); } }
+
 /* ==== Film: wide clip that bridges the red hero and the cream page ==== */
-.hero { padding-block: var(--sp-4) 0; min-height: 0; }
-.hero-grid { padding-bottom: var(--sp-6); }
 .film { padding-block: 0; }
-.film::before { content: ""; position: absolute; inset: 0 0 50% 0; background: var(--brand); }
+.film::before { content: ""; position: absolute; inset: 0 0 50% 0; background: var(--dusk-ink); }
 .film .wrap { position: relative; }
 .film-frame {
   --f: 1; position: relative; margin: 0; aspect-ratio: 16/9; border-radius: var(--r); overflow: hidden; background: var(--ink);
