@@ -128,7 +128,6 @@
         '</nav>' +
         '<div class="foot-col"><h3>' + T.contact + '</h3>' +
           '<a href="mailto:rasauadrena@gmail.com">rasauadrena@gmail.com</a>' +
-          '<a href="tel:+37065351467">+370 653 51467</a>' +
           '<a href="https://www.instagram.com/adrena_extreme/" target="_blank" rel="noopener">Instagram @adrena_extreme ↗</a>' +
         '</div>' +
         '<div class="foot-col"><h3>' + T.partner + '</h3>' +
